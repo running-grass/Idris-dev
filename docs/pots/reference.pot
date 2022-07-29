@@ -1,0 +1,4088 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017-2020, The Idris Community
+# This file is distributed under the same license as the Idris package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Idris 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-29 09:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../reference/codegen.rst:5
+msgid "Code Generation Targets"
+msgstr ""
+
+#: ../reference/codegen.rst:7
+msgid "``Idris`` has been designed such that the compiler can generate code for different backends upon request. By default ``Idris`` generates a ``C`` backend when generating an executable. Included within the standard Idris installation are backends for Javascript and Node.js."
+msgstr ""
+
+#: ../reference/codegen.rst:11
+msgid "However, there are third-party code generators out there.  Below we describe some of these backends and how you can use them when compiling your ``Idris`` code. If you want to write your own codegen for your language there is a `stub project on GitHub <https://github.com/idris-lang/idris-emptycg>`__ that can help point you in the right direction."
+msgstr ""
+
+#: ../reference/codegen.rst:16
+msgid "Official Backends"
+msgstr ""
+
+#: ../reference/codegen.rst:19
+msgid "C Language"
+msgstr ""
+
+#: ../reference/codegen.rst:21
+msgid "The default target of Idris is C. In order to view the generated C code, compile via:"
+msgstr ""
+
+#: ../reference/codegen.rst:29
+msgid "Javascript"
+msgstr ""
+
+#: ../reference/codegen.rst:31
+msgid "To generate code that is tailored for running in the browser issue the following command:"
+msgstr ""
+
+#: ../reference/codegen.rst:39
+msgid "Idris can produce big chunks of JavaScript code (hello world weighs in at about 60 lines). However, the generated code can be minified using the `closure-compiler <https://developers.google.com/closure/compiler/>`__ from Google."
+msgstr ""
+
+#: ../reference/codegen.rst:50
+msgid "Node.js"
+msgstr ""
+
+#: ../reference/codegen.rst:52
+msgid "Generating code for NodeJS is slightly different. Idris outputs a JavaScript file that can be directly executed via node."
+msgstr ""
+
+#: ../reference/codegen.rst:64
+msgid "Third Party"
+msgstr ""
+
+#: ../reference/codegen.rst:68
+msgid "These are third-party code generations and may have bit-rotted or do not work with current versions of Idris. Please speak to the project's maintainers if there are any problems."
+msgstr ""
+
+#: ../reference/codegen.rst:74
+msgid "CIL (.NET, Mono, Unity)"
+msgstr ""
+
+#: ../reference/codegen.rst:81
+msgid "The resulting assemblies can also be used with .NET or Unity."
+msgstr ""
+
+#: ../reference/codegen.rst:83
+msgid "Requires `idris-cil <https://github.com/bamboo/idris-cil>`__."
+msgstr ""
+
+#: ../reference/codegen.rst:86
+msgid "Erlang"
+msgstr ""
+
+#: ../reference/codegen.rst:88
+msgid "`Available online <https://github.com/lenary/idris-erlang>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:91
+msgid "Java"
+msgstr ""
+
+#: ../reference/codegen.rst:93
+msgid "`Available online <https://github.com/idris-hackers/idris-java>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:101
+msgid "Note: The resulting .jar is automatically prefixed by a header including an .sh script to allow executing it directly."
+msgstr ""
+
+#: ../reference/codegen.rst:105
+msgid "JVM"
+msgstr ""
+
+#: ../reference/codegen.rst:107
+msgid "`Available online <https://github.com/mmhelloworld/idris-jvm>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:110
+msgid "LLVM"
+msgstr ""
+
+#: ../reference/codegen.rst:112
+msgid "`Available online <https://github.com/idris-hackers/idris-llvm>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:115
+msgid "Malfunction"
+msgstr ""
+
+#: ../reference/codegen.rst:117
+msgid "`Available online <https://github.com/stedolan/idris-malfunction>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:120
+msgid "Ocaml"
+msgstr ""
+
+#: ../reference/codegen.rst:122
+msgid "`Available online <https://github.com/ziman/idris-ocaml>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:125
+msgid "PHP"
+msgstr ""
+
+#: ../reference/codegen.rst:127
+msgid "`Available online <https://github.com/edwinb/idris-php>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:130
+msgid "Python"
+msgstr ""
+
+#: ../reference/codegen.rst:132
+msgid "`Available online <https://github.com/ziman/idris-py>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:135
+msgid "Ruby"
+msgstr ""
+
+#: ../reference/codegen.rst:137
+msgid "`Available online <https://github.com/mrb/idris-ruby>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:140
+msgid "WS"
+msgstr ""
+
+#: ../reference/codegen.rst:142
+msgid "`Available online <https://github.com/edwinb/WS-idr>`__"
+msgstr ""
+
+#: ../reference/codegen.rst:145
+msgid "WebAssembly"
+msgstr ""
+
+#: ../reference/codegen.rst:147
+msgid "`Available online <https://github.com/SPY/idris-codegen-wasm>`__"
+msgstr ""
+
+#: ../reference/compilation.rst:3
+msgid "Compilation, Logging, and Reporting"
+msgstr ""
+
+#: ../reference/compilation.rst:5
+msgid "This section provides information about the Idris compilation process, and provides details over how you can follow the process through logging."
+msgstr ""
+
+#: ../reference/compilation.rst:9
+msgid "Compilation Process"
+msgstr ""
+
+#: ../reference/compilation.rst:11
+msgid "Idris follows the following compilation process:"
+msgstr ""
+
+#: ../reference/compilation.rst:13
+msgid "Parsing"
+msgstr ""
+
+#: ../reference/compilation.rst:14
+msgid "Type Checking"
+msgstr ""
+
+#: ../reference/compilation.rst:16
+msgid "Elaboration"
+msgstr ""
+
+#: ../reference/compilation.rst:17
+msgid "Coverage"
+msgstr ""
+
+#: ../reference/compilation.rst:18
+msgid "Unification"
+msgstr ""
+
+#: ../reference/compilation.rst:19
+msgid "Totality Checking"
+msgstr ""
+
+#: ../reference/compilation.rst:20
+msgid "Erasure"
+msgstr ""
+
+#: ../reference/compilation.rst:22
+#: ../reference/compilation.rst:27
+msgid "Code Generation"
+msgstr ""
+
+#: ../reference/compilation.rst:24
+msgid "Defunctionalisation"
+msgstr ""
+
+#: ../reference/compilation.rst:25
+msgid "Inlining"
+msgstr ""
+
+#: ../reference/compilation.rst:26
+msgid "Resolving variables"
+msgstr ""
+
+#: ../reference/compilation.rst:31
+msgid "Type Checking Only"
+msgstr ""
+
+#: ../reference/compilation.rst:33
+msgid "With Idris you can ask it to terminate the compilation process after type checking has completed. This is achieved through use of either:"
+msgstr ""
+
+#: ../reference/compilation.rst:35
+msgid "The command line options"
+msgstr ""
+
+#: ../reference/compilation.rst:37
+msgid "``--check`` for files"
+msgstr ""
+
+#: ../reference/compilation.rst:38
+msgid "``--checkpkg`` for packages"
+msgstr ""
+
+#: ../reference/compilation.rst:40
+msgid "The REPL command: ``:check``"
+msgstr ""
+
+#: ../reference/compilation.rst:42
+msgid "Use of this option will still result in the generation of the Idris binary ``.ibc`` files, and is suitable if you do not wish to generate code from one of the supported backends."
+msgstr ""
+
+#: ../reference/compilation.rst:45
+msgid "Reporting Compilation Process"
+msgstr ""
+
+#: ../reference/compilation.rst:47
+msgid "During compilation the reporting of Idris' progress can be controlled by setting a verbosity level."
+msgstr ""
+
+#: ../reference/compilation.rst:50
+msgid "``-V``, or alternatively ``--verbose`` and ``--V0``, will report which file Idris is currently type checking."
+msgstr ""
+
+#: ../reference/compilation.rst:51
+msgid "``--V1`` will additionally report: Parsing, IBC Generation, and Code Generation."
+msgstr ""
+
+#: ../reference/compilation.rst:53
+msgid "``--V2`` will additionally report: Totality Checking, Universe Checking, and the individual steps prior to code generation."
+msgstr ""
+
+#: ../reference/compilation.rst:57
+msgid "By default Idris' progress reporting is set to quiet: ``-q``, or ``--quiet``."
+msgstr ""
+
+#: ../reference/compilation.rst:60
+msgid "Logging Internal Operation"
+msgstr ""
+
+#: ../reference/compilation.rst:62
+msgid "For those that develop on the Idris compiler, the internal operation of Idris is captured using a category based logger. Currently, the logging infrastructure has support for the following categories:"
+msgstr ""
+
+#: ../reference/compilation.rst:66
+msgid "Parser (``parser``)"
+msgstr ""
+
+#: ../reference/compilation.rst:67
+msgid "Elaborator (``elab``)"
+msgstr ""
+
+#: ../reference/compilation.rst:68
+msgid "Code generation (``codegen``)"
+msgstr ""
+
+#: ../reference/compilation.rst:69
+msgid "Erasure (``erasure``)"
+msgstr ""
+
+#: ../reference/compilation.rst:70
+msgid "Coverage Checking (``coverage``)"
+msgstr ""
+
+#: ../reference/compilation.rst:71
+msgid "IBC generation (``ibc``)"
+msgstr ""
+
+#: ../reference/compilation.rst:74
+msgid "These categories are specified using the command-line option: ``--logging-categories CATS``, where ``CATS`` is a quoted colon separated string of the categories you want to see. By default if this option is not specified all categories are allowed.  Sub-categories have yet to be defined but will be in the future, especially for the elaborator."
+msgstr ""
+
+#: ../reference/compilation.rst:81
+msgid "Further, the verbosity of logging can be controlled by specifying a logging level between: 1 to 10 using the command-line option: ``--log <level>``."
+msgstr ""
+
+#: ../reference/compilation.rst:85
+msgid "Level 0: Show no logging output. Default level"
+msgstr ""
+
+#: ../reference/compilation.rst:86
+msgid "Level 1: High level details of the compilation process."
+msgstr ""
+
+#: ../reference/compilation.rst:87
+msgid "Level 2: Provides details of the coverage checking, and further details the elaboration process specifically: Interface, Clauses, Data, Term, and Types,"
+msgstr ""
+
+#: ../reference/compilation.rst:88
+msgid "Level 3: Provides details of compilation of the IRTS, erasure, parsing, case splitting, and further details elaboration of: Implementations, Providers, and Values."
+msgstr ""
+
+#: ../reference/compilation.rst:89
+msgid "Level 4: Provides further details on: Erasure, Coverage Checking, Case splitting, and elaboration of clauses."
+msgstr ""
+
+#: ../reference/compilation.rst:90
+msgid "Level 5: Provides details on the prover, and further details elaboration (adding declarations) and compilation of the IRTS."
+msgstr ""
+
+#: ../reference/compilation.rst:91
+msgid "Level 6: Further details elaboration and coverage checking."
+msgstr ""
+
+#: ../reference/compilation.rst:92
+msgid "Level 7:"
+msgstr ""
+
+#: ../reference/compilation.rst:93
+msgid "Level 8:"
+msgstr ""
+
+#: ../reference/compilation.rst:94
+msgid "Level 9:"
+msgstr ""
+
+#: ../reference/compilation.rst:95
+msgid "Level 10: Further details elaboration."
+msgstr ""
+
+#: ../reference/compilation.rst:98
+msgid "Environment Variables"
+msgstr ""
+
+#: ../reference/compilation.rst:100
+msgid "Several paths set by default within the Idris compiler can be overridden through environment variables.  The provided variables are:"
+msgstr ""
+
+#: ../reference/compilation.rst:103
+msgid "``IDRIS_CC`` Change the *C compiler* used by the *C backend*."
+msgstr ""
+
+#: ../reference/compilation.rst:104
+msgid "``IDRIS_CFLAGS`` Change the *C flags* passed to the *C compiler*."
+msgstr ""
+
+#: ../reference/compilation.rst:105
+msgid "``TARGET``   Change the target directory i.e. *data dir* where Idris installs files when installing using Cabal/Stack."
+msgstr ""
+
+#: ../reference/compilation.rst:106
+msgid "``IDRIS_LIBRARY_PATH`` Change the location of where installed packages are found/installed."
+msgstr ""
+
+#: ../reference/compilation.rst:107
+msgid "``IDRIS_DOC_PATH``  Change the location of where generated idrisdoc for packages are installed."
+msgstr ""
+
+#: ../reference/compilation.rst:111
+msgid "In versions of Idris prior to 0.12.3 the environment variables ``IDRIS_LIBRARY_PATH`` and ``TARGET`` were both used to affect the installation of single packages and direct where Idris installed its data. The meaning of these variables has changed, and command line options are preferred when changing where individual packages are installed."
+msgstr ""
+
+#: ../reference/compilation.rst:118
+msgid "The CLI option ``--ibcsubdir`` can be used to direct where generated IBC files are placed.  However, this means Idris will install files in a non-standard location separate from the rest of the installed packages. The CLI option ``--idrispath <dir>`` allows you to add a directory to the library search path; this option can be used multiple times and can be shortened to ``-i <dir>``. Similary, the ``--sourcepath <dir>`` option can be used to add directories to the source search path. There is no shortened version for this option as ``-s`` is a reserved flag."
+msgstr ""
+
+#: ../reference/compilation.rst:128
+msgid "Further, Idris also supports options to augment the paths used, and pass options to the code generator backend.  The option ``--cg-opt <ARG>`` can be used to pass options to the code generator. The format of ``<ARG>`` is dependent on the selected backend."
+msgstr ""
+
+#: ../reference/documenting.rst:5
+msgid "Documenting Idris Code"
+msgstr ""
+
+#: ../reference/documenting.rst:7
+msgid "Idris documentation comes in two major forms: comments, which exist for a reader’s edification and are ignored by the compiler, and inline API documentation, which the compiler parses and stores for future reference. To consult the documentation for a declaration ``f``, write ``:doc f`` at the REPL or use the appropriate command in your editor (``C-c C-d`` in Emacs, ``<LocalLeader>h`` in Vim)."
+msgstr ""
+
+#: ../reference/documenting.rst:15
+#: ../reference/packages.rst:119
+#: ../reference/syntax-guide.rst:453
+msgid "Comments"
+msgstr ""
+
+#: ../reference/documenting.rst:17
+msgid "Use comments to explain why code is written the way that it is. Idris’s comment syntax is the same as that of Haskell: lines beginning with ``--`` are comments, and regions bracketed by ``{-`` and ``-}`` are comments even if they extend across multiple lines. These can be used to comment out lines of code or provide simple documentation for the readers of Idris code."
+msgstr ""
+
+#: ../reference/documenting.rst:25
+msgid "Inline Documentation"
+msgstr ""
+
+#: ../reference/documenting.rst:27
+msgid "Idris also supports a comprehensive and rich inline syntax for Idris code to be generated. This syntax also allows for named parameters and variables within type signatures to be individually annotated using a syntax similar to Javadoc parameter annotations."
+msgstr ""
+
+#: ../reference/documenting.rst:32
+msgid "Documentation always comes before the declaration being documented. Inline documentation applies to either top-level declarations or to constructors. Documentation for specific arguments to constructors, type constructors, or functions can be associated with these arguments using their names."
+msgstr ""
+
+#: ../reference/documenting.rst:38
+msgid "The inline documentation for a declaration is an unbroken string of lines, each of which begins with ``|||`` (three pipe symbols). The first paragraph of the documentation is taken to be an overview, and in some contexts, only this overview will be shown. After the documentation for the declaration as a whole, it is possible to associate documentation with specific named parameters, which can either be explicitly name or the results of converting free variables to implicit parameters.  Annotations are the same as with Javadoc annotations, that is for the named parameter ``(n : T)``, the corresponding annotation is ``||| @ n Some description`` that is placed before the declaration."
+msgstr ""
+
+#: ../reference/documenting.rst:50
+msgid "Documentation is written in Markdown, though not all contexts will display all possible formatting (for example, images are not displayed when viewing documentation in the REPL, and only some terminals render italics correctly). A comprehensive set of examples is given below."
+msgstr ""
+
+#: ../reference/erasure.rst:3
+msgid "Erasure By Usage Analysis"
+msgstr ""
+
+#: ../reference/erasure.rst:5
+msgid "This work stems from this `feature proposal <https://github.com/idris-lang/Idris-dev/wiki/Egg-%232%3A-Erasure-annotations>`__ (obsoleted by this page). Beware that the information in the proposal is out of date — and sometimes even in direct contradiction with the eventual implementation."
+msgstr ""
+
+#: ../reference/erasure.rst:12
+msgid "Motivation"
+msgstr ""
+
+#: ../reference/erasure.rst:14
+msgid "Traditional dependently typed languages (Agda, Coq) are good at erasing *proofs* (either via irrelevance or an extra universe)."
+msgstr ""
+
+#: ../reference/erasure.rst:23
+msgid "For example, in the above snippet, the second argument is a proof, which is used only to convince the compiler that the function is total. This proof is never inspected at runtime and thus can be erased. In this case, the mere existence of the proof is sufficient and we can use irrelevance-related methods to achieve erasure."
+msgstr ""
+
+#: ../reference/erasure.rst:29
+msgid "However, sometimes we want to erase *indices* and this is where the traditional approaches stop being useful, mainly for reasons described in the `original proposal <https://github.com/idris-lang/Idris-dev/wiki/Egg-%232%3A-Erasure-annotations>`__."
+msgstr ""
+
+#: ../reference/erasure.rst:41
+msgid "Notice that in this case, the second argument is the important one and we would like to get rid of the ``n`` instead, although the shape of the program is generally the same as in the previous case."
+msgstr ""
+
+#: ../reference/erasure.rst:45
+msgid "There are methods described by Brady, McBride and McKinna in [BMM04]_ to remove the indices from data structures, exploiting the fact that functions operating on them either already have a copy of the appropriate index or the index can be quickly reconstructed if needed. However, we often want to erase the indices altogether, from the whole program, even in those cases where reconstruction is not possible."
+msgstr ""
+
+#: ../reference/erasure.rst:52
+msgid "The following two sections describe two cases where doing so improves the runtime performance asymptotically."
+msgstr ""
+
+#: ../reference/erasure.rst:56
+msgid "Binary numbers"
+msgstr ""
+
+#: ../reference/erasure.rst:58
+msgid "O(n) instead of O(log n)"
+msgstr ""
+
+#: ../reference/erasure.rst:60
+msgid "Consider the following ``Nat``-indexed type family representing binary numbers:"
+msgstr ""
+
+#: ../reference/erasure.rst:70
+msgid "These are supposed to be (at least asymptotically) fast and memory-efficient because their size is logarithmic compared to the numbers they represent."
+msgstr ""
+
+#: ../reference/erasure.rst:74
+msgid "Unfortunately this is not the case. The problem is that these binary numbers still carry the *unary* indices with them, performing arithmetic on the indices whenever arithmetic is done on the binary numbers themselves. Hence the real representation of the number 15 looks like this:"
+msgstr ""
+
+#: ../reference/erasure.rst:92
+msgid "The used memory is actually *linear*, not logarithmic and therefore we cannot get below O(n) with time complexities."
+msgstr ""
+
+#: ../reference/erasure.rst:95
+msgid "One could argue that Idris in fact compiles ``Nat`` via GMP but that's a moot point for two reasons:"
+msgstr ""
+
+#: ../reference/erasure.rst:98
+msgid "First, whenever we try to index our data structures with anything else than ``Nat``, the compiler is not going to come to the rescue."
+msgstr ""
+
+#: ../reference/erasure.rst:101
+msgid "Second, even with ``Nat``, the GMP integers are *still* there and they slow the runtime down."
+msgstr ""
+
+#: ../reference/erasure.rst:104
+msgid "This ought not to be the case since the ``Nat`` are never used at runtime and they are only there for typechecking purposes. Hence we should get rid of them and get runtime code similar to what an Idris programmer would write."
+msgstr ""
+
+#: ../reference/erasure.rst:110
+msgid "U-views of lists"
+msgstr ""
+
+#: ../reference/erasure.rst:112
+msgid "O(n^2) instead of O(n)"
+msgstr ""
+
+#: ../reference/erasure.rst:114
+msgid "Consider the type of U-views of lists:"
+msgstr ""
+
+#: ../reference/erasure.rst:123
+msgid "For better intuition, the shape of the U-view of ``[x0,x1,x2,z,y2,y1,y0]`` looks like this:"
+msgstr ""
+
+#: ../reference/erasure.rst:133
+msgid "When recursing over this structure, the values of ``xs`` range over ``[x0,x1,x2,z,y2,y1,y0]``, ``[x1,x2,z,y2,y1]``, ``[x2,z,y2]``, ``[z]``.  No matter whether these lists are stored or built on demand, they take up a quadratic amount of memory (because they cannot share nodes), and hence it takes a quadratic amount of time just to build values of this index alone."
+msgstr ""
+
+#: ../reference/erasure.rst:140
+msgid "But the reasonable expectation is that operations with U-views take linear time — so we need to erase the index ``xs`` if we want to achieve this goal."
+msgstr ""
+
+#: ../reference/erasure.rst:145
+msgid "Changes to Idris"
+msgstr ""
+
+#: ../reference/erasure.rst:147
+msgid "Usage analysis is run at every compilation and its outputs are used for various purposes. This is actually invisible to the user but it's a relatively big and important change, which enables the new features."
+msgstr ""
+
+#: ../reference/erasure.rst:151
+msgid "Everything that is found to be unused is erased. No annotations are needed, just don't use the thing and it will vanish from the generated code. However, if you wish, you can use the dot annotations to get a warning if the thing is accidentally used."
+msgstr ""
+
+#: ../reference/erasure.rst:156
+msgid "\"Being used\" in this context means that the value of the \"thing\" may influence run-time behaviour of the program. (More precisely, it is not found to be irrelevant to the run-time behaviour by the usage analysis algorithm.)"
+msgstr ""
+
+#: ../reference/erasure.rst:161
+msgid "\"Things\" considered for removal by erasure include:"
+msgstr ""
+
+#: ../reference/erasure.rst:163
+msgid "function arguments"
+msgstr ""
+
+#: ../reference/erasure.rst:165
+msgid "data constructor fields (including record fields and dictionary fields of interface implementations)"
+msgstr ""
+
+#: ../reference/erasure.rst:168
+msgid "For example, ``Either`` often compiles to the same runtime representation as ``Bool``. Constructor field removal sometimes combines with the newtype optimisation to have quite a strong effect."
+msgstr ""
+
+#: ../reference/erasure.rst:172
+msgid "There is a new compiler option ``--warnreach``, which will enable warnings coming from erasure. Since we have full usage analysis, we can compile even those programs that violate erasure annotations -- it's just that the binaries may run slower than expected. The warnings will be enabled by default in future versions of Idris (and possibly turned to errors). However, in this transitional period, we chose to keep them on-demand to avoid confusion until better documentation is written."
+msgstr ""
+
+#: ../reference/erasure.rst:181
+msgid "Case-tree elaboration tries to avoid using dotted \"things\" whenever possible. (NB. This is not yet perfect and it's being worked on: https://gist.github.com/ziman/10458331)"
+msgstr ""
+
+#: ../reference/erasure.rst:185
+msgid "Postulates are no longer required to be collapsible. They are now required to be *unused* instead."
+msgstr ""
+
+#: ../reference/erasure.rst:189
+msgid "Changes to the language"
+msgstr ""
+
+#: ../reference/erasure.rst:191
+msgid "You can use dots to mark fields that are not intended to be used at runtime."
+msgstr ""
+
+#: ../reference/erasure.rst:201
+msgid "If these fields are found to be used at runtime, the dots will trigger a warning (with ``--warnreach``)."
+msgstr ""
+
+#: ../reference/erasure.rst:204
+msgid "Note that free (unbound) implicits are dotted by default so, for example, the constructor ``O`` can be defined as:"
+msgstr ""
+
+#: ../reference/erasure.rst:211
+msgid "and this is actually the preferred form."
+msgstr ""
+
+#: ../reference/erasure.rst:213
+msgid "If you have a free implicit which is meant to be used at runtime, you have to change it into an (undotted) ``{bound : implicit}``."
+msgstr ""
+
+#: ../reference/erasure.rst:216
+msgid "You can also put dots in types of functions to get more guarantees."
+msgstr ""
+
+#: ../reference/erasure.rst:222
+msgid "and free implicits are automatically dotted here, too."
+msgstr ""
+
+#: ../reference/erasure.rst:225
+msgid "What it means"
+msgstr ""
+
+#: ../reference/erasure.rst:227
+msgid "Dot annotations serve two purposes:"
+msgstr ""
+
+#: ../reference/erasure.rst:229
+msgid "influence case-tree elaboration to avoid dotted variables"
+msgstr ""
+
+#: ../reference/erasure.rst:231
+msgid "trigger warnings when a dotted variable is used"
+msgstr ""
+
+#: ../reference/erasure.rst:233
+msgid "However, there's no direct connection between being dotted and being erased. The compiler erases everything it can, dotted or not. The dots are there mainly to help the programmer (and the compiler) refrain from using the values they want to erase."
+msgstr ""
+
+#: ../reference/erasure.rst:239
+msgid "How to use it"
+msgstr ""
+
+#: ../reference/erasure.rst:241
+msgid "Ideally, few or no extra annotations are needed -- in practice, it turns out that having free implicits automatically dotted is enough to get good erasure."
+msgstr ""
+
+#: ../reference/erasure.rst:245
+msgid "Therefore, just compile with ``--warnreach`` to see warnings if erasure cannot remove parts of the program."
+msgstr ""
+
+#: ../reference/erasure.rst:248
+msgid "However, those programs that have been written without runtime behaviour in mind, will need some help to get in the form that compiles to a reasonable binary. Generally, it's sufficient to follow erasure warnings (which may be sometimes unhelpful at the moment)."
+msgstr ""
+
+#: ../reference/erasure.rst:254
+msgid "Benchmarks"
+msgstr ""
+
+#: ../reference/erasure.rst:256
+msgid "source: https://github.com/ziman/idris-benchmarks"
+msgstr ""
+
+#: ../reference/erasure.rst:257
+msgid "results: https://ziman.functor.sk/erasure-bm/"
+msgstr ""
+
+#: ../reference/erasure.rst:259
+msgid "It can be clearly seen that asymptotics are improved by erasure."
+msgstr ""
+
+#: ../reference/erasure.rst:262
+msgid "Shortcomings"
+msgstr ""
+
+#: ../reference/erasure.rst:264
+msgid "You can't get warnings in libraries because usage analysis starts from ``Main.main``. This will be solved by the planned ``%default_usage`` pragma."
+msgstr ""
+
+#: ../reference/erasure.rst:268
+msgid "Usage warnings are quite bad and unhelpful at the moment. We should include more information and at least translate argument numbers to their names."
+msgstr ""
+
+#: ../reference/erasure.rst:272
+msgid "There is no decent documentation yet. This page is the first one."
+msgstr ""
+
+#: ../reference/erasure.rst:274
+msgid "There is no generally accepted terminology. We switch between \"dotted\", \"unused\", \"erased\", \"irrelevant\", \"inaccessible\", while each has a slightly different meaning. We need more consistent and understandable naming."
+msgstr ""
+
+#: ../reference/erasure.rst:279
+msgid "If the same type is used in both erased and non-erased context, it will retain its fields to accommodate the least common denominator -- the non-erased context. This is particularly troublesome in the case of the type of (dependent) pairs, where it actually means that no erasure would be performed. We should probably locate disjoint uses of data types and split them into \"sub-types\". There are three different flavours of dependent types now: ``Sigma`` (nothing erased), ``Exists`` (first component erased), ``Subset`` (second component erased)."
+msgstr ""
+
+#: ../reference/erasure.rst:289
+msgid "Case-tree building does not avoid dotted values coming from pattern-matched constructors (https://gist.github.com/ziman/10458331). This is to be fixed soon. (Fixed.)"
+msgstr ""
+
+#: ../reference/erasure.rst:293
+msgid "Higher-order function arguments and opaque functional variables are considered to be using all their arguments. To work around this, you can force erasure via the type system, using the ``Erased`` wrapper: https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Data/Erased.idr"
+msgstr ""
+
+#: ../reference/erasure.rst:298
+msgid "Interface methods are considered to be using the union of all their implementations. In other words, an argument of a method is unused only if it is unused in every implementation of the method that occurs in the program."
+msgstr ""
+
+#: ../reference/erasure.rst:304
+msgid "Planned features"
+msgstr ""
+
+#: ../reference/erasure.rst:306
+msgid "Fixes to the above shortcomings in general."
+msgstr ""
+
+#: ../reference/erasure.rst:309
+msgid "Improvements to the case-tree elaborator so that it properly avoids"
+msgstr ""
+
+#: ../reference/erasure.rst:309
+msgid "dotted fields of data constructors. Done."
+msgstr ""
+
+#: ../reference/erasure.rst:317
+msgid "Compiler pragma ``%default_usage used/unused`` and per-function"
+msgstr ""
+
+#: ../reference/erasure.rst:312
+msgid "overrides ``used`` and ``unused``, which allow the programmer to mark the return value of a function as used, even if the function is not used in ``main`` (which is the case when writing library code). These annotations will help library writers discover usage violations in their code before it is actually published and used in compiled programs."
+msgstr ""
+
+#: ../reference/erasure.rst:320
+msgid "Troubleshooting"
+msgstr ""
+
+#: ../reference/erasure.rst:323
+msgid "My program is slower"
+msgstr ""
+
+#: ../reference/erasure.rst:325
+msgid "The patch introducing erasure by usage analysis also disabled some optimisations that were in place before; these are subsumed by the new erasure. However, in some erasure-unaware programs, where erasure by usage analysis does not exercise its full potential (but the old optimisations would have worked), certain slowdown may be observed (up to ~10% according to preliminary benchmarking), due to retention and computation of information that should not be necessary at runtime."
+msgstr ""
+
+#: ../reference/erasure.rst:333
+msgid "A simple check whether this is the case is to compile with ``--warnreach``. If you see warnings, there is some unnecessary code getting compiled into the binary."
+msgstr ""
+
+#: ../reference/erasure.rst:337
+msgid "The solution is to change the code so that there are no warnings."
+msgstr ""
+
+#: ../reference/erasure.rst:340
+msgid "Usage warnings are unhelpful"
+msgstr ""
+
+#: ../reference/erasure.rst:342
+msgid "This is a known issue and we are working on it. For now, see the section `How to read and resolve erasure warnings <#how-to-read-and-resolve-erasure-warnings>`__."
+msgstr ""
+
+#: ../reference/erasure.rst:347
+msgid "There should be no warnings in this function"
+msgstr ""
+
+#: ../reference/erasure.rst:349
+msgid "A possible cause is non-totality of the function (more precisely, non-coverage). If a function is non-covering, the program needs to inspect all arguments in order to detect coverage failures at runtime. Since the function inspects all its arguments, nothing can be erased and this may transitively cause usage violations. The solution is to make the function total or accept the fact that it will use its arguments and remove some dots from the appropriate constructor fields and function arguments. (Please note that this is not a shortcoming of erasure and there is nothing we can do about it.)"
+msgstr ""
+
+#: ../reference/erasure.rst:359
+msgid "Another possible cause is the currently imperfect case-tree elaboration, which does not avoid dotted constructor fields (see https://gist.github.com/ziman/10458331). You can either rephrase the function or wait until this is fixed, hopefully soon. Fixed."
+msgstr ""
+
+#: ../reference/erasure.rst:365
+msgid "The compiler refuses to recognise this thing as erased"
+msgstr ""
+
+#: ../reference/erasure.rst:367
+msgid "You can force anything to be erased by wrapping it in the ``Erased`` monad. While this program triggers usage warnings,"
+msgstr ""
+
+#: ../reference/erasure.rst:375
+msgid "the following program does not:"
+msgstr ""
+
+#: ../reference/erasure.rst:383
+msgid "How to read and resolve erasure warnings"
+msgstr ""
+
+#: ../reference/erasure.rst:386
+msgid "Example 1"
+msgstr ""
+
+#: ../reference/erasure.rst:388
+msgid "Consider the following program:"
+msgstr ""
+
+#: ../reference/erasure.rst:402
+msgid "When you compile it using ``--warnreach``, there is one warning:"
+msgstr ""
+
+#: ../reference/erasure.rst:409
+msgid "The warning does not contain much detail at this point so we can try compiling with ``--dumpcases cases.txt`` and look up the compiled definition in ``cases.txt``:"
+msgstr ""
+
+#: ../reference/erasure.rst:420
+msgid "The reason for the warning is that ``sumLengths`` calls ``vlen``, which gets inlined. The second clause of ``sumLengths`` then accesses the variable ``n``, compiled as ``{e0}``. Since ``n`` is a free implicit, it is automatically considered dotted and this triggers the warning."
+msgstr ""
+
+#: ../reference/erasure.rst:425
+msgid "A solution would be either making the argument ``n`` a bound implicit parameter to indicate that we wish to keep it at runtime,"
+msgstr ""
+
+#: ../reference/erasure.rst:432
+msgid "or fixing ``vlen`` to not use the index:"
+msgstr ""
+
+#: ../reference/erasure.rst:440
+msgid "Which solution is appropriate depends on the usecase."
+msgstr ""
+
+#: ../reference/erasure.rst:443
+msgid "Example 2"
+msgstr ""
+
+#: ../reference/erasure.rst:445
+msgid "Consider the following program manipulating value-indexed binary numbers."
+msgstr ""
+
+#: ../reference/erasure.rst:463
+msgid "In the function ``toN``, we attempted to \"cheat\" and instead of traversing the whole structure, we just projected the value index ``n`` out of constructors ``I`` and ``O``. However, this index is a free implicit, therefore it is considered dotted."
+msgstr ""
+
+#: ../reference/erasure.rst:468
+msgid "Inspecting it then produces the following warnings when compiling with ``--warnreach``:"
+msgstr ""
+
+#: ../reference/erasure.rst:478
+msgid "We can see that the argument ``n`` of both ``I`` and ``O`` is used in the function ``toN``, argument 1."
+msgstr ""
+
+#: ../reference/erasure.rst:481
+msgid "At this stage of development, warnings only contain argument numbers, not names; this will hopefully be fixed. When numbering arguments, we go from 0, taking free implicits first, left-to-right; then the bound arguments. The function ``toN`` has therefore in fact two arguments: ``n`` (argument 0) and ``b`` (argument 1). And indeed, as the warning says, we project the dotted field from ``b``."
+msgstr ""
+
+#: ../reference/erasure.rst:488
+msgid "Again, one solution is to fix the function ``toN`` to calculate its result honestly; the other one is to accept that we carry a ``Nat`` with every constructor of ``Bin`` and make it a bound implicit:"
+msgstr ""
+
+#: ../reference/erasure.rst:498
+msgid "References"
+msgstr ""
+
+#: ../reference/erasure.rst:500
+msgid "Edwin Brady, Conor McBride, James McKinna: `Inductive families need not store their indices <https://citeseerx.ist.psu.edu/viewdoc/summary;jsessionid=1F796FCF0F2C4C535FC70F62BE2FB821?doi=10.1.1.62.3849>`__"
+msgstr ""
+
+#: ../reference/ffi.rst:3
+msgid "New Foreign Function Interface"
+msgstr ""
+
+#: ../reference/ffi.rst:7
+msgid "Ever since Idris has had multiple backends compiling to different target languages on potentially different platforms, we have had the problem that the foreign function interface (FFI) was written under the assumption of compiling to C. As a result, it has been hard to write generic code for multiple targets, or even to be sure that if code compiles that it will run on the expected target."
+msgstr ""
+
+#: ../reference/ffi.rst:14
+msgid "As of 0.9.17, Idris will have a new foreign function interface (FFI) which is aware of multiple targets. Users who are working with the default code generator can happily continue writing programs as before with no changes, but if you are writing bindings for an external library, writing a back end, or working with a non-C back end, there are some things you will need to be aware of, which this page describes."
+msgstr ""
+
+#: ../reference/ffi.rst:23
+msgid "The ``IO'`` monad, and ``main``"
+msgstr ""
+
+#: ../reference/ffi.rst:25
+msgid "The ``IO`` monad exists as before, but is now specific to the C backend (or, more precisely, any backend whose foreign function calls are compatible with C.) Additionally, there is now an ``IO'`` monad, which is parameterised over a FFI descriptor:"
+msgstr ""
+
+#: ../reference/ffi.rst:34
+msgid "The Prelude defines two FFI descriptors which are imported automatically, for C and JavaScript/Node, and defines ``IO`` to use the C FFI and ``JS_IO`` to use the JavaScript FFI:"
+msgstr ""
+
+#: ../reference/ffi.rst:49
+msgid "As before, the entry point to an Idris program is ``main``, but the type of ``main`` can now be any implementation of ``IO'``, e.g. the following are both valid:"
+msgstr ""
+
+#: ../reference/ffi.rst:58
+msgid "The FFI descriptor includes details about which types can be marshalled between the foreign language and Idris, and the \"target\" of a foreign function call (typically just a String representation of the function's name, but potentially something more complicated such as an external library file or even a URL)."
+msgstr ""
+
+#: ../reference/ffi.rst:65
+msgid "FFI descriptors"
+msgstr ""
+
+#: ../reference/ffi.rst:67
+msgid "An FFI descriptor is a record containing a predicate which holds when a type can be marshalled, and the type of the target of a foreign call:"
+msgstr ""
+
+#: ../reference/ffi.rst:78
+msgid "For C, this is:"
+msgstr ""
+
+#: ../reference/ffi.rst:119
+msgid "Linking foreign code"
+msgstr ""
+
+#: ../reference/ffi.rst:121
+msgid "This is the example of linking C code."
+msgstr ""
+
+#: ../reference/ffi.rst:128
+msgid "Example Makefile"
+msgstr ""
+
+#: ../reference/ffi.rst:139
+msgid "Foreign calls"
+msgstr ""
+
+#: ../reference/ffi.rst:141
+msgid "To call a foreign function, the ``foreign`` function is used. For example:"
+msgstr ""
+
+#: ../reference/ffi.rst:150
+msgid "The ``foreign`` function takes an FFI description, a function name (the type is given by the ``ffi_fn`` field of ``FFI_C`` here), and a function type, which gives the expected types of the remaining arguments. Here, we're calling an external function ``fileOpen`` which takes, in the C, a ``char*`` file name, a ``char*`` mode, and returns a file pointer. It is the job of the C back end to convert Idris ``String`` to C ``char*`` and vice versa."
+msgstr ""
+
+#: ../reference/ffi.rst:158
+msgid "The argument types and return type given here must be present in the ``fn_types`` predicate of the ``FFI_C`` description for the foreign call to be valid."
+msgstr ""
+
+#: ../reference/ffi.rst:162
+msgid "**Note** The arguments to ``foreign`` *must* be known at compile time, because the foreign calls are generated statically. The ``%inline`` directive on a function can be used to give hints to help this, for example a shorthand for calling external JavaScript functions:"
+msgstr ""
+
+#: ../reference/ffi.rst:175
+msgid "C callbacks"
+msgstr ""
+
+#: ../reference/ffi.rst:176
+msgid "It is possible to pass an Idris function to a C function taking a function pointer by using ``CFnPtr`` in the function type. The Idris function is passed to ``MkCFnPtr`` in the arguments. The example below shows declaring the C standard library function ``qsort`` which takes a pointer to a comparison function."
+msgstr ""
+
+#: ../reference/ffi.rst:191
+msgid "There are a few limitations to callbacks in the C FFI. The foreign function can't take the function to make a callback of as an argument. This will give a compilation error:"
+msgstr ""
+
+#: ../reference/ffi.rst:201
+msgid "Note that the function that is used as a callback can't be a closure, that is it can't be a partially applied function. This is because the mechanism used is unable to pass the closed-over values through C. If we want to pass Idris values to the callback we have to pass them through C explicitly. Non-primitive Idris values can be passed to C via the ``Raw`` type."
+msgstr ""
+
+#: ../reference/ffi.rst:207
+msgid "The other big limitation is that it doesn't support ``IO`` functions. Use ``unsafePerformIO`` to wrap them (i.e. to make an ``IO`` function usable as a callback, change the return type from ``IO r`` to ``r``, and change the ``= do`` to ``= unsafePerformIO $ do``)."
+msgstr ""
+
+#: ../reference/ffi.rst:212
+msgid "There are two special function names: ``%wrapper`` returns the function pointer that wraps an Idris function. This is useful if the function pointer isn't taken by a C function directly but should be inserted into a data structure. A foreign declaration using ``%wrapper`` must return ``IO Ptr``."
+msgstr ""
+
+#: ../reference/ffi.rst:225
+msgid "``%dynamic`` calls a C function pointer with some arguments. This is useful if a C function returns or data structure contains a C function pointer, for example structs of function pointers are common in object-oriented C such as in COM or the Linux kernel. The function type contains an extra ``Ptr`` at the start for the function pointer. ``%dynamic`` can be seen as a pseudo-function that calls the function in the first argument, passing the remaining arguments to it."
+msgstr ""
+
+#: ../reference/ffi.rst:238
+msgid "If the foreign name is prefixed by a ``&``, it is treated as a pointer to the global variable with the following name. The type must be just ``IO Ptr``."
+msgstr ""
+
+#: ../reference/ffi.rst:247
+msgid "If the foreign name is prefixed by a ``#``, the name is pasted in literally. This is useful to access constants that are preprocessor definitions (like ``INT_MAX``)."
+msgstr ""
+
+#: ../reference/ffi.rst:261
+msgid "For more complicated interactions with C (such as reading and setting fields of a C ``struct``), there is a module C FFI available in the contrib package."
+msgstr ""
+
+#: ../reference/ffi.rst:265
+#: ../reference/ffi.rst:270
+msgid "C heap"
+msgstr ""
+
+#: ../reference/ffi.rst:267
+msgid "Idris has two heaps where objects can be allocated:"
+msgstr ""
+
+#: ../reference/ffi.rst:270
+msgid "FP heap"
+msgstr ""
+
+#: ../reference/ffi.rst:272
+msgid "Cheney-collected"
+msgstr ""
+
+#: ../reference/ffi.rst:272
+msgid "Mark-and-sweep-collected"
+msgstr ""
+
+#: ../reference/ffi.rst:274
+msgid "Garbage collections touches only live objects."
+msgstr ""
+
+#: ../reference/ffi.rst:274
+msgid "Garbage collection has to traverse all registered items."
+msgstr ""
+
+#: ../reference/ffi.rst:277
+msgid "Ideal for FP-style rapid allocation of lots of small short-lived pieces of memory, such as data constructors."
+msgstr ""
+
+#: ../reference/ffi.rst:277
+msgid "Ideal for C-style allocation of a few big buffers."
+msgstr ""
+
+#: ../reference/ffi.rst:281
+msgid "Finalizers are impossible to support reasonably."
+msgstr ""
+
+#: ../reference/ffi.rst:281
+msgid "Items have finalizers that are called on deallocation."
+msgstr ""
+
+#: ../reference/ffi.rst:284
+msgid "Data is copied all the time (when collecting garbage, modifying data, registering managed pointers, etc.)"
+msgstr ""
+
+#: ../reference/ffi.rst:284
+msgid "Copying does not happen."
+msgstr ""
+
+#: ../reference/ffi.rst:288
+msgid "Contains objects of various types."
+msgstr ""
+
+#: ../reference/ffi.rst:288
+msgid "Contains C heap items: ``(void *)`` pointers with finalizers. A finalizer is a routine that deallocates the resources associated with the item."
+msgstr ""
+
+#: ../reference/ffi.rst:293
+msgid "Fixed set of object types."
+msgstr ""
+
+#: ../reference/ffi.rst:293
+msgid "The data pointer may point to anything, as long as the finalizer cleans up correctly."
+msgstr ""
+
+#: ../reference/ffi.rst:297
+msgid "Not suitable for C resources and arbitrary pointers."
+msgstr ""
+
+#: ../reference/ffi.rst:297
+msgid "Suitable for C resources and arbitrary pointers."
+msgstr ""
+
+#: ../reference/ffi.rst:300
+msgid "Values form a compact memory block."
+msgstr ""
+
+#: ../reference/ffi.rst:300
+msgid "Items are kept in a linked list."
+msgstr ""
+
+#: ../reference/ffi.rst:302
+msgid "Any Idris value, most notably ``ManagedPtr``."
+msgstr ""
+
+#: ../reference/ffi.rst:302
+msgid "Items represented by the Idris type ``CData``."
+msgstr ""
+
+#: ../reference/ffi.rst:305
+msgid "Data of ``ManagedPtr`` allocated in C, buffer then copied into the FP heap."
+msgstr ""
+
+#: ../reference/ffi.rst:305
+msgid "Data allocated in C, pointer copied into the C heap."
+msgstr ""
+
+#: ../reference/ffi.rst:309
+msgid "Allocation and reallocation not possible from C code (without having a reference to the VM). Everything is copied instead."
+msgstr ""
+
+#: ../reference/ffi.rst:309
+msgid "Allocated and reallocate freely in C, registering the allocated items in the FFI."
+msgstr ""
+
+#: ../reference/ffi.rst:315
+msgid "The FP heap is the primary heap. It may contain values of type ``CData``, which are references to items in the C heap. A C heap item contains a ``(void *)`` pointer and the corresponding finalizer. Once a C heap item is no longer referenced from the FP heap, it is marked as unused and the next GC sweep will call its finalizer and deallocate it."
+msgstr ""
+
+#: ../reference/ffi.rst:321
+msgid "There is no Idris interface for ``CData`` other than its type and FFI."
+msgstr ""
+
+#: ../reference/ffi.rst:324
+msgid "Usage from C code"
+msgstr ""
+
+#: ../reference/ffi.rst:326
+msgid "Although not enforced in code, ``CData`` is meant to be opaque and non-RTS code (such as libraries or C bindings) should access only its ``(void *)`` field called ``data``."
+msgstr ""
+
+#: ../reference/ffi.rst:330
+msgid "Feel free to mutate both the pointer ``data`` (eg. after calling ``realloc``) and the memory it points to. However, keep in mind that this must not break Idris's referential transparency."
+msgstr ""
+
+#: ../reference/ffi.rst:334
+msgid "**WARNING!** If you call ``cdata_allocate`` or ``cdata_manage``, the resulting ``CData`` object *must* be returned from your FFI function so that it is inserted in the C heap by the RTS. Otherwise the memory will be leaked."
+msgstr ""
+
+#: ../reference/ffi.rst:372
+msgid "The ``Raw`` type constructor allows you to access or return a runtime representation of the value. For instance, if you want to copy a string generated from C code into an Idris value, you may want to return a ``Raw String`` instead of a ``String`` and use ``MKSTR`` or ``MKSTRlen`` to copy it over."
+msgstr ""
+
+#: ../reference/ffi.rst:394
+msgid "FFI implementation"
+msgstr ""
+
+#: ../reference/ffi.rst:396
+msgid "In order to write bindings to external libraries, the details of how ``foreign`` works are unnecessary: you simply need to know that ``foreign`` takes an FFI descriptor, the function name, and its type. It is instructive to look a little deeper, however:"
+msgstr ""
+
+#: ../reference/ffi.rst:401
+msgid "The type of ``foreign`` is as follows:"
+msgstr ""
+
+#: ../reference/ffi.rst:411
+msgid "The important argument here is the implicit ``fty``, which contains a proof (``FTy``) that the given type is valid according to the FFI description ``ffi``:"
+msgstr ""
+
+#: ../reference/ffi.rst:421
+msgid "Notice that this uses the ``ffi_types`` field of the FFI descriptor --- these arguments to ``FRet`` and ``FFun`` give explicit proofs that the type is valid in this FFI. For example, the above ``do_fopen`` builds the following implicit proof as the ``fty`` argument to ``foreign``:"
+msgstr ""
+
+#: ../reference/ffi.rst:432
+msgid "Compiling foreign calls"
+msgstr ""
+
+#: ../reference/ffi.rst:434
+msgid "(This section assumes some knowledge of the Idris internals.)"
+msgstr ""
+
+#: ../reference/ffi.rst:436
+msgid "When writing a back end, we now need to know how to compile ``foreign``.  We'll skip the details here of how a ``foreign`` call reaches the intermediate representation (the IR), though you can look in ``IO.idr`` in the ``prelude`` package to see a bit more detail --- a ``foreign`` call is implemented by the primitive function ``mkForeignPrim``. The important part of the IR as defined in ``Lang.hs`` is the following constructor:"
+msgstr ""
+
+#: ../reference/ffi.rst:451
+msgid "So, a ``foreign`` call appears in the IR as the ``LForeign`` constructor, which takes a function descriptor (of a type given by the ``ffi_fn`` field in the FFI descriptor), a return type descriptor (given by an application of ``FTy``), and a list of arguments with type descriptors (also given by an application of ``FTy``)."
+msgstr ""
+
+#: ../reference/ffi.rst:457
+msgid "An ``FDesc`` describes an application of a name to some arguments, and is really just a simplified subset of an ``LExp``:"
+msgstr ""
+
+#: ../reference/ffi.rst:467
+msgid "There are corresponding structures in the lower level IRs, such as the defunctionalised, simplified and bytecode forms."
+msgstr ""
+
+#: ../reference/ffi.rst:470
+msgid "Our ``do_fopen`` example above arrives in the ``LExp`` form as:"
+msgstr ""
+
+#: ../reference/ffi.rst:477
+msgid "(Assuming that ``f`` and ``m`` stand for the ``LExp`` representations of the arguments.) This information should be enough for any back end to marshal the arguments and return value appropriately."
+msgstr ""
+
+#: ../reference/ffi.rst:483
+msgid "When processing ``FDesc``, be aware that there may be implicit arguments, which have not been erased. For example, ``C_IntT`` has an implicit argument ``i``, so will appear in an ``FDesc`` as something of the form ``FApp (sUN \"C_IntT\") [i, t]`` where ``i`` is the implicit argument (which can be ignored) and ``t`` is the descriptor of the integer type. See ``CodegenC.hs``, specifically the function ``toFType``, to see how this works in practice."
+msgstr ""
+
+#: ../reference/ffi.rst:492
+msgid "JavaScript FFI descriptor"
+msgstr ""
+
+#: ../reference/ffi.rst:494
+msgid "The JavaScript FFI descriptor is a little more complex, because the JavaScript FFI supports marshalling functions. It is defined as follows:"
+msgstr ""
+
+#: ../reference/ffi.rst:520
+msgid "The reason for wrapping function types in a ``JsFn`` is to help the proof search when building ``FTy``. We hope to improve proof search eventually, but for the moment it works much more reliably if the indices are disjoint! An example of using this appears in `IdrisScript <https://github.com/idris-hackers/IdrisScript>`__ when setting timeouts:"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:3
+msgid "The IDE Protocol"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:5
+msgid "The Idris REPL has two modes of interaction: a human-readable syntax designed for direct use in a terminal, and a machine-readable syntax designed for using Idris as a backend for external tools."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:8
+msgid "Protocol Overview"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:10
+msgid "The communication protocol is of asynchronous request-reply style: a single request from the client is handled by Idris at a time. Idris waits for a request on its standard input stream, and outputs the answer or answers to standard output. The result of a request can be either success, failure, or intermediate output; and furthermore, before the result is delivered, there might be additional meta-messages."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:15
+msgid "A reply can consist of multiple messages: any number of messages to inform the user about the progress of the request or other informational output, and finally a result, either ``ok`` or ``error``."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:17
+msgid "The wire format is the length of the message in characters, encoded in 6 characters hexadecimal, followed by the message encoded as S-expression (sexp). Additionally, each request includes a unique integer (counting upwards), which is repeated in all messages corresponding to that request."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:20
+msgid "An example interaction from loading the file ``/home/hannes/empty.idr`` looks as follows on the wire:::"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:28
+msgid "The first message is the request from idris-mode to load the specific file, which length is hex 2a, decimal 42 (including the newline at the end). The request identifier is set to 1. The first message from Idris is to write the string ``Type checking /home/hannes/empty.idr``, another is to set the prompt to ``*/home/hannes/empty``. The answer, starting with ``:return`` is ``ok``, and additional information is that the file was loaded."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:33
+msgid "There are three atoms in the wire language: numbers, strings, and symbols. The only compound object is a list, which is surrounded by parenthesis. The syntax is::"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:40
+msgid "where ``NUM`` is either 0 or a positive integer, ``ALPHA`` is an alphabetical character, and ``STR`` is the contents of a string, with ``\"`` escaped by a backslash. The atom ``nil`` is accepted instead of ``()`` for compatibility with some regexp pretty-printing routines."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:43
+msgid "The state of the Idris process is mainly the active file, which needs to be kept synchronised between the editor and Idris. This is achieved by the already seen ``:load-file`` command."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:46
+msgid "The available commands include:"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:49
+msgid "``(:load-file FILENAME [LINE])``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:49
+msgid "Load the named file.  If a ``LINE`` number is provided, the file is only loaded up to that line.  Otherwise, the entire file is loaded."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:52
+msgid "``(:interpret STRING)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:52
+msgid "Interpret ``STRING`` at the Idris REPL, returning a highlighted result."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:56
+msgid "``(:type-of STRING)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:55
+msgid "Return the type of the name, written with Idris syntax in the ``STRING``. The reply may contain highlighting information."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:60
+msgid "``(:case-split LINE NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:59
+msgid "Generate a case-split for the pattern variable ``NAME`` on program line ``LINE``. The pattern-match cases to be substituted are returned as a string with no highlighting."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:64
+msgid "``(:add-clause LINE NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:63
+msgid "Generate an initial pattern-match clause for the function declared as ``NAME`` on program line ``LINE``. The initial clause is returned as a string with no highlighting."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:67
+msgid "``(:add-proof-clause LINE NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:67
+msgid "Add a clause driven by the ``<==`` syntax."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:71
+msgid "``(:add-missing LINE NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:70
+msgid "Add the missing cases discovered by totality checking the function declared as ``NAME`` on program line ``LINE``. The missing clauses are returned as a string with no highlighting."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:75
+msgid "``(:make-with LINE NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:74
+msgid "Create a with-rule pattern match template for the clause of function ``NAME`` on line ``LINE``. The new code is returned with no highlighting."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:79
+msgid "``(:make-case LINE NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:78
+msgid "Create a case pattern match template for the clause of function ``NAME`` on line ``LINE``. The new code is returned with no highlighting."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:82
+msgid "``(:make-lemma LINE NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:82
+msgid "Create a top level function with a type which solves the hole named ``NAME`` on line ``LINE``."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:86
+msgid "``(:proof-search LINE NAME HINTS)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:85
+msgid "Attempt to fill out the holes on ``LINE`` named ``NAME`` by proof search. ``HINTS`` is a possibly-empty list of additional things to try while searching."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:89
+msgid "``(:docs-for NAME [MODE])``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:89
+msgid "Look up the documentation for ``NAME``, and return it as a highlighted string. If ``MODE`` is ``:overview``, only the first paragraph of documentation is provided for ``NAME``.  If ``MODE`` is ``:full``, or omitted, the full documentation is returned for ``NAME``."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:92
+msgid "``(:apropos STRING)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:92
+msgid "Search the documentation for mentions of ``STRING``, and return any found as a list of highlighted strings."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:95
+msgid "``(:metavariables WIDTH)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:95
+msgid "List the currently-active holes, with their types pretty-printed with ``WIDTH`` columns."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:98
+msgid "``(:who-calls NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:98
+msgid "Get a list of callers of ``NAME``."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:101
+msgid "``(:calls-who NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:101
+msgid "Get a list of callees of ``NAME``."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:104
+msgid "``(:browse-namespace NAMESPACE)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:104
+msgid "Return the contents of ``NAMESPACE``, like ``:browse`` at the command-line REPL."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:107
+msgid "``(:normalise-term TM)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:107
+msgid "Return a highlighted string consisting of the results of normalising the serialised term ``TM`` (which would previously have been sent as the ``tt-term`` property of a string)."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:110
+msgid "``(:show-term-implicits TM)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:110
+msgid "Return a highlighted string consisting of the results of making all arguments in serialised term ``TM`` (which would previously have been sent as the ``tt-term`` property of a string) explicit."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:113
+msgid "``(:hide-term-implicits TM)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:113
+msgid "Return a highlighted string consisting of the results of making all arguments in serialised term ``TM`` (which would previously have been sent as the ``tt-term`` property of a string) follow their usual implicitness setting."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:116
+msgid "``(:elaborate-term TM)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:116
+msgid "Return a highlighted string consisting of the core language term corresponding to serialised term ``TM`` (which would previously have been sent as the ``tt-term`` property of a string)."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:119
+msgid "``(:print-definition NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:119
+msgid "Return the definition of ``NAME`` as a highlighted string."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:122
+msgid "``(:repl-completions NAME)``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:122
+msgid "Search names, types and documentations which contain ``NAME``. Return the result of tab-completing ``NAME`` as a REPL command."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:127
+msgid "``:version``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:125
+msgid "Return the version information of the Idris compiler."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:129
+msgid "Possible replies include a normal final reply:::"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:134
+msgid "A normal intermediate reply:::"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:139
+msgid "Informational and/or abnormal replies:::"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:145
+msgid "Proof mode replies:::"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:153
+msgid "Output Highlighting"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:155
+msgid "Idris mode supports highlighting the output from Idris. In reality, this highlighting is controlled by the Idris compiler. Some of the return forms from Idris support an optional extra parameter: a list mapping spans of text to metadata about that text. Clients can then use this list both to highlight the displayed output and to enable richer interaction by having more metadata present. For example, the Emacs mode allows right-clicking identifiers to get a menu with access to documentation and type signatures."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:162
+msgid "A particular semantic span is a three element list. The first element of the list is the index at which the span begins, the second element is the number of characters included in the span, and the third is the semantic data itself. The semantic data is a list of lists. The head of each list is a key that denotes what kind of metadata is in the list, and the tail is the metadata itself."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:200
+msgid "The following keys are available:"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:168
+msgid "``name``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:169
+msgid "gives a reference to the fully-qualified Idris name"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:170
+msgid "``implicit``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:171
+msgid "provides a Boolean value that is True if the region is the name of an implicit argument"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:173
+msgid "``decor``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:173
+msgid "describes the category of a token, which can be ``type``, ``function``, ``data``, ``keyword``, or ``bound``."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:185
+msgid "``source-loc``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:176
+msgid "states that the region refers to a source code location. Its body is a collection of key-value pairs, with the following possibilities:"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:179
+msgid "``filename``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:179
+msgid "provides the filename"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:182
+msgid "``start``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:182
+msgid "provides the line and column that the source location starts at as a two-element tail"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:185
+msgid "``end``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:185
+msgid "provides the line and column that the source location ends at as a two-element tail"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:188
+msgid "``text-formatting``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:188
+msgid "provides an attribute of formatted text. This is for use with natural-language text, not code, and is presently emitted only from inline documentation. The potential values are ``bold``, ``italic``, and ``underline``."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:191
+msgid "``link-href``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:191
+msgid "provides a URL that the corresponding text is a link to."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:194
+msgid "``quasiquotation``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:194
+msgid "states that the region is quasiquoted."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:197
+msgid "``antiquotation``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:197
+msgid "states that the region is antiquoted."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:200
+msgid "``tt-term``"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:200
+msgid "A serialised representation of the Idris core term corresponding to the region of text."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:203
+msgid "Source Code Highlighting"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:205
+msgid "Idris supports instructing editors how to colour their code. When elaborating source code or REPL input, Idris will locate regions of the source code corresponding to names, and emit information about these names using the same metadata as output highlighting."
+msgstr ""
+
+#: ../reference/ide-protocol.rst:208
+msgid "These messages will arrive as replies to the command that caused elaboration to occur, such as ``:load-file`` or ``:interpret``. They have the format:::"
+msgstr ""
+
+#: ../reference/ide-protocol.rst:213
+msgid "where ``POSNS`` is a list of positions to highlight. Each of these is a two-element list whose first element is a position (encoded as for the ``source-loc`` property above) and whose second element is highlighting metadata in the same format used for output."
+msgstr ""
+
+#: ../reference/index.rst:5
+msgid "Language Reference"
+msgstr ""
+
+#: ../reference/index.rst:7
+msgid "This is the reference guide for the Idris Language. It documents the language specification and internals. This will tell you how Idris works, for using it you should read the Idris Tutorial."
+msgstr ""
+
+#: ../reference/index.rst:12
+msgid "The documentation for Idris has been published under the Creative Commons CC0 License. As such to the extent possible under law, *The Idris Community* has waived all copyright and related or neighboring rights to Documentation for Idris."
+msgstr ""
+
+#: ../reference/index.rst:17
+msgid "More information concerning the CC0 can be found online at: https://creativecommons.org/publicdomain/zero/1.0/"
+msgstr ""
+
+#: ../reference/internals.rst:3
+msgid "Idris' Internals"
+msgstr ""
+
+#: ../reference/internals.rst:5
+msgid "Note: this is still a fairly raw set of notes taken by David Christiansen at Edwin's presentation at the 2013 Idris Developers Meeting. They're in the process of turning into a useful guide - feel free to contribute."
+msgstr ""
+
+#: ../reference/internals.rst:10
+msgid "This document assumes that you are already familiar with Idris. It is intended for those who want to work on the internals."
+msgstr ""
+
+#: ../reference/internals.rst:13
+msgid "People looking to develop new back ends may want to look at :ref:`code-generation-targets`"
+msgstr ""
+
+#: ../reference/internals.rst:17
+msgid "Core/TT.hs"
+msgstr ""
+
+#: ../reference/internals.rst:19
+msgid "Idris is compiled to a simple, explicit core language. This core language is called TT because it looks a bit like a Π. It's a minimal language, with a locally nameless representation. That is, local variables are represented with de Bruijn indices and globally-defined constants are represented with names."
+msgstr ""
+
+#: ../reference/internals.rst:25
+msgid "The ``TT`` datatype uses a trick that is common in the Idris code: it is polymorphic over the type of names stored in it, and it derives ``Functor``. This allows ``fmap`` to be used as a general-purpose traversal."
+msgstr ""
+
+#: ../reference/internals.rst:30
+msgid "There is a general construction for binders, used for λ, Π, and let-bindings. These are distinguished using a ``BinderType``."
+msgstr ""
+
+#: ../reference/internals.rst:33
+msgid "During compilation, some terms (especially types) will be erased. This is represented using the ``Erased`` constructor of ``TT``. A handy trick when generating TT terms is to insert ``Erased`` where a term is uniquely determined, as the typechecker will fill it out."
+msgstr ""
+
+#: ../reference/internals.rst:38
+msgid "The constructor ``Proj`` is a result of the optimizer. It is used to extract a specific constructor argument, in a more economical way than defining a new pattern-matching operation."
+msgstr ""
+
+#: ../reference/internals.rst:42
+msgid "The datatype ``Raw`` represents terms that have not yet been typechecked. The typechecker converts a ``Raw`` to a ``TT`` if it can."
+msgstr ""
+
+#: ../reference/internals.rst:46
+msgid "Core/CaseTree.hs"
+msgstr ""
+
+#: ../reference/internals.rst:48
+msgid "Case trees are used to represent top-level pattern-matching definitions in the TT language."
+msgstr ""
+
+#: ../reference/internals.rst:51
+msgid "Just as with the ``TT`` datatype, the ``deriving Functor`` trick is used with ``SC`` and ``CaseAlt`` to get GHC to generate a function for mapping over contained terms."
+msgstr ""
+
+#: ../reference/internals.rst:55
+msgid "Constructor cases (``ConCase`` in ``CaseAlt``) refer to numbered constructors. Every constructor is numbered *0,1,2,…*. At this stage in the compiler, the tags are datatype-local. After defunctionalization, however, they are made globally unique."
+msgstr ""
+
+#: ../reference/internals.rst:60
+msgid "The ``n+1`` patterns (``SucCase``) and hacky-seeming things are to make code fast -- please ask before \"cleaning up\" the representation."
+msgstr ""
+
+#: ../reference/internals.rst:64
+msgid "Core/Evaluate.hs"
+msgstr ""
+
+#: ../reference/internals.rst:66
+msgid "This module contains the main evaluator for Idris. The evaluator is used both at the REPL and during type checking, where normalised terms need to be compared for equality."
+msgstr ""
+
+#: ../reference/internals.rst:70
+msgid "A key datatype in the evaluator is a *context*. Contexts are mappings from global names to their values, but they are organized to make type-directed disambiguation quick. In particular, the main part of a name that a user might type is used as the key, and its values are maps from namespaces to actual values."
+msgstr ""
+
+#: ../reference/internals.rst:76
+msgid "The datatype ``Def`` represents a definition in the global context. All global names map to this structure."
+msgstr ""
+
+#: ../reference/internals.rst:79
+msgid "``Type`` and ``Term`` are both synonyms for ``TT``."
+msgstr ""
+
+#: ../reference/internals.rst:81
+msgid "Datatypes are represented by a ``TyDecl`` with the appropriate ``NameType``. A ``Function`` is a global constant term with an annotated type, ``Operator`` represents primitives implemented in Haskell, and ``CaseOp`` represents ordinary pattern-matching definitions. ``CaseOp`` has four versions for different purposes, and all are saved because that's easiest."
+msgstr ""
+
+#: ../reference/internals.rst:88
+msgid "``CaseInfo``: the ``tc_dictionary`` is because it's a type class dictionary which makes totality checking easier."
+msgstr ""
+
+#: ../reference/internals.rst:91
+msgid "The ``normalise*`` functions give different behaviors - but ``normalise`` is the most common."
+msgstr ""
+
+#: ../reference/internals.rst:94
+msgid "``normaliseC`` - \"resolved\" means with names converted to de Bruijn indices as appropriate;"
+msgstr ""
+
+#: ../reference/internals.rst:97
+msgid "``normaliseAll`` - reduce everything, even if it's non-total;"
+msgstr ""
+
+#: ../reference/internals.rst:99
+msgid "``normaliseTrace`` - special-purpose for debugging."
+msgstr ""
+
+#: ../reference/internals.rst:101
+msgid "``simplify`` - reduce the things that are small - the list argument is the things to not reduce."
+msgstr ""
+
+#: ../reference/internals.rst:105
+msgid "Core/Typecheck.hs"
+msgstr ""
+
+#: ../reference/internals.rst:107
+msgid "Standard stuff. Hopefully no changes are necessary."
+msgstr ""
+
+#: ../reference/internals.rst:110
+msgid "Core/Elaborate.hs"
+msgstr ""
+
+#: ../reference/internals.rst:112
+msgid "Idris definitions are elaborated one by one and turned into the corresponding ``TT``. This is done with a tactic language as an EDSL in the ``Elab`` monad (or ``Elab'`` when there's a custom state)."
+msgstr ""
+
+#: ../reference/internals.rst:116
+msgid "Lots of plumbing for errors."
+msgstr ""
+
+#: ../reference/internals.rst:118
+msgid "All elaboration is relative to a global context."
+msgstr ""
+
+#: ../reference/internals.rst:120
+msgid "The string in the pair returned by elaborate is log information."
+msgstr ""
+
+#: ../reference/internals.rst:122
+msgid "See JFP paper, but the names don't necessarily map to each other. The paper is the \"idealized version\" without logging, additional state, etc."
+msgstr ""
+
+#: ../reference/internals.rst:125
+msgid "All the tactics take ``Raw`` s, typechecking happens there."
+msgstr ""
+
+#: ../reference/internals.rst:127
+msgid "``claim (x : t)`` assumes a new ``x : t``."
+msgstr ""
+
+#: ../reference/internals.rst:129
+msgid "PLEASE TIDY THINGS UP!"
+msgstr ""
+
+#: ../reference/internals.rst:131
+msgid "``proofSearch`` flag is to try whether the failure came from a human (so fail) or from a machine (so continue)"
+msgstr ""
+
+#: ../reference/internals.rst:134
+msgid "Idris-level syntax for providing alternatives explicitly: ``(| x, y, z |)`` try ``x``, ``y``, ``z`` in order, and take the first that succeeds."
+msgstr ""
+
+#: ../reference/internals.rst:138
+msgid "Core/ProofState.hs"
+msgstr ""
+
+#: ../reference/internals.rst:141
+msgid "Core/Unify.hs"
+msgstr ""
+
+#: ../reference/internals.rst:143
+msgid "Deals with unification. Unification can reply with:"
+msgstr ""
+
+#: ../reference/internals.rst:145
+msgid "this works"
+msgstr ""
+
+#: ../reference/internals.rst:146
+msgid "this can never work"
+msgstr ""
+
+#: ../reference/internals.rst:147
+msgid "this will work if these other unification problems work out (e.g. unifying ``f x`` with ``1``)"
+msgstr ""
+
+#: ../reference/internals.rst:150
+msgid "``match_unify``: same thing as unification except it's just matching name against name, term against term. ``x + y`` matches to ``0 + y`` with ``x = 0``. Used for ``<==`` syntax as well as type class resolution."
+msgstr ""
+
+#: ../reference/internals.rst:155
+msgid "Idris/AbsSyntaxTree.hs"
+msgstr ""
+
+#: ../reference/internals.rst:157
+msgid "``PTerm`` is the datatype of Idris syntax. ``P`` is for *Program*. Each ``PTerm`` turns into a TT term by applying a series of tactics."
+msgstr ""
+
+#: ../reference/internals.rst:160
+msgid "``IState`` is the major interpreter state. The global context is the ``tt_ctxt`` field."
+msgstr ""
+
+#: ../reference/internals.rst:163
+msgid "``Ctxt`` maps possibly ambiguous names to their referents."
+msgstr ""
+
+#: ../reference/internals.rst:166
+msgid "Idris/ElabDecls.hs"
+msgstr ""
+
+#: ../reference/internals.rst:168
+msgid "This is where the actual elaboration from ``PTerm`` to ``TT`` happens."
+msgstr ""
+
+#: ../reference/internals.rst:171
+msgid "Idris/ElabTerm.hs"
+msgstr ""
+
+#: ../reference/internals.rst:173
+msgid "``build`` is the function that creates a ``Raw``. All the \"junk\" is to deal with things like metavars and so forth. It has to remember what names are still to be defined, and it doesn't yet know the type (filled in by unificaiton later). Also case expressions have to turn into top-level functions."
+msgstr ""
+
+#: ../reference/internals.rst:179
+msgid "``resolveTC`` is type class resolution."
+msgstr ""
+
+#: ../reference/language-extensions.rst:3
+msgid "Language Extensions"
+msgstr ""
+
+#: ../reference/language-extensions.rst:7
+msgid "Type Providers"
+msgstr ""
+
+#: ../reference/language-extensions.rst:9
+msgid "Idris type providers are a way to get the type system to reflect observations about the world outside of Idris. Similarly to `F# type providers <https://msdn.microsoft.com/en-us/library/vstudio/hh156509.aspx>`__, they cause effectful computations to run during type checking, returning information that the type checker can use when checking the rest of the program. While F# type providers are based on code generation, Idris type providers use only the ordinary execution semantics of Idris to generate the information."
+msgstr ""
+
+#: ../reference/language-extensions.rst:18
+msgid "A type provider is simply a term of type ``IO (Provider t)``, where ``Provider`` is a data type with constructors for a successful result and an error. The type ``t`` can be either ``Type`` (the type of types) or a concrete type. Then, a type provider ``p`` is invoked using the syntax ``%provide (x : t) with p``. When the type checker encounters this line, the IO action ``p`` is executed. Then, the resulting term is extracted from the IO monad. If it is ``Provide y`` for some ``y : t``, then ``x`` is bound to ``y`` for the remainder of typechecking and in the compiled code. If execution fails, a generic error is reported and type checking terminates. If the resulting term is ``Error e`` for some string ``e``, then type checking fails and the error ``e`` is reported to the user."
+msgstr ""
+
+#: ../reference/language-extensions.rst:31
+msgid "Example Idris type providers can be seen at `this repository <https://github.com/david-christiansen/idris-type-providers>`__. More detailed descriptions are available in David Christiansen's `WGP '13 paper <https://dx.doi.org/10.1145/2502488.2502495>`__ and `M.Sc. thesis <http://itu.dk/people/drc/david-christiansen-thesis.pdf>`__."
+msgstr ""
+
+#: ../reference/language-extensions.rst:38
+msgid "Elaborator Reflection"
+msgstr ""
+
+#: ../reference/language-extensions.rst:40
+msgid "Another way to extend the language is elaborator reflection which is described in the :ref:`elaborator-index` section."
+msgstr ""
+
+#: ../reference/language-features.rst:3
+msgid "Core Language Features"
+msgstr ""
+
+#: ../reference/language-features.rst:6
+msgid "Full-spectrum dependent types"
+msgstr ""
+
+#: ../reference/language-features.rst:7
+msgid "Strict evaluation (plus ``Lazy : Type -> Type`` type constructor for explicit laziness)"
+msgstr ""
+
+#: ../reference/language-features.rst:9
+msgid "Lambda, Pi (forall), Let bindings"
+msgstr ""
+
+#: ../reference/language-features.rst:10
+msgid "Pattern matching definitions"
+msgstr ""
+
+#: ../reference/language-features.rst:11
+msgid "Export modifiers ``public``, ``abstract``, ``private``"
+msgstr ""
+
+#: ../reference/language-features.rst:12
+msgid "Function options ``partial``, ``total``"
+msgstr ""
+
+#: ../reference/language-features.rst:13
+msgid "``where`` clauses"
+msgstr ""
+
+#: ../reference/language-features.rst:14
+msgid "\"magic with\""
+msgstr ""
+
+#: ../reference/language-features.rst:15
+msgid "Implicit arguments (in top level types)"
+msgstr ""
+
+#: ../reference/language-features.rst:16
+msgid "\"Bound\" implicit arguments ``{n : Nat} -> {a : Type} -> Vect n a``"
+msgstr ""
+
+#: ../reference/language-features.rst:17
+msgid "\"Unbound\" implicit arguments --- ``Vect n a`` is equivalent to the above in a type, ``n`` and ``a`` are implicitly bound. This applies to names beginning with a lower case letter in an argument position."
+msgstr ""
+
+#: ../reference/language-features.rst:20
+msgid "'Tactic' implicit arguments, which are solved by running a tactic script or giving a default argument, rather than by unification."
+msgstr ""
+
+#: ../reference/language-features.rst:22
+msgid "Unit type ``()``, empty type ``Void``"
+msgstr ""
+
+#: ../reference/language-features.rst:23
+msgid "Tuples (desugaring to nested pairs)"
+msgstr ""
+
+#: ../reference/language-features.rst:24
+msgid "Dependent pair syntax ``(x : T ** P x)`` (there exists an ``x`` of type ``T`` such that ``P x``)"
+msgstr ""
+
+#: ../reference/language-features.rst:26
+msgid "Inline ``case`` expressions"
+msgstr ""
+
+#: ../reference/language-features.rst:27
+msgid "Heterogeneous equality"
+msgstr ""
+
+#: ../reference/language-features.rst:28
+msgid "``do`` notation"
+msgstr ""
+
+#: ../reference/language-features.rst:29
+msgid "Idiom brackets"
+msgstr ""
+
+#: ../reference/language-features.rst:30
+msgid "Interfaces (like type classes), supporting default methods and dependencies between methods"
+msgstr ""
+
+#: ../reference/language-features.rst:32
+msgid "``rewrite`` prf ``in`` expr"
+msgstr ""
+
+#: ../reference/language-features.rst:33
+msgid "Metavariables"
+msgstr ""
+
+#: ../reference/language-features.rst:34
+msgid "Inline proof/tactic scripts"
+msgstr ""
+
+#: ../reference/language-features.rst:35
+msgid "Implicit coercion"
+msgstr ""
+
+#: ../reference/language-features.rst:36
+msgid "``codata``"
+msgstr ""
+
+#: ../reference/language-features.rst:37
+msgid "Also ``Inf : Type -> Type`` type constructor for mixed data/codata. In fact ``codata`` is implemented by putting recursive arguments under ``Inf``."
+msgstr ""
+
+#: ../reference/language-features.rst:40
+msgid "``syntax`` rules for defining pattern and term syntactic sugar"
+msgstr ""
+
+#: ../reference/language-features.rst:41
+msgid "these are used in the standard library to define ``if ... then ... else`` expressions and an Agda-style preorder reasoning syntax."
+msgstr ""
+
+#: ../reference/language-features.rst:44
+msgid "`Uniqueness typing <https://github.com/idris-lang/Idris-dev/wiki/Uniqueness-Types>`__ using the ``UniqueType`` universe."
+msgstr ""
+
+#: ../reference/language-features.rst:47
+msgid "`Partial evaluation <https://github.com/idris-lang/Idris-dev/wiki/Static-Arguments-and-Partial-Evaluation>`__ by ``%static`` argument annotations."
+msgstr ""
+
+#: ../reference/language-features.rst:50
+msgid "Error message reflection"
+msgstr ""
+
+#: ../reference/language-features.rst:51
+msgid "Eliminators"
+msgstr ""
+
+#: ../reference/language-features.rst:52
+msgid "Label types ``'name``"
+msgstr ""
+
+#: ../reference/language-features.rst:53
+msgid "``%logging n``"
+msgstr ""
+
+#: ../reference/language-features.rst:54
+msgid "``%unifyLog``"
+msgstr ""
+
+#: ../reference/misc.rst:3
+msgid "Miscellaneous"
+msgstr ""
+
+#: ../reference/misc.rst:5
+msgid "Things we have yet to classify, or are two small to justify their own page."
+msgstr ""
+
+#: ../reference/misc.rst:9
+msgid "The Unifier Log"
+msgstr ""
+
+#: ../reference/misc.rst:11
+msgid "If you're having a hard time debugging why the unifier won't accept something (often while debugging the compiler itself), try applying the special operator ``%unifyLog`` to the expression in question. This will cause the type checker to spit out all sorts of informative messages."
+msgstr ""
+
+#: ../reference/misc.rst:18
+msgid "Namespaces and type-directed disambiguation"
+msgstr ""
+
+#: ../reference/misc.rst:20
+msgid "Names can be defined in separate namespaces, and disambiguated by type. An expression ``with NAME EXPR`` will privilege the namespace ``NAME`` in the expression ``EXPR``. For example:"
+msgstr ""
+
+#: ../reference/misc.rst:37
+msgid "Alternatives"
+msgstr ""
+
+#: ../reference/misc.rst:39
+msgid "The syntax ``(| option1, option2, option3, ... |)`` type checks each of the options in turn until one of them works. This is used, for example, when translating integer literals."
+msgstr ""
+
+#: ../reference/misc.rst:49
+msgid "This can also be used to give simple automated proofs, for example: trying some constructors of proofs."
+msgstr ""
+
+#: ../reference/misc.rst:58
+msgid "Totality checking assertions"
+msgstr ""
+
+#: ../reference/misc.rst:60
+msgid "All definitions are checked for *coverage* (i.e. all well-typed applications are handled) and either for *termination* (i.e. all well-typed applications will eventually produce an answer) or, if returning codata, for productivity (in practice, all recursive calls are constructor guarded)."
+msgstr ""
+
+#: ../reference/misc.rst:66
+msgid "Obviously, termination checking is undecidable. In practice, the termination checker looks for *size change* - every cycle of recursive calls must have a decreasing argument, such as a recursive argument of a strictly positive data type."
+msgstr ""
+
+#: ../reference/misc.rst:71
+msgid "There are two built-in functions which can be used to give the totality checker a hint:"
+msgstr ""
+
+#: ../reference/misc.rst:74
+msgid "``assert_total x`` asserts that the expression ``x`` is terminating and covering, even if the totality checker cannot tell. This can be used for example if ``x`` uses a function which does not cover all inputs, but the caller knows that the specific input is covered."
+msgstr ""
+
+#: ../reference/misc.rst:78
+msgid "``assert_smaller p x`` asserts that the expression ``x`` is structurally smaller than the pattern ``p``."
+msgstr ""
+
+#: ../reference/misc.rst:81
+msgid "For example, the following function is not checked as total:"
+msgstr ""
+
+#: ../reference/misc.rst:89
+msgid "This is because the checker cannot tell that ``filter`` will always produce a value smaller than the pattern ``x :: xs`` for the recursive call to ``qsort``. We can assert that this will always be true as follows:"
+msgstr ""
+
+#: ../reference/misc.rst:104
+msgid "Preorder reasoning"
+msgstr ""
+
+#: ../reference/misc.rst:106
+msgid "This syntax is defined in the module ``Syntax.PreorderReasoning`` in the ``base`` package. It provides a syntax for composing proofs of reflexive-transitive relations, using overloadable functions called ``step`` and ``qed``. This module also defines ``step`` and ``qed`` functions allowing the syntax to be used for demonstrating equality. Here is an example:"
+msgstr ""
+
+#: ../reference/misc.rst:124
+msgid "Note that the parentheses are required -- only a simple expression can be on the left of ``={ }=`` or ``QED``. Also, when using preorder reasoning syntax to prove things about equality, remember that you can only relate the entire expression, not subexpressions. This might occasionally require the use of ``cong``."
+msgstr ""
+
+#: ../reference/misc.rst:130
+msgid "Finally, although equality is the most obvious application of preorder reasoning, it can be used for any reflexive-transitive relation. Something like ``step1 ={ just1 }= step2 ={ just2 }= end QED`` is translated to ``(step step1 just1 (step step2 just2 (qed end)))``, selecting the appropriate definitions of ``step`` and ``qed`` through the normal disambiguation process. The standard library, for example, also contains an implementation of preorder reasoning on isomorphisms."
+msgstr ""
+
+#: ../reference/misc.rst:140
+msgid "Pattern matching on Implicit Arguments"
+msgstr ""
+
+#: ../reference/misc.rst:142
+msgid "Pattern matching is only allowed on implicit arguments when they are referred by name, e.g."
+msgstr ""
+
+#: ../reference/misc.rst:151
+#: ../reference/syntax-guide.rst:144
+msgid "or"
+msgstr ""
+
+#: ../reference/misc.rst:158
+msgid "The latter could be shortened to the following:"
+msgstr ""
+
+#: ../reference/misc.rst:165
+msgid "That is, ``{x}`` behaves like ``{x=x}``."
+msgstr ""
+
+#: ../reference/misc.rst:169
+msgid "Existence of an implementation"
+msgstr ""
+
+#: ../reference/misc.rst:171
+msgid "In order to show that an implementation of some interface is defined for some type, one could use the ``%implementation`` keyword:"
+msgstr ""
+
+#: ../reference/misc.rst:180
+msgid "'match' application"
+msgstr ""
+
+#: ../reference/misc.rst:182
+msgid "``ty <== name`` applies the function ``name`` in such a way that it has the type ``ty``, by matching ``ty`` against the function's type. This can be used in proofs, for example:"
+msgstr ""
+
+#: ../reference/misc.rst:201
+msgid "Reflection"
+msgstr ""
+
+#: ../reference/misc.rst:203
+msgid "Including ``%reflection`` functions and ``quoteGoal x by fn in t``, which applies ``fn`` to the expected type of the current expression, and puts the result in ``x`` which is in scope when elaborating ``t``."
+msgstr ""
+
+#: ../reference/misc.rst:208
+msgid "Bash Completion"
+msgstr ""
+
+#: ../reference/misc.rst:210
+msgid "Use of ``optparse-applicative`` allows Idris to support Bash completion.  You can obtain the completion script for Idris using the following command::"
+msgstr ""
+
+#: ../reference/misc.rst:217
+msgid "To enable completion for the lifetime of your current session, run the following command::"
+msgstr ""
+
+#: ../reference/misc.rst:223
+msgid "To enable completion permanently you must either:"
+msgstr ""
+
+#: ../reference/misc.rst:225
+msgid "Modify your bash init script with the above command."
+msgstr ""
+
+#: ../reference/misc.rst:227
+msgid "Add the completion script to the appropriate ``bash_completion.d/`` folder on your machine."
+msgstr ""
+
+#: ../reference/packages.rst:5
+msgid "Packages"
+msgstr ""
+
+#: ../reference/packages.rst:7
+msgid "Idris includes a simple system for building packages from a package description file. These files can be used with the Idris compiler to manage the development process of your Idris programmes and packages."
+msgstr ""
+
+#: ../reference/packages.rst:13
+msgid "Package Descriptions"
+msgstr ""
+
+#: ../reference/packages.rst:15
+msgid "A package description includes the following:"
+msgstr ""
+
+#: ../reference/packages.rst:17
+msgid "A header, consisting of the keyword package followed by the package name. Package names can be any valid Idris identifier. The iPKG format also takes a quoted version that accepts any valid filename."
+msgstr ""
+
+#: ../reference/packages.rst:20
+msgid "Fields describing package contents, ``<field> = <value>``"
+msgstr ""
+
+#: ../reference/packages.rst:22
+msgid "At least one field must be the modules field, where the value is a comma separated list of modules.  For example, a library test which has two modules ``foo.idr`` and ``bar.idr`` as source files would be written as follows::"
+msgstr ""
+
+#: ../reference/packages.rst:31
+msgid "Other examples of package files can be found in the ``libs`` directory of the main Idris repository, and in `third-party libraries <https://github.com/idris-lang/Idris-dev/wiki/Libraries>`_."
+msgstr ""
+
+#: ../reference/packages.rst:35
+msgid "Metadata"
+msgstr ""
+
+#: ../reference/packages.rst:37
+msgid "From Idris `v0.12` the `iPKG` format supports additional metadata associated with the package. The added fields are:"
+msgstr ""
+
+#: ../reference/packages.rst:41
+msgid "``brief = \"<text>\"``, a string literal containing a brief description of the package."
+msgstr ""
+
+#: ../reference/packages.rst:44
+msgid "``version = <text>``, a version string to associate with the package."
+msgstr ""
+
+#: ../reference/packages.rst:46
+msgid "``readme = <file>``, location of the README file."
+msgstr ""
+
+#: ../reference/packages.rst:48
+msgid "``license = <text>``, a string description of the licensing information."
+msgstr ""
+
+#: ../reference/packages.rst:51
+msgid "``author = <text>``, the author information."
+msgstr ""
+
+#: ../reference/packages.rst:53
+msgid "``maintainer = <text>``, Maintainer information."
+msgstr ""
+
+#: ../reference/packages.rst:55
+msgid "``homepage = <url>``, the website associated with the package."
+msgstr ""
+
+#: ../reference/packages.rst:57
+msgid "``sourceloc = <url>``, the location of the DVCS where the source can be found."
+msgstr ""
+
+#: ../reference/packages.rst:60
+msgid "``bugtracker = <url>``, the location of the project's bug tracker."
+msgstr ""
+
+#: ../reference/packages.rst:64
+msgid "Common Fields"
+msgstr ""
+
+#: ../reference/packages.rst:66
+msgid "Other common fields which may be present in an ``ipkg`` file are:"
+msgstr ""
+
+#: ../reference/packages.rst:68
+msgid "``sourcedir = <dir>``, which takes the directory (relative to the current directory) which contains the source. Default is the current directory."
+msgstr ""
+
+#: ../reference/packages.rst:72
+msgid "``executable = <output>``, which takes the name of the executable file to generate. Executable names can be any valid Idris identifier. the iPKG format also takes a quoted version that accepts any valid filename."
+msgstr ""
+
+#: ../reference/packages.rst:77
+msgid "``main = <module>``, which takes the name of the main module, and must be present if the executable field is present."
+msgstr ""
+
+#: ../reference/packages.rst:80
+msgid "``opts = \"<idris options>\"``, which allows options to be passed to Idris."
+msgstr ""
+
+#: ../reference/packages.rst:83
+msgid "``pkgs = <pkg name> (',' <pkg name>)+``, a comma separated list of package names that the Idris package requires."
+msgstr ""
+
+#: ../reference/packages.rst:87
+msgid "Binding to C"
+msgstr ""
+
+#: ../reference/packages.rst:89
+msgid "In more advanced cases, particularly to support creating bindings to external ``C`` libraries, the following options are available:"
+msgstr ""
+
+#: ../reference/packages.rst:92
+msgid "``makefile = <file>``, which specifies a ``Makefile``, to be built before the Idris modules, for example to support linking with a ``C`` library. When building, Idris sets the environment variables ``IDRIS_INCLUDES`` (with C include flags) and ``IDRIS_LDFLAGS`` (with C linking flags) so they can be used from inside the ``Makefile``."
+msgstr ""
+
+#: ../reference/packages.rst:99
+msgid "``libs = <libs>``, which takes a comma separated list of libraries which must be present for the package to be usable."
+msgstr ""
+
+#: ../reference/packages.rst:102
+msgid "``objs = <objs>``, which takes a comma separated list of additional files to be installed (object files, headers), perhaps generated by the ``Makefile``."
+msgstr ""
+
+#: ../reference/packages.rst:107
+msgid "Testing"
+msgstr ""
+
+#: ../reference/packages.rst:109
+msgid "For testing Idris packages there is a rudimentary testing harness, run in the ``IO`` context. The ``iPKG`` file is used to specify the functions used for testing. The following option is available:"
+msgstr ""
+
+#: ../reference/packages.rst:113
+msgid "``tests = <test functions>``, which takes the qualified names of all test functions to be run."
+msgstr ""
+
+#: ../reference/packages.rst:116
+msgid "The modules containing the test functions must also be added to the list of modules."
+msgstr ""
+
+#: ../reference/packages.rst:121
+msgid "Package files support comments using the standard Idris singleline ``--`` and multiline ``{- -}`` format."
+msgstr ""
+
+#: ../reference/packages.rst:124
+msgid "Using Package files"
+msgstr ""
+
+#: ../reference/packages.rst:126
+msgid "Given an Idris package file ``test.ipkg`` it can be used with the Idris compiler as follows:"
+msgstr ""
+
+#: ../reference/packages.rst:128
+msgid "``idris --build test.ipkg`` will build all modules in the package"
+msgstr ""
+
+#: ../reference/packages.rst:130
+msgid "``idris --install test.ipkg`` will install the package, making it accessible by other Idris libraries and programs."
+msgstr ""
+
+#: ../reference/packages.rst:133
+msgid "``idris --clean test.ipkg`` will delete all intermediate code and executable files generated when building."
+msgstr ""
+
+#: ../reference/packages.rst:136
+msgid "``idris --mkdoc test.ipkg`` will build HTML documentation for your package in the folder ``test_doc`` in your project's root directory."
+msgstr ""
+
+#: ../reference/packages.rst:138
+msgid "``idris --installdoc test.ipkg`` will install the packages documentation into Idris' central documentation folder located at ``idris --docdir``."
+msgstr ""
+
+#: ../reference/packages.rst:140
+msgid "``idris --checkpkg test.ipkg`` will type check all modules in the package only. This differs from build that type checks **and** generates code."
+msgstr ""
+
+#: ../reference/packages.rst:142
+msgid "``idris --testpkg test.ipkg`` will compile and run any embedded tests you have specified in the ``tests`` parameter."
+msgstr ""
+
+#: ../reference/packages.rst:144
+msgid "When building or install packages the commandline flag ``--warnipkg`` will audit the project and warn of any potentiable problems."
+msgstr ""
+
+#: ../reference/packages.rst:146
+msgid "Once the test package has been installed, the command line option ``--package test`` makes it accessible (abbreviated to ``-p test``). For example::"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:3
+msgid "Static Arguments and Partial Evaluation"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:5
+msgid "As of version 0.9.15, Idris has support for *partial evaluation* of statically known arguments. This involves creating specialised versions of functions with arguments annotated as ``%static``."
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:9
+msgid "(This is an implementation of the partial evaluator described in `this ICFP 2010 paper <https://eb.host.cs.st-andrews.ac.uk/writings/icfp10.pdf>`__. Please refer to this for more precise definitions of what follows.)"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:14
+msgid "Partial evaluation is switched off by default since Idris 1.0. It can be enabled with the ``--partial-eval`` flag."
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:18
+msgid "Introductory Example"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:20
+msgid "Consider the power function over natural numbers, defined as follows (we'll call it ``my_pow`` since ``pow`` already exists in the Prelude):"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:29
+msgid "This is implemented by recursion on the second argument, and we can evaluate the definition further if the second argument is known, even if the first isn't. For example, we can build a function at the REPL to cube a number as follows:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:41
+msgid "Note that in the resulting function the recursion has been eliminated, since ``my_pow`` is implemented by recursion on the known argument. We have no such luck if the first argument is known and the second isn't:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:50
+msgid "Now, consider the following definition which calculates x^2 + 1:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:57
+msgid "Since the second argument to ``my_pow`` here is statically known, it seems a shame to have to make the recursive calls every time. However, Idris will not in general inline recursive definitions, in particular since they may diverge or duplicate work without some deeper analysis."
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:62
+msgid "We can, however, give Idris some hints that here we really would like to create a specialised version of ``my_pow``."
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:66
+msgid "Automatic specialisation of ``pow``"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:68
+msgid "The trick is to mark the statically known arguments with the ``%static`` flag:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:77
+msgid "When an argument is annotated in this way, Idris will try to create a specialised version whenever it accounts a call with a concrete value (i.e. a constant, constructor form, or globally defined function) in a ``%static`` position. If ``my_pow`` is defined this way, and ``powFn`` defined as above, we can see the effect by typing ``:printdef powFn`` at the REPL:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:90
+msgid "What is this mysterious ``PE_my_pow_3f3e5ad8``? It's a specialised power function where the statically known argument has been specialised away. The name is generated from a hash of the specialised arguments, and we can see its definition with ``:printdef`` too:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:101
+msgid "The ``(0arg)`` is an internal argument name (programmers can't give variable names beginning with a digit after all). Notice also that there is a specialised version of ``fromInteger`` for ``Nat``\\ s, since type class dictionaries are themselves a particularly common case of statically known arguments!"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:108
+msgid "Specialising Type Classes"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:110
+msgid "Type class dictionaries are very often statically known, so Idris automatically marks any type class constraint as ``%static`` and builds specialised versions of top level functions where the class is instantiated. For example, given:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:120
+msgid "If we print this definition, we'll see a specialised version of ``+`` is used:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:129
+msgid "More interestingly, consider ``vadd`` which adds corresponding elements in a vector of anything numeric:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:138
+msgid "If we use this on something concrete as follows..."
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:146
+msgid "...then in fact, we get a specialised version of ``vadd`` in the definition of ``test``, and indeed the specialised version of ``toList``:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:156
+msgid "Here's the specialised version of ``vadd``:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:165
+msgid "Note that the recursive structure has been preserved, and the recursive call to ``vadd`` has been replaced with a recursive call to the specialised version. We've also got the same specialised version of ``+`` that we had above in ``calc``."
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:171
+msgid "Specialising Higher Order Functions"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:173
+msgid "Another case where partial evaluation can be useful is in automatically making specialised versions of higher order functions. Unlike type class dictionaries, this is not done automatically, but we might consider writing ``map`` as follows:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:184
+msgid "Then using ``my_map`` will yield specialised versions, for example to double every value in a list of ``Int``\\ s we could write:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:192
+msgid "This would yield a specialised version of ``my_map``, used in ``doubleAll`` as follows:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:205
+msgid "Specialising Interpreters"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:207
+msgid "A particularly useful situation where partial evaluation becomes effective is in defining an interpreter for a well-typed expression language, defined as follows (see the `Idris tutorial, section 4 <https://eb.host.cs.st-andrews.ac.uk/writings/idris-tutorial.pdf>`__ for more details on how this works):"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:230
+msgid "We can write a couple of test functions in this language as follows, using the ``dsl`` notation to overload lambdas; first a function which multiplies two inputs:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:239
+msgid "Then, a function which calculates the factorial of its input:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:248
+msgid "The interpreter's type is written as follows, marking the expression to be evaluated as ``%static``:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:255
+msgid "This means that if we write an Idris program to calculate a factorial by calling ``interp`` on ``eFac``, the resulting definition will be specialised, partially evaluating away the interpreter:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:264
+msgid "We can see that the call to ``interp`` has been partially evaluated away as follows:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:273
+msgid "If we look at ``PE_interp_ed1429e`` we'll see that it follows exactly the structur of ``eFac``, with the interpreter evaluated away:"
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:287
+msgid "For the sake of readability, I have simplified this slightly: what you will really see also includes specialised versions of ``==``, ``-`` and ``fromInteger``. Note that ``PE_interp_ed1429e``, which represents ``eFac`` has become a recursive function following the structure of ``eFac``. There is also a call to ``PE_interp_b5c2d0ff`` which is a specialised interpeter for ``eMult``."
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:294
+msgid "These definitions arise because the partial evaluator will only specialise a definition by a specific concrete argument once, then it is cached for future use. So any future applications of ``interp`` on ``eFac`` will also be translated to ``PE_interp_ed1429e``."
+msgstr ""
+
+#: ../reference/partial-evaluation.rst:299
+msgid "The specialised version of ``eMult``, without any simplification for readability, is:"
+msgstr ""
+
+#: ../reference/repl.rst:5
+msgid "The Idris REPL"
+msgstr ""
+
+#: ../reference/repl.rst:7
+msgid "Idris comes with a ``REPL``."
+msgstr ""
+
+#: ../reference/repl.rst:10
+msgid "Evaluation"
+msgstr ""
+
+#: ../reference/repl.rst:12
+msgid "Being a fully dependently typed language, Idris has two phases where it evaluates things, compile-time and run-time. At compile-time it will only evaluate things which it knows to be total (i.e. terminating and covering all possible inputs) in order to keep type checking decidable. The compile-time evaluator is part of the Idris kernel, and is implemented in Haskell using a HOAS (higher order abstract syntax) style representation of values. Since everything is known to have a normal form here, the evaluation strategy doesn't actually matter because either way it will get the same answer, and in practice it will do whatever the Haskell run-time system chooses to do."
+msgstr ""
+
+#: ../reference/repl.rst:22
+msgid "The REPL, for convenience, uses the compile-time notion of evaluation. As well as being easier to implement (because we have the evaluator available) this can be very useful to show how terms evaluate in the type checker. So you can see the difference between:"
+msgstr ""
+
+#: ../reference/repl.rst:36
+#: ../reference/semantic-highlighting.rst:42
+msgid "Customisation"
+msgstr ""
+
+#: ../reference/repl.rst:38
+msgid "Idris supports initialisation scripts."
+msgstr ""
+
+#: ../reference/repl.rst:41
+msgid "Initialisation scripts"
+msgstr ""
+
+#: ../reference/repl.rst:43
+msgid "When the Idris REPL starts up, it will attempt to open the file repl/init in Idris's application data directory. The application data directory is the result of the Haskell function call ``getAppUserDataDirectory \"idris\"``, which on most Unix-like systems will return $HOME/.idris and on various versions of Windows will return paths such as ``C:/Documents And Settings/user/Application Data/appName``."
+msgstr ""
+
+#: ../reference/repl.rst:50
+msgid "The file repl/init is a newline-separate list of REPL commands. Not all commands are supported in initialisation scripts — only the subset that will not interfere with the normal operation of the REPL. In particular, setting colours, display options such as showing implicits, and log levels are supported."
+msgstr ""
+
+#: ../reference/repl.rst:57
+msgid "Example initialisation script"
+msgstr ""
+
+#: ../reference/repl.rst:66
+msgid "The ``REPL`` Commands"
+msgstr ""
+
+#: ../reference/repl.rst:68
+msgid "The current set of supported commands are:"
+msgstr ""
+
+#: ../reference/repl.rst:71
+msgid "Command"
+msgstr ""
+
+#: ../reference/repl.rst:71
+msgid "Arguments"
+msgstr ""
+
+#: ../reference/repl.rst:71
+msgid "Purpose"
+msgstr ""
+
+#: ../reference/repl.rst:73
+#: ../reference/repl.rst:75
+#: ../reference/repl.rst:77
+#: ../reference/repl.rst:119
+msgid "<expr>"
+msgstr ""
+
+#: ../reference/repl.rst:73
+msgid "Evaluate an expression"
+msgstr ""
+
+#: ../reference/repl.rst:75
+msgid ":t :type"
+msgstr ""
+
+#: ../reference/repl.rst:75
+msgid "Check the type of an expression"
+msgstr ""
+
+#: ../reference/repl.rst:77
+msgid ":core"
+msgstr ""
+
+#: ../reference/repl.rst:77
+msgid "View the core language representation of a term"
+msgstr ""
+
+#: ../reference/repl.rst:79
+msgid ":miss :missing"
+msgstr ""
+
+#: ../reference/repl.rst:79
+#: ../reference/repl.rst:81
+#: ../reference/repl.rst:89
+#: ../reference/repl.rst:91
+#: ../reference/repl.rst:95
+#: ../reference/repl.rst:111
+#: ../reference/repl.rst:113
+#: ../reference/repl.rst:115
+#: ../reference/repl.rst:150
+msgid "<name>"
+msgstr ""
+
+#: ../reference/repl.rst:79
+msgid "Show missing clauses"
+msgstr ""
+
+#: ../reference/repl.rst:81
+msgid ":doc"
+msgstr ""
+
+#: ../reference/repl.rst:81
+msgid "Show internal documentation"
+msgstr ""
+
+#: ../reference/repl.rst:83
+msgid ":mkdoc"
+msgstr ""
+
+#: ../reference/repl.rst:83
+#: ../reference/repl.rst:93
+msgid "<namespace>"
+msgstr ""
+
+#: ../reference/repl.rst:83
+msgid "Generate IdrisDoc for namespace(s) and dependencies"
+msgstr ""
+
+#: ../reference/repl.rst:85
+msgid ":apropos"
+msgstr ""
+
+#: ../reference/repl.rst:85
+msgid "[<package list>] <name>"
+msgstr ""
+
+#: ../reference/repl.rst:85
+msgid "Search names, types, and documentation"
+msgstr ""
+
+#: ../reference/repl.rst:87
+msgid ":s :search"
+msgstr ""
+
+#: ../reference/repl.rst:87
+msgid "[<package list>] <expr>"
+msgstr ""
+
+#: ../reference/repl.rst:87
+msgid "Search for values by type"
+msgstr ""
+
+#: ../reference/repl.rst:89
+msgid ":wc :whocalls"
+msgstr ""
+
+#: ../reference/repl.rst:89
+msgid "List the callers of some name"
+msgstr ""
+
+#: ../reference/repl.rst:91
+msgid ":cw :callswho"
+msgstr ""
+
+#: ../reference/repl.rst:91
+msgid "List the callees of some name"
+msgstr ""
+
+#: ../reference/repl.rst:93
+msgid ":browse"
+msgstr ""
+
+#: ../reference/repl.rst:93
+msgid "List the contents of some namespace"
+msgstr ""
+
+#: ../reference/repl.rst:95
+msgid ":total"
+msgstr ""
+
+#: ../reference/repl.rst:95
+msgid "Check the totality of a name"
+msgstr ""
+
+#: ../reference/repl.rst:97
+msgid ":r :reload"
+msgstr ""
+
+#: ../reference/repl.rst:97
+msgid "Reload current file"
+msgstr ""
+
+#: ../reference/repl.rst:99
+msgid ":l :load"
+msgstr ""
+
+#: ../reference/repl.rst:99
+#: ../reference/repl.rst:101
+#: ../reference/repl.rst:121
+#: ../reference/repl.rst:125
+msgid "<filename>"
+msgstr ""
+
+#: ../reference/repl.rst:99
+msgid "Load a new file"
+msgstr ""
+
+#: ../reference/repl.rst:101
+msgid ":cd"
+msgstr ""
+
+#: ../reference/repl.rst:101
+msgid "Change working directory"
+msgstr ""
+
+#: ../reference/repl.rst:103
+msgid ":module"
+msgstr ""
+
+#: ../reference/repl.rst:103
+msgid "<module>"
+msgstr ""
+
+#: ../reference/repl.rst:103
+msgid "Import an extra module"
+msgstr ""
+
+#: ../reference/repl.rst:105
+msgid ":e :edit"
+msgstr ""
+
+#: ../reference/repl.rst:105
+msgid "Edit current file using $EDITOR or $VISUAL"
+msgstr ""
+
+#: ../reference/repl.rst:107
+msgid ":m :metavars"
+msgstr ""
+
+#: ../reference/repl.rst:107
+msgid "Show remaining proof obligations (holes)"
+msgstr ""
+
+#: ../reference/repl.rst:109
+msgid ":p :prove"
+msgstr ""
+
+#: ../reference/repl.rst:109
+msgid "<hole>"
+msgstr ""
+
+#: ../reference/repl.rst:109
+msgid "Prove a hole"
+msgstr ""
+
+#: ../reference/repl.rst:111
+msgid ":a :addproof"
+msgstr ""
+
+#: ../reference/repl.rst:111
+msgid "Add proof to source file"
+msgstr ""
+
+#: ../reference/repl.rst:113
+msgid ":rmproof"
+msgstr ""
+
+#: ../reference/repl.rst:113
+msgid "Remove proof from proof stack"
+msgstr ""
+
+#: ../reference/repl.rst:115
+msgid ":showproof"
+msgstr ""
+
+#: ../reference/repl.rst:115
+msgid "Show proof"
+msgstr ""
+
+#: ../reference/repl.rst:117
+msgid ":proofs"
+msgstr ""
+
+#: ../reference/repl.rst:117
+msgid "Show available proofs"
+msgstr ""
+
+#: ../reference/repl.rst:119
+msgid ":x"
+msgstr ""
+
+#: ../reference/repl.rst:119
+msgid "Execute IO actions resulting from an expression using the interpreter"
+msgstr ""
+
+#: ../reference/repl.rst:121
+msgid ":c :compile"
+msgstr ""
+
+#: ../reference/repl.rst:121
+msgid "Compile to an executable [codegen] <filename>"
+msgstr ""
+
+#: ../reference/repl.rst:123
+msgid ":exec :execute"
+msgstr ""
+
+#: ../reference/repl.rst:123
+msgid "[<expr>]"
+msgstr ""
+
+#: ../reference/repl.rst:123
+msgid "Compile to an executable and run"
+msgstr ""
+
+#: ../reference/repl.rst:125
+#: ../reference/repl.rst:127
+msgid ":dynamic"
+msgstr ""
+
+#: ../reference/repl.rst:125
+msgid "Dynamically load a C library (similar to %dynamic)"
+msgstr ""
+
+#: ../reference/repl.rst:127
+msgid "List dynamically loaded C libraries"
+msgstr ""
+
+#: ../reference/repl.rst:129
+msgid ":? :h :help"
+msgstr ""
+
+#: ../reference/repl.rst:129
+msgid "Display this help text"
+msgstr ""
+
+#: ../reference/repl.rst:131
+msgid ":set"
+msgstr ""
+
+#: ../reference/repl.rst:131
+#: ../reference/repl.rst:134
+#: ../reference/repl.rst:136
+msgid "<option>"
+msgstr ""
+
+#: ../reference/repl.rst:131
+msgid "Set an option (errorcontext, showimplicits, originalerrors, autosolve, nobanner, warnreach, evaltypes, desugarnats)"
+msgstr ""
+
+#: ../reference/repl.rst:134
+msgid ":unset"
+msgstr ""
+
+#: ../reference/repl.rst:134
+msgid "Unset an option"
+msgstr ""
+
+#: ../reference/repl.rst:136
+msgid ":color :colour"
+msgstr ""
+
+#: ../reference/repl.rst:136
+msgid "Turn REPL colours on or off; set a specific colour"
+msgstr ""
+
+#: ../reference/repl.rst:138
+msgid ":consolewidth"
+msgstr ""
+
+#: ../reference/repl.rst:138
+msgid "auto|infinite|<number>"
+msgstr ""
+
+#: ../reference/repl.rst:138
+msgid "Set the width of the console"
+msgstr ""
+
+#: ../reference/repl.rst:140
+msgid ":printerdepth"
+msgstr ""
+
+#: ../reference/repl.rst:140
+msgid "<number-or-blank>"
+msgstr ""
+
+#: ../reference/repl.rst:140
+msgid "Set the maximum pretty-printing depth, or infinite if nothing specified"
+msgstr ""
+
+#: ../reference/repl.rst:142
+msgid ":q :quit"
+msgstr ""
+
+#: ../reference/repl.rst:142
+msgid "Exit the Idris system"
+msgstr ""
+
+#: ../reference/repl.rst:144
+msgid ":w :warranty"
+msgstr ""
+
+#: ../reference/repl.rst:144
+msgid "Displays warranty information"
+msgstr ""
+
+#: ../reference/repl.rst:146
+msgid ":let"
+msgstr ""
+
+#: ../reference/repl.rst:146
+msgid "(<top-level-declaration>)..."
+msgstr ""
+
+#: ../reference/repl.rst:146
+msgid "Evaluate a declaration, such as a function definition, instance implementation, or fixity declaration"
+msgstr ""
+
+#: ../reference/repl.rst:148
+msgid ":unlet :undefine"
+msgstr ""
+
+#: ../reference/repl.rst:148
+msgid "(<name>)..."
+msgstr ""
+
+#: ../reference/repl.rst:148
+msgid "Remove the listed repl definitions, or all repl definitions if no names given"
+msgstr ""
+
+#: ../reference/repl.rst:150
+msgid ":printdef"
+msgstr ""
+
+#: ../reference/repl.rst:150
+msgid "Show the definition of a function"
+msgstr ""
+
+#: ../reference/repl.rst:152
+msgid ":pp :pprint"
+msgstr ""
+
+#: ../reference/repl.rst:152
+msgid "<option> <number> <name>"
+msgstr ""
+
+#: ../reference/repl.rst:152
+msgid "Pretty prints an Idris function in either LaTeX or HTML and for a specified width."
+msgstr ""
+
+#: ../reference/repl.rst:157
+msgid "Using the REPL"
+msgstr ""
+
+#: ../reference/repl.rst:161
+msgid "Getting help"
+msgstr ""
+
+#: ../reference/repl.rst:163
+msgid "The command ``:help`` (or ``:h`` or ``:?``) prints a short summary of the available commands."
+msgstr ""
+
+#: ../reference/repl.rst:167
+msgid "Quitting Idris"
+msgstr ""
+
+#: ../reference/repl.rst:169
+msgid "If you would like to leave Idris, simply use ``:q`` or ``:quit``."
+msgstr ""
+
+#: ../reference/repl.rst:172
+msgid "Evaluating expressions"
+msgstr ""
+
+#: ../reference/repl.rst:174
+msgid "To evaluate an expression, simply type it. If Idris is unable to infer the type, it can be helpful to use the operator ``the`` to manually provide one, as Idris's syntax does not allow for direct type annotations. Examples of ``the`` include:"
+msgstr ""
+
+#: ../reference/repl.rst:190
+msgid "This may not work in cases where the expression still involves ambiguous names. The name can be disambiguated by using the ``with`` keyword:"
+msgstr ""
+
+#: ../reference/repl.rst:204
+msgid "Adding let bindings"
+msgstr ""
+
+#: ../reference/repl.rst:206
+msgid "To add a let binding to the REPL, use ``:let``. It's likely you'll also need to provide a type annotation. ``:let`` also works for other declarations as well, such as ``data``."
+msgstr ""
+
+#: ../reference/repl.rst:223
+msgid "Getting type information"
+msgstr ""
+
+#: ../reference/repl.rst:225
+msgid "To ask Idris for the type of some expression, use the ``:t`` command. Additionally, if used with an overloaded name, Idris will provide all overloadings and their types. To ask for the type of an infix operator, surround it in parentheses."
+msgstr ""
+
+#: ../reference/repl.rst:243
+msgid "You can also ask for basic information about interfaces with ``:doc``:"
+msgstr ""
+
+#: ../reference/repl.rst:266
+msgid "Other documentation is also available from ``:doc``:"
+msgstr ""
+
+#: ../reference/repl.rst:328
+msgid "Finding things"
+msgstr ""
+
+#: ../reference/repl.rst:330
+msgid "The command ``:apropos`` searches names, types, and documentation for some string, and prints the results. For example:"
+msgstr ""
+
+#: ../reference/repl.rst:421
+msgid "``:search`` does a type-based search, in the spirit of Hoogle. See `Type-directed search (:search) <https://github.com/idris-lang/Idris-dev/wiki/Type-directed-search-%28%3Asearch%29>`_ for more details. Here is an example:"
+msgstr ""
+
+#: ../reference/repl.rst:445
+msgid "``:search`` can also look for dependent types:"
+msgstr ""
+
+#: ../reference/repl.rst:455
+msgid "Loading and reloading Idris code"
+msgstr ""
+
+#: ../reference/repl.rst:457
+msgid "The command ``:l File.idr`` will load File.idr into the currently-running REPL, and ``:r`` will reload the last file that was loaded."
+msgstr ""
+
+#: ../reference/repl.rst:462
+#: ../reference/syntax-guide.rst:385
+msgid "Totality"
+msgstr ""
+
+#: ../reference/repl.rst:464
+msgid "All Idris definitions are checked for totality. The command ``:total <NAME>`` will display the result of that check. If a definition is not total, this may be due to an incomplete pattern match. If that is the case, ``:missing`` or ``:miss`` will display the missing cases."
+msgstr ""
+
+#: ../reference/repl.rst:470
+msgid "Editing files"
+msgstr ""
+
+#: ../reference/repl.rst:472
+msgid "The command ``:e`` launches your default editor on the current module. After control returns to Idris, the file is reloaded."
+msgstr ""
+
+#: ../reference/repl.rst:476
+msgid "Invoking the compiler"
+msgstr ""
+
+#: ../reference/repl.rst:478
+msgid "The current module can be compiled to an executable using the command ``:c <FILENAME>`` or ``:compile <FILENAME>``. This command allows to specify codegen, so for example JavaScript can be generated using ``:c javascript <FILENAME>``. The ``:exec`` command will compile the program to a temporary file and run the resulting executable."
+msgstr ""
+
+#: ../reference/repl.rst:485
+msgid "IO actions"
+msgstr ""
+
+#: ../reference/repl.rst:487
+msgid "Unlike GHCI, the Idris REPL is not inside of an implicit IO monad. This means that a special command must be used to execute IO actions. ``:x tm`` will execute the IO action ``tm`` in an Idris interpreter."
+msgstr ""
+
+#: ../reference/repl.rst:492
+msgid "Dynamically loading C libraries"
+msgstr ""
+
+#: ../reference/repl.rst:494
+msgid "Sometimes, an Idris program will depend on external libraries written in C. In order to use these libraries from the Idris interpreter, they must first be dynamically loaded. This is achieved through the ``%dynamic <LIB>`` directive in Idris source files or through the ``:dynamic <LIB>`` command at the REPL. The current set of dynamically loaded libraries can be viewed by executing ``:dynamic`` with no arguments. These libraries are available through the Idris FFI in `type providers <#type-providers>`__ and ``:exec``."
+msgstr ""
+
+#: ../reference/repl.rst:504
+msgid "Colours"
+msgstr ""
+
+#: ../reference/repl.rst:506
+msgid "Idris terms are available in amazing colour! By default, the Idris REPL uses colour to distinguish between data constructors, types or type constructors, operators, bound variables, and implicit arguments. This feature is available on all POSIX-like systems, and there are plans to allow it to work on Windows as well."
+msgstr ""
+
+#: ../reference/repl.rst:512
+msgid "If you do not like the default colours, they can be turned off using the command"
+msgstr ""
+
+#: ../reference/repl.rst:519
+msgid "and, when boredom strikes, they can be re-enabled using the command"
+msgstr ""
+
+#: ../reference/repl.rst:525
+msgid "To modify a colour, use the command"
+msgstr ""
+
+#: ../reference/repl.rst:531
+msgid "where ``<CATEGORY`` is one of ``keyword``, ``boundvar``, ``implicit``, ``function``, ``type``, ``data``, or ``prompt``, and is a space-separated list drawn from the colours and the font options. The available colours are ``default``, ``black``, ``yellow``, ``cyan``, ``red``, ``blue``, ``white``, ``green``, and ``magenta``. If more than one colour is specified, the last one takes precedence. The available options are ``dull`` and ``vivid``, ``bold`` and ``nobold``, ``italic`` and ``noitalic``, ``underline`` and ``nounderline``, forming pairs of opposites. The colour ``default`` refers to your terminal's default colour."
+msgstr ""
+
+#: ../reference/repl.rst:542
+msgid "The colours used at startup can be changed using REPL initialisation scripts."
+msgstr ""
+
+#: ../reference/repl.rst:545
+msgid "Colour can be disabled at startup by the ``--nocolour`` command-line option."
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:3
+msgid "Semantic Highlighting & Pretty Printing"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:5
+msgid "Since ``v0.9.18`` Idris comes with support for semantic highlighting. When using the ``REPL`` or IDE support, Idris will highlight your code accordingly to its meaning within the Idris structure. A precursor to semantic highlighting support is the pretty printing of definitions to console, LaTeX, or HTML."
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:8
+msgid "The default styling scheme used was inspired by Conor McBride's own set of stylings, informally known as *Conor Colours*."
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:12
+msgid "Legend"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:14
+msgid "The concepts and their default stylings are as follows:"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:17
+msgid "Idris Term"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:17
+msgid "HTML"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:17
+msgid "LaTeX"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:17
+msgid "IDE/REPL"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:19
+msgid "Bound Variable"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:19
+msgid "Purple"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:19
+msgid "Magenta"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:21
+msgid "Keyword"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:21
+msgid "Bold"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:21
+msgid "Underlined"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:23
+msgid "Function"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:23
+msgid "Green"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:25
+msgid "Type"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:25
+msgid "Blue"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:27
+#: ../reference/syntax-reference.rst:381
+msgid "Data"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:27
+msgid "Red"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:29
+msgid "Implicit"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:29
+msgid "Italic Purple"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:29
+msgid "Italic Magenta"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:33
+msgid "Pretty Printing"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:35
+msgid "Idris also supports the pretty printing of code to HTML and LaTeX using the commands:"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:37
+msgid "``:pp <latex|html> <width> <function name>``"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:38
+msgid "``:pprint <latex|html> <width> <function name>``"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:44
+msgid "If you are not happy with the colours used, the VIM and Emacs editor support allows for customisation of the colours. When pretty printing Idris code as LaTeX and HTML, commands and a CSS style are provided. The colours used by the REPL can be customised through the initialisation script."
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:48
+msgid "Further Information"
+msgstr ""
+
+#: ../reference/semantic-highlighting.rst:50
+msgid "Please also see the `Idris Extras <https://github.com/idris-hackers/idris-extras>`_ project for links to editor support, and pre-made style files for LaTeX and HTML."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:3
+msgid "Syntax Guide"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:5
+msgid "Examples are mostly adapted from the Idris tutorial."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:8
+msgid "Source File Structure"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:10
+msgid "Source files consist of:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:12
+msgid "An optional :ref:`syntax-module-headers`."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:13
+msgid "Zero or more :ref:`syntax-imports`."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:14
+msgid "Zero or more declarations, e.g. :ref:`syntax-variables`, :ref:`syntax-data-types`, etc."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:17
+msgid "For example:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:33
+msgid "Module Header"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:35
+msgid "A file can start with a module header, introduced by the ``module`` keyword:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:41
+msgid "Module names can be hierarchical, with parts separated by ``.``:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:47
+msgid "Each file can define only a single module, which includes everything defined in that file."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:50
+msgid "Like with declarations, a :ref:`docstring <syntax-comments>` can be used to provide documentation for a module:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:61
+msgid "Imports"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:63
+msgid "An ``import`` makes the names in another module available for use by the current module:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:70
+msgid "All the declarations in an imported module are available for use in the file. In a case where a name is ambiguous --- e.g. because it is imported from multiple modules, or appears in multiple visible namespaces --- the ambiguity can be resolved using :ref:`syntax-qualified-names`.  (Often, the compiler can resolve the ambiguity for you, using the types involved.)"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:75
+msgid "Imported modules can be given aliases to make qualified names more compact:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:81
+msgid "Note that names made visible by import are not, by default, re-exported to users of the module being written.  This can be done using ``import public``:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:91
+msgid "Variables"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:93
+msgid "A variable is always defined by defining its type on one line, and its value on the next line, using the syntax"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:101
+#: ../reference/type-directed-search.rst:168
+msgid "Examples"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:111
+msgid "Types"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:113
+msgid "In Idris, types are first class values. So a type declaration is the same as just declaration of a variable whose type is ``Type``. In Idris, variables that denote a type need not be capitalised. Example:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:122
+msgid "a more interesting example:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:129
+msgid "While capitalising types is not required, the rules for generating implicit arguments mean it is often a good idea."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:135
+msgid "Data types"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:137
+msgid "Idris provides two kinds of syntax for defining data types. The first, Haskell style syntax, defines a regular algebraic data type. For example"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:150
+msgid "The second, more general kind of data type, is defined using Agda or GADT style syntax. This syntax defines a data type that is parameterised by some values (in the ``Vect`` example, a value of type ``Nat`` and a value of type ``Type``)."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:161
+msgid "The signature of type constructors may use dependent types"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:169
+msgid "Records"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:171
+msgid "There is a special syntax for data types with one constructor and multiple fields."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:181
+msgid "This defines a constructor as well as getter and setter function for each field."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:190
+msgid "The types of record fields may depend on the value of other fields"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:199
+msgid "Setter functions are only provided for fields that do not use dependant types. In the example above neither ``set_size`` nor ``set_items`` are defined."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:205
+msgid "Co-data"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:207
+msgid "Inifinite data structures can be introduced with the ``codata`` keyword."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:215
+msgid "This is syntactic sugar for the following, which is usually preferred:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:222
+msgid "Every occurence of the defined type in a constructor argument will be wrapped in the ``Inf`` type constructor. This has the effect of delaying the evaluation of the second argument when the data constructor is applied. An ``Inf`` argument is constructed using ``Delay`` (which Idris will insert implicitly) and evaluated using ``Force`` (again inserted implicitly)."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:228
+msgid "Furthermore, recursive calls under a ``Delay`` must be guarded by a constructor to pass the totality checker."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:232
+#: ../reference/syntax-reference.rst:401
+msgid "Operators"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:235
+msgid "Arithmetic"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:246
+msgid "Equality and Relational"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:258
+msgid "Conditional"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:267
+msgid "Conditionals"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:270
+msgid "If Then Else"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:277
+msgid "Case Expressions"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:288
+#: ../reference/syntax-reference.rst:69
+msgid "Functions"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:291
+msgid "Named"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:293
+msgid "Named functions are defined in the same way as variables, with the type followed by the definition."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:301
+msgid "Example"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:308
+msgid "Functions can also have multiple inputs, for example"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:315
+msgid "Functions can also have named arguments. This is required if you want to annotate parameters in a docstring. The following shows the same ``makeHello`` function as above, but with named parameters which are also annotated in the docstring"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:328
+msgid "Like Haskell, Idris functions can be defined by pattern matching. For example"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:337
+msgid "Similarly case analysis looks like"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:346
+msgid "Dependent Functions"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:348
+msgid "Dependent functions are functions where the type of the return value depends on the input value. In order to define a dependent function, named parameters must be used, since the parameter will appear in the return type. For example, consider"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:359
+msgid "In this example, the return type is ``Vect n Int`` which is an expression which depends on the input parameter ``n``."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:363
+msgid "Anonymous"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:365
+msgid "Arguments in anonymous functions are separated by comma."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:373
+msgid "Modifiers"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:376
+msgid "Visibility"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:393
+msgid "Sets explicitly to which extent pattern matching is terminating and/or exhaustive. A ``partial`` pattern matching makes no assumption. A ``covering`` pattern matching ensures that pattern matching is exhaustive on its clauses. Furthermore, a ``total`` pattern matching enforces both exhaustivity and termination of the evaluation of its clauses."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:400
+msgid "Implicit Coercion"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:407
+msgid "Options"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:420
+#: ../reference/syntax-reference.rst:373
+msgid "Misc"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:425
+msgid "Qualified Names"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:427
+msgid "If multiple declarations with the same name are visible, using the name can result in an ambiguous situation.  The compiler will attempt to resolve the ambiguity using the types involved.  If it's unable --- for example, because the declarations with the same name also have the same type signatures --- the situation can be cleared up using a *qualified name*."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:433
+msgid "A qualified name has the symbol's namespace prefixed, separated by a ``.``:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:439
+msgid "This would specifically reference a ``length`` declaration from ``Data.Vect``."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:441
+msgid "Qualified names can be written using two different shorthands:"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:443
+msgid "Names in modules that are :ref:`imported <syntax-imports>` using an alias can be qualified by the alias."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:446
+msgid "The name can be qualified by the *shortest unique suffix* of the namespace in question.  For example, the ``length`` case above can likely be shortened to ``Vect.length``."
+msgstr ""
+
+#: ../reference/syntax-guide.rst:462
+msgid "Multi line String literals"
+msgstr ""
+
+#: ../reference/syntax-guide.rst:473
+#: ../reference/syntax-reference.rst:144
+msgid "Directives"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:3
+msgid "Syntax Reference"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:5
+msgid "Here we present a rough description of Idris' surface syntax as an eBNF grammar. This presentend grammar may differ from syntax that Idris' parser can handle due to the parser and grammar description not being in sync."
+msgstr ""
+
+#: ../reference/syntax-reference.rst:10
+msgid "Notation"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:12
+msgid "Grammar shortcut notation::"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:24
+msgid "Main Grammar"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:52
+msgid "Syntax Declarations"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:93
+msgid "Blocks & Namespaces"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:107
+msgid "Interfaces & Implementation"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:121
+#: ../reference/syntax-reference.rst:209
+msgid "Bodies"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:188
+msgid "Expressions"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:277
+msgid "Pies"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:302
+msgid "Do Blocks & Idioms"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:319
+msgid "Constants"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:340
+msgid "Tactics"
+msgstr ""
+
+#: ../reference/syntax-reference.rst:414
+msgid "Documentation"
+msgstr ""
+
+#: ../reference/tactics.rst:3
+msgid "DEPRECATED: Tactics and Theorem Proving"
+msgstr ""
+
+#: ../reference/tactics.rst:6
+msgid "The interactive theorem-proving interface documented here has been deprecated in favor of :ref:`elaborator-reflection`."
+msgstr ""
+
+#: ../reference/tactics.rst:9
+msgid "Idris supports interactive theorem proving, and the analyse of context through holes.  To list all unproven holes, use the command ``:m``. This will display their qualified names and the expected types. To interactively prove a holes, use the command ``:p name`` where ``name`` is the hole. Once the proof is complete, the command ``:a`` will append it to the current module."
+msgstr ""
+
+#: ../reference/tactics.rst:16
+msgid "Once in the interactive prover, the following commands are available:"
+msgstr ""
+
+#: ../reference/tactics.rst:19
+msgid "Basic commands"
+msgstr ""
+
+#: ../reference/tactics.rst:21
+msgid "``:q`` - Quits the prover (gives up on proving current lemma)."
+msgstr ""
+
+#: ../reference/tactics.rst:22
+msgid "``:abandon`` - Same as :q"
+msgstr ""
+
+#: ../reference/tactics.rst:23
+msgid "``:state`` - Displays the current state of the proof."
+msgstr ""
+
+#: ../reference/tactics.rst:24
+msgid "``:term`` - Displays the current proof term complete with its yet-to-be-filled holes (is only really useful for debugging)."
+msgstr ""
+
+#: ../reference/tactics.rst:26
+msgid "``:undo`` - Undoes the last tactic."
+msgstr ""
+
+#: ../reference/tactics.rst:27
+msgid "``:qed`` - Once the interactive theorem prover tells you \"No more goals,\" you get to type this in celebration! (Completes the proof and exits the prover)"
+msgstr ""
+
+#: ../reference/tactics.rst:32
+msgid "Commonly Used Tactics"
+msgstr ""
+
+#: ../reference/tactics.rst:35
+msgid "Compute"
+msgstr ""
+
+#: ../reference/tactics.rst:37
+msgid "``compute`` - Normalises all terms in the goal (note: does not normalise assumptions)"
+msgstr ""
+
+#: ../reference/tactics.rst:50
+msgid "Exact"
+msgstr ""
+
+#: ../reference/tactics.rst:52
+msgid "``exact`` - Provide a term of the goal type directly."
+msgstr ""
+
+#: ../reference/tactics.rst:63
+msgid "Refine"
+msgstr ""
+
+#: ../reference/tactics.rst:65
+msgid "``refine`` - Use a name to refine the goal. If the name needs arguments, introduce them as new goals."
+msgstr ""
+
+#: ../reference/tactics.rst:69
+msgid "Trivial"
+msgstr ""
+
+#: ../reference/tactics.rst:71
+msgid "``trivial`` - Satisfies the goal using an assumption that matches its type."
+msgstr ""
+
+#: ../reference/tactics.rst:85
+msgid "Intro"
+msgstr ""
+
+#: ../reference/tactics.rst:87
+msgid "``intro`` - If your goal is an arrow, turns the left term into an assumption."
+msgstr ""
+
+#: ../reference/tactics.rst:101
+msgid "You can also supply your own name for the assumption:"
+msgstr ""
+
+#: ../reference/tactics.rst:115
+msgid "Intros"
+msgstr ""
+
+#: ../reference/tactics.rst:117
+msgid "``intros`` - Exactly like intro, but it operates on all left terms at once."
+msgstr ""
+
+#: ../reference/tactics.rst:133
+msgid "let"
+msgstr ""
+
+#: ../reference/tactics.rst:135
+msgid "``let`` - Introduces a new assumption; you may use current assumptions to define the new one."
+msgstr ""
+
+#: ../reference/tactics.rst:153
+msgid "rewrite"
+msgstr ""
+
+#: ../reference/tactics.rst:155
+msgid "``rewrite`` - Takes an expression with an equality type (x = y), and replaces all instances of x in the goal with y. Is often useful in combination with 'sym'."
+msgstr ""
+
+#: ../reference/tactics.rst:177
+msgid "sourceLocation"
+msgstr ""
+
+#: ../reference/tactics.rst:179
+msgid "``sourceLocation`` - Solve the current goal with information about the location in the source code where the tactic was invoked. This is mostly for embedded DSLs and programmer tools like assertions that need to know where they are called. See ``Language.Reflection.SourceLocation`` for more information."
+msgstr ""
+
+#: ../reference/tactics.rst:186
+msgid "Less commonly-used tactics"
+msgstr ""
+
+#: ../reference/tactics.rst:188
+msgid "``applyTactic`` - Apply a user-defined tactic. This should be a function of type ``List (TTName, Binder TT) -> TT -> Tactic``, where the first argument represents the proof context and the second represents the goal. If your tactic will produce a proof term directly, use the ``Exact`` constructor from ``Tactic``."
+msgstr ""
+
+#: ../reference/tactics.rst:193
+msgid "``attack`` - ?"
+msgstr ""
+
+#: ../reference/tactics.rst:194
+msgid "``equiv`` - Replaces the goal with a new one that is convertible with the old one"
+msgstr ""
+
+#: ../reference/tactics.rst:196
+msgid "``fill`` - ?"
+msgstr ""
+
+#: ../reference/tactics.rst:197
+msgid "``focus`` - ?"
+msgstr ""
+
+#: ../reference/tactics.rst:198
+msgid "``mrefine`` - Refining by matching against a type"
+msgstr ""
+
+#: ../reference/tactics.rst:199
+msgid "``reflect`` - ?"
+msgstr ""
+
+#: ../reference/tactics.rst:200
+msgid "``solve`` - Takes a guess with the correct type and fills a hole with it, closing a proof obligation. This happens automatically in the interactive prover, so ``solve`` is really only relevant in tactic scripts used for helping implicit argument resolution."
+msgstr ""
+
+#: ../reference/tactics.rst:204
+msgid "``try`` - ?"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:3
+msgid "Type Directed Search ``:search``"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:5
+msgid "Idris' ``:search`` command searches for terms according to their approximate type signature (much like `Hoogle <https://www.haskell.org/hoogle/>`__ for Haskell). For example::"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:27
+msgid "The best results are listed first. As we can see, ``(::)`` and ``intersperse`` are exact matches; the ``=`` symbol to the left of those results tells us the types of ``(::)`` and ``intersperse`` are effectively the same as the type that was searched."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:32
+msgid "The next result is ``delete``, whose type is more specific than the type that was searched; that's indicated by the ``>`` symbol. If we had a function with the signature ``e -> List e -> List e``, we could have given it the type ``Eq a => a -> List a -> List a``, but not necessarily the other way around."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:38
+msgid "The final two results, ``assert_smaller`` and ``const``, have types more general than the type that was searched, and so they have ``<`` symbols to their left. For example, ``e -> List e -> List e`` would be a valid type for ``assert_smaller``. The correspondence for ``const`` is more complicated than any of the four previous results. ``:search`` shows this result because we could change the order of the arguments! That is, the following definition would be legal:"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:52
+msgid "About :search results"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:54
+msgid ":search's functionality is based on the notion of type isomorphism. Informally, two types are isomorphic if we can identify terms of one type exactly with terms of the other. For example, we can consider the types ``Nat -> a -> List a`` and ``a -> Nat -> List a`` to be isomorphic, because if we have ``f : Nat -> a -> List a``, then ``flip f : a -> Nat -> List a``. Similarly, if ``g : a -> Nat -> List a``, then ``flip g : Nat -> a -> List a``."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:62
+msgid "With :search, we create a partial order on types; that is, given two types ``A`` and ``B``, we may choose to say that ``A <= B``, ``A >= B``, or both (in which case we say ``A == B``), or neither. For :search, we say that ``A >= B`` if all of the terms inhabiting ``A`` correspond to terms of ``B``, but it need not necessarily be the case that *all* the terms of ``B`` correspond to terms of ``A``. Here's an example:"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:73
+msgid "The left-hand type has just a single inhabitant, ``id``, which corresponds to the term ``id {a = Nat}``, which has the right-hand type. However, there are various terms inhabiting the right-hand type (such as ``S``) which cannot correspond with terms of type ``a -> a``."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:78
+msgid "We can consider the partial order for ``:search`` to be, in some sense, inductively generated by several classes of \"edits\" which are described below."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:83
+msgid "Possible edits"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:85
+msgid "Here is a simple approximate list of the edits that are possible in ``:search``. They are not entirely formal, and do not necessarily reflect the ``:search`` command's actual behavior. For example, the *argument application* rule may be used directly on arguments that are bound after other arguments, without using several applications of the *argument transposition* rule."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:92
+msgid "**Argument transposition**"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:100
+#: ../reference/type-directed-search.rst:120
+msgid "Score: 1 point"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:102
+#: ../reference/type-directed-search.rst:122
+#: ../reference/type-directed-search.rst:191
+msgid "Example:"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:108
+msgid "Note that in order for it to make sense to change the order of arguments, neither of the arguments' types may depend on the value bound by the other argument!"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:112
+msgid "**Symmetry of equality**"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:130
+msgid "Note that this rule means that we can flip equalities anywhere they occur (i.e., not only in the return type)."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:133
+msgid "**Argument application**"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:141
+msgid "Score: <= : 3 points, >= : 9 points"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:143
+msgid "Examples:"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:151
+msgid "Note that the ``n`` shown in the scheme above may be 0; that is, there are no Pi terms to be added on the right side. For example, that's the case for the first example shown above. This is probably the most important, and most widely used, rule of all."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:156
+msgid "**Type class application**"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:166
+msgid "Score: <= : 4 points, >= : 12 points"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:175
+msgid "This rule is used by looking at the instances for a particular type class. While the scheme is shown only for single-parameter type classes, it naturally generalizes to multi-parameter type classes. This rule is particularly useful in conjunction with argument application. Again, note that the ``n`` in the scheme above may be 0."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:181
+msgid "**Type class introduction**"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:189
+msgid "Score: <= : 2 points, >= : 6 points"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:198
+msgid "Scoring and listing search results"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:200
+msgid "When a type ``S`` is searched, the type is compared against the types of all of the terms which are currently in context. When :search compares two types ``S`` and ``T``, it essentially tries to find a chain of inequalities"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:210
+msgid "using the edit rules listed above. It also tries to find chains going the other way (i.e., showing ``S >= T``) as well. Each rule has an associated score which indicates how drastic of a change the rule corresponds to. These scores are listed above. Note that for the rules which are not symmetric, the score depends on the direction in which the rule is used. Finding types which are more general that the searched typed (``S <= T``) is preferred to finding types which are less general."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:218
+msgid "The score for the entire chain is, at minimum, the sum of the scores of the individual rules (some non-linear interactions may be added). The :search function tries to find the chain between ``S`` and ``T`` which results in the lowest score, and this is the score associated to the search result for ``T``."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:224
+msgid "Search results are listed in order of ascending score. The symbol which is shown along with the search result reflects the type of the chain which resulted in the minimum score."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:229
+msgid "Implementation of :search"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:231
+msgid "Practically, naive and undirected application of the rules enumerated above is not possible; not only is this obviously inefficient, but the two application rules (particularly *argument application*) are really impossible to use without context given by other types. Therefore, we use a heuristic algorithm that is meant to be practical, though it might not find ways to relate two types which may actually be related by the rules listed above."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:239
+msgid "Suppose we wish to match two types, ``S`` and ``T``. We think of the problem as a non-deterministic state machine. There is a ``State`` datatype which keeps track of how well we've matched ``S`` and ``T`` so far. It contains:"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:244
+msgid "Names of argument variables (Pi-bound variables) in either type which have yet to be matched"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:246
+msgid "A directed acyclic graph (DAG) of arguments (Pi-bindings) for ``S`` and ``T`` which have yet to be matched"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:248
+msgid "A list of typeclass constraints for ``S`` and ``T`` which have yet to be matched"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:250
+msgid "A record of the rules which have been used so far to get to this point"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:253
+msgid "A function ``nextSteps : State -> [State]`` finds the next states which may follow from a given state. Some states, where everything has been matched, are considered final. The algorithm can be roughly broken down into multiple stages; if we start from having two types, ``S`` and ``T``, which we wish to match, they are as follows:"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:259
+msgid "For each of ``S`` and ``T``, split the types up into their return types and directed acyclic graphs of the arguments, where there is an edge from argument A to argument B if the term bound in A appears in the type of B. The topological sorts of the DAG represent all the possible ways in which the arguments may be permuted."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:264
+msgid "For type ``T``, recursively find (saturated) uses of the ``=`` type constructor and produce a list of modified versions of ``T`` containing all possible flips of the ``=`` constructor (this corresponds to the *symmetry of equality rule*)."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:268
+msgid "For each modified type for ``T``, try to unify the return type of the modified ``T`` with ``S``, considering arguments from both ``S`` and ``T`` to be holes, so that the unifier may match pieces of the two types. For each modified version of ``T`` where this succeeds, an initial ``State`` can be made. The arguments and typeclasses are updated accordingly with the results of unification. The remainder of the algorithm involves applying ``nextSteps`` to these states until either no states remain (corresponding to no path from ``S`` to ``T``) or a final state is found. ``nextSteps`` also has several stages:"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:278
+msgid "Try to unify arguments of ``S`` with arguments of ``T``, much like is done with the return types. We work \"backwards\" through the arguments: we try matching all remaining arguments of ``S`` which lack outgoing edges in the DAG of remaining arguments (that is, the bound value doesn't appear in the type of any other remaining arguments) with the all of the corresponding remaining arguments of ``T``. This is done recursively until no arguments remain for both ``S`` and ``T``; otherwise, we give up at this point. This step corresponds to application of the *argument application rule*, as well as the *argument transposition* rule."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:288
+msgid "Now, we try to match the type classes. First, we take all possible subsets of type class constraints for ``S`` and ``T``. So if ``S`` and ``T`` have a total of ``n`` type class constraints, this produces ``2^n`` states for every state, and this quickly becomes infeasible as ``n`` grows large. This is probably the biggest bottleneck of the algorithm at the moment. This step corresponds to applications of the *type class introduction* rule."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:295
+msgid "Try to match type class constraints for ``S`` with those for ``T``. We attempt to unify each type class constraint for ``S`` with each constraint for ``T``. This may result in applications of the *type class application* rule. Once we are unable to match any more type class constraints between ``S`` and ``T``, we proceed to the final step."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:301
+msgid "Try instantiating type classes with their instances (in either ``S`` or ``T``). This corresponds to applications of the *type class application* rule. After instantiating a type class, we hopefully open up more opportunities to match typeclass constraints of ``S`` with those of ``T``, so we return to the previous step."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:307
+msgid "The code for :search is located in the `Idris.TypeSearch module <https://github.com/idris-lang/Idris-dev/blob/master/src/Idris/TypeSearch.hs>`__."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:311
+msgid "Aggregating results"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:313
+msgid "The search for chains of rules/edits which relate two types can be viewed as a shortest path problem where nodes correspond to types and edges correspond to rules relating two types. The weights or distances on each edge correspond to the score of each rule. We then may imagine that we have a single start node, our search type ``S``, and several final nodes: all of the types for terms which are currently in context. The problem, then, is to find the shortest paths (where they exist) to all of the final nodes. In particular, we wish to find the \"closest\" types (those with the minimum score) first, as we'd like to display them first."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:324
+msgid "This problem nicely maps to usage of Dijkstra's algorithm. We search for all types simultaneously so we can find the closest ones with the minimum amount of work. In practice, this results in using a priority queue of priority queues. We first ask \"which goal type should we work on next?\", and then ask \"which state should we expand upon next?\" By using this strategy, the best results can be shown quickly, even if it takes a bit of time to find worse results (or at least rule them out)."
+msgstr ""
+
+#: ../reference/type-directed-search.rst:333
+msgid "Miscellaneous Notes"
+msgstr ""
+
+#: ../reference/type-directed-search.rst:335
+msgid "Whether arguments are explicit or implicit does not affect search results."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:3
+msgid "Uniqueness Types"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:5
+msgid "Uniqueness Types are an experimental feature available from Idris 0.9.15. A value with a unique type is guaranteed to have *at most one* reference to it at run-time, which means that it can safely be updated in-place, reducing the need for memory allocation and garbage collection. The motivation is that we would like to be able to write reactive systems, programs which run in limited memory environments, device drivers, and any other system with hard real-time requirements, ideally while giving up as little high level conveniences as possible."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:14
+msgid "They are inspired by linear types, `Uniqueness Types <https://en.wikipedia.org/wiki/Uniqueness_type>`__ in the `Clean <https://wiki.clean.cs.ru.nl/Clean>`__ programming language, and ownership types and borrowed pointers in the `Rust <https://www.rust-lang.org/>`__ programming language."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:20
+msgid "Some things we hope to be able to do eventually with uniqueness types include:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:23
+msgid "Safe, pure, in-place update of arrays, lists, etc"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:24
+msgid "Provide guarantees of correct resource usage, state transitions, etc"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:25
+msgid "Provide guarantees that critical program fragments will *never* allocate"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:29
+msgid "Using Uniqueness"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:31
+msgid "If ``x : T`` and ``T : UniqueType``, then there is at most one reference to ``x`` at any time during run-time execution. For example, we can declare the type of unique lists as follows:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:41
+msgid "If we have a value ``xs : UList a``, then there is at most one reference to ``xs`` at run-time. The type checker preserves this guarantee by ensuring that there is at most one reference to any value of a unique type in a pattern clause. For example, the following function definition would be valid:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:53
+msgid "In the second clause, ``xs`` is a value of a unique type, and only appears once on the right hand side, so this clause is valid. Not only that, since we know there can be no other reference to the ``UList a`` argument, we can reuse its space for building the result! The compiler is aware of this, and compiles this definition to an in-place update of the list."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:60
+msgid "The following function definition would not be valid (even assuming an implementation of ``++``), however, since ``xs`` appears twice:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:68
+msgid "This would result in a shared pointer to ``xs``, so the typechecker reports:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:75
+msgid "If we explicitly copy, however, the typechecker is happy:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:83
+msgid "Note that it's fine to use ``x`` twice, because ``a`` is a ``Type``, rather than a ``UniqueType``."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:86
+msgid "There are some other restrictions on where a ``UniqueType`` can appear, so that the uniqueness property is preserved. In particular, the type of the function type, ``(x : a) -> b`` depends on the type of ``a`` or ``b`` - if either is a ``UniqueType``, then the function type is also a ``UniqueType``. Then, in a data declaration, if the type constructor builds a ``Type``, then no constructor can have a ``UniqueType``. For example, the following definition is invalid, since it would embed a unique value in a possible non-unique value:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:101
+msgid "Finally, types may be polymorphic in their uniqueness, to a limited extent. Since ``Type`` and ``UniqueType`` are different types, we are limited in how much we can use polymorphic functions on unique types. For example, if we have function composition defined as follows:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:111
+msgid "And we have some functions over unique types:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:118
+msgid "Then we cannot compose ``foo`` and ``bar`` as ``bar . foo``, because ``UList`` does not compute a ``Type``! Instead, we can define composition as follows:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:127
+msgid "The ``Type*`` type stands for either unique or non-unique types. Since such a function may be passed a ``UniqueType``, any value of type ``Type*`` must also satisfy the requirement that it appears at most once on the right hand side."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:133
+msgid "Borrowed Types"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:135
+msgid "It quickly becomes obvious when working with uniqueness types that having only one reference at a time can be painful. For example, what if we want to display a list before updating it?"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:148
+msgid "This is a valid definition of ``showU``, but unfortunately it consumes the list! So the following function would be invalid:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:158
+msgid "Still, one would hope to be able to display a unique list without problem, since it merely *inspects* the list; there are no updates. We can achieve this, using the notion of *borrowing*. A Borrowed type is a Unique type which can be inspected at the top level (by pattern matching, or by *lending* to another function) but no further. This ensures that the internals (i.e. the arguments to top level patterns) will not be passed to any function which will update them."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:166
+msgid "``Borrowed`` converts a ``UniqueType`` to a ``BorrowedType``. It is defined as follows (along with some additional rules in the typechecker):"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:179
+msgid "A value can be \"lent\" to another function using ``lend``. Arguments to ``lend`` are not counted by the type checker as a reference to a unique value, therefore a value can be lent as many times as desired. Using this, we can write ``showU`` as follows:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:193
+msgid "Unlike a unique value, a borrowed value may be referred to as many times as desired. However, there is a restriction on how a borrowed value can be used. After all, much like a library book or your neighbour's lawnmower, if a function borrows a value it is expected to return it in exactly the condition in which it was received!"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:199
+msgid "The restriction is that when a ``Borrowed`` type is matched, any pattern variables under the ``Read`` which have a unique type may not be referred to at all on the right hand side (unless they are themselves lent to another function)."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:204
+msgid "Uniqueness information is stored in the type, and in particular in function types. Once we're in a unique context, any new function which is constructed will be required to have unique type, which prevents the following sort of bad program being implemented:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:217
+msgid "Since ``lend`` is implicit, in practice for functions to lend and borrow values merely requires the argument to be marked as ``Borrowed``. We can therefore write ``showU`` as follows:"
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:231
+msgid "Problems/Disadvantages/Still to do..."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:233
+msgid "This is a work in progress, there is lots to do. The most obvious problem is the loss of abstraction. On the one hand, we have more precise control over memory usage with ``UniqueType`` and ``BorrowedType``, but they are not in general compatible with functions polymorphic over ``Type``. In the short term, we can start to write reactive and low memory systems with this, but longer term it would be nice to support more abstraction."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:241
+msgid "We also haven't checked any of the metatheory, so this could all be fatally flawed! The implementation is based to a large extent on `Uniqueness Typing Simplified <http://lambda-the-ultimate.org/node/2708>`__, by de Vries et al, so there is reason to believe things should be fine, but we still have to do the work."
+msgstr ""
+
+#: ../reference/uniqueness-types.rst:248
+msgid "Much as there are with linear types, there are some annoyances when trying to prove properties of functions with unique types (for example, what counts as a use of a value). Since we require *at most* one use of a value, rather than *exactly* one, this seems to be less of an issue in practice, but still needs thought."
+msgstr ""
