@@ -187,3 +187,7 @@ pseudoxml:
 .PHONY: pots
 pots:
 	@$(SPHINXBUILD) -b gettext . ./pots
+
+.PHONY: update
+update: pots
+	sphinx-intl update -p pots -l zh_CN

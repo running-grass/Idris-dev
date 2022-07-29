@@ -1,0 +1,2816 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017-2020, The Idris Community
+# This file is distributed under the same license as the Idris package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Idris 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-29 09:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../elaboratorReflection/elabReflection.rst:2
+msgid "Extending Idris using Elaborator Reflection"
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:4
+msgid ""
+"Idris provides a mechanism to modify the language without having to "
+"recompile Idris itself. We can think of this in terms of metaprogramming "
+"or domain specific languages or just building in new capabilities."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:6
+msgid ""
+"In order to extend the language we need to know something about how Idris"
+" is compiled. This page explains only what is needed to customise the "
+"elaboration. For more information about the compiler's implementation see"
+" `Edwin Brady's 2013 paper`_ and for customising the elaboration process "
+"see `Elaborator reflection: extending Idris in Idris`_ and `David "
+"Christiansen's PhD thesis`_."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:8
+msgid "Compilation of Idris proceeds through a number of stages."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:10
+msgid ""
+"First, Idris is desugared by inserting placeholders for terms to be "
+"guessed by the compiler and replacing certain syntactic forms, such as "
+"do-notation, with the functions that implement them."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:11
+msgid ""
+"Then, this desugared Idris is translated into a much simpler core "
+"language, called TT. This translation process is called elaboration."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:12
+msgid ""
+"Finally, TT is type checked a second time to rule out errors, and then "
+"compiled into the target language."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:-1
+msgid "diagram illustrating these stages of Idris compilation"
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:19
+msgid ""
+"TT is a core language which is syntactically very simple. This makes it "
+"easy for computers to process but very verbose and hard for humans to "
+"read. The Idris elaborator is written in Haskell using an elaboration "
+"library that was inspired by the tactics in interactive proof assistants "
+"such as Coq."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:23
+msgid ""
+"There are some similarities with a proof assistant but in Idris the "
+"elaborator is an interpreter of Idris source in the elaboration monad, "
+"where each syntactic construct of Idris is interpreted as a sequence of "
+"tactics."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst
+msgid "diagram comparing elaboration with proof assistant"
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:29
+msgid ""
+"The primitives in the elaboration library are not just useful for the "
+"implementors of Idris itself. They can also be used by authors of "
+"extensions to the compiler, using a mechanism known as elaborator "
+"reflection. During elaboration TT (Raw) structure contains:"
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:32
+msgid "holes - placeholders for terms that have not yet been filled in."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:33
+msgid ""
+"guesses - similar to let bindings, except with no reduction rule, so that"
+" elaboration programs can control the precise shape of terms that are "
+"under construction."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:35
+msgid ""
+"For more information about holes and guesses see `Dependently Typed "
+"Functional Programs and their Proofs by McBride 1999`_."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:37
+msgid ""
+"The following diagram is intended to illustrate a high level view of the "
+"tactics and how this eventually results in the TT language being "
+"generated. It is not necessary to understand the details at this stage. "
+"The intention is to help build up some intuition so that, when we get "
+"into the details, we can recognise how this fits into the big picture."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:-1
+msgid "diagram illustrating overview of TT language being generated from tactics."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:44
+msgid ""
+"As already mentioned the TT core language is kept syntactically very "
+"simple, for instance, here are the binders in TT with corresponding code "
+"and logic type validity rules:"
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst:48
+msgid ""
+"This diagram illustrates the basis of the compilation process in logic "
+"(in this case for binders). It is not necessary to be an expert logician "
+"to understand elaborator reflection. However, when learning about "
+"tactics, they may appear arbitrary without knowing some theory. For more "
+"information about this see `Edwin Brady's 2013 paper`_."
+msgstr ""
+
+#: ../elaboratorReflection/elabReflection.rst
+msgid "diagram illustrating basis of code in logic"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:5
+msgid "Elaborator Reflection Introduction"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:7
+msgid ""
+"The Idris elaborator is responsible for converting high-level Idris code "
+"into the core language. It is implemented as a kind of embedded tactic "
+"language in Haskell, where tactic scripts are written in an *elaboration "
+"monad* that provides error handling and a proof state. For details, see "
+"`Edwin Brady's 2013 paper in the Journal of Functional Programming "
+"<https://eb.host.cs.st-andrews.ac.uk/drafts/impldtp.pdf>`_."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:12
+msgid ""
+"Elaborator reflection makes the elaboration type as well as a selection "
+"of its tactics available to Idris code. This means that metaprograms "
+"written in Idris can have complete control over the elaboration process, "
+"generating arbitrary code, and they have access to all of the facilities "
+"available in the elaborator, such as higher-order unification, type "
+"checking, and emitting auxiliary definitions."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:16
+msgid "The Elaborator State"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:18
+msgid ""
+"The elaborator state contains information about the ongoing elaboration "
+"process. In particular, it contains a *goal type*, which is to be filled "
+"by an under-construction *proof term*. The proof term can contain "
+"*holes*, each of which has a scope in which it is valid and a type. Some "
+"holes may additionally contain *guesses*, which can be substituted in the"
+" scope of the hole. The holes are tracked in a *hole queue*, and one of "
+"them is *focused*. In addition to the goal type, proof term, and holes, "
+"the elaborator state contains a collection of unsolved unification "
+"problems that can affect elaboration."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:25
+msgid ""
+"The elaborator state is not directly available to Idris programs. "
+"Instead, it is modified through the use of *tactics*, which are "
+"operations that affect the elaborator state. A tactic that returns a "
+"value of type ``a``, potentially modifying the elaborator state, has type"
+" ``Elab a``. The default tactics are all in the namespace "
+"``Language.Reflection.Elab.Tactics``."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:32
+msgid "Running Elaborator Scripts"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:34
+#, python-format
+msgid ""
+"On their own, tactics have no effect. The meta-operation ``%runElab "
+"script`` runs ``script`` in the current elaboration context. Before you "
+"can use ``%runElab``, you will have to enable the language extension by "
+"adding ``%language ElabReflection`` in your file (or by passing ``-X "
+"ElabReflection`` to the ``idris`` executable from your command line). For"
+" example, the following script constructs the identity function at type "
+"``Nat``:"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:49
+#, python-format
+msgid ""
+"On the right-hand side, the Idris elaborator has the goal ``Nat -> Nat``."
+" When it encounters the ``%runElab`` directive, it fulfills this goal by "
+"running the provided script. The first tactic, ``intro``, constructs a "
+"lambda that binds the name ``x``. The name argument is optional because a"
+" default name can be taken from the function type. Now, the proof term is"
+" of the form ``\\x : Nat => {hole}``. The second tactic, ``fill``, fills "
+"this hole with a guess, giving the term ``\\x : Nat => {hole≈x}``. "
+"Finally, the ``solve`` tactic instantiates the guess, giving the result "
+"``\\x : Nat => x``."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:57
+msgid ""
+"Because elaborator scripts are ordinary Idris expressions, it is also "
+"possible to use them in multiple contexts. Note that there is nothing "
+"``Nat``-specific about the above script. We can generate identity "
+"functions at any concrete type using the same script:"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:79
+msgid "Interactively Building Elab Scripts"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:81
+msgid ""
+"You can build an ``Elab`` script interactively at the REPL. Use the "
+"command ``:metavars``, or ``:m`` for short, to list the available holes. "
+"Then, issue the ``:elab <hole>`` command at the REPL to enter the "
+"elaboration shell."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:86
+msgid ""
+"At the shell, you can enter proof tactics to alter the proof state. You "
+"can view the system-provided tactics prior to entering the shell by "
+"issuing the REPL command ``:browse Language.Reflection.Elab.Tactics``. "
+"When you have discharged all goals, you can complete the proof using the "
+"``:qed`` command and receive in return an elaboration script that fills "
+"the hole."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:93
+msgid ""
+"The interactive elaboration shell accepts a limited number of commands, "
+"including a subset of the commands understood by the normal Idris REPL as"
+" well as some elaboration-specific commands. It also supports the "
+"``do``-syntax, meaning you can write ``res <- command`` to bind the "
+"result of ``command`` to variable ``res``."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:99
+msgid "General-purpose commands:"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:101
+msgid ""
+"``:eval <EXPR>``, or ``:e <EXPR>`` for short, evaluates the provided "
+"expression and prints the result."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:104
+msgid ""
+"``:type <EXPR>``, or ``:t <EXPR>`` for short, prints the provided "
+"expression together with its type."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:107
+msgid "``:search <TYPE>`` searches for definitions having the provided type."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:109
+msgid ""
+"``:doc <NAME>`` searches for definitions with the provided name and "
+"prints their documentation."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:113
+msgid "Commands for viewing the proof state:"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:115
+msgid ""
+"``:state`` displays the current state of the term being constructed. It "
+"lists both other goals and the current goal."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:118
+msgid ""
+"``:term`` displays the current proof term as well as its yet-to-be-filled"
+" holes."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:121
+msgid "Commands for manipulating the proof state:"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:123
+msgid "``:undo`` undoes the effects of the last tactic."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:125
+msgid ""
+"``:abandon`` gives up on proving the current lemma and quits the "
+"elaboration shell."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:127
+msgid ""
+"``:qed`` finishes the script and exits the elaboration shell. The shell "
+"will only accept this command once it reports, \"No more goals.\" On "
+"exit, it will print out the finished elaboration script for you to copy "
+"into your program."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:133
+msgid "Failure"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:135
+msgid ""
+"Some tactics may *fail*. For example, ``intro`` will fail if the focused "
+"hole does not have a function type, ``solve`` will fail if the current "
+"hole does not contain a guess, and ``fill`` will fail if the term to be "
+"filled in has the wrong type. Scripts can also fail explicitly using the "
+"``fail`` tactic."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:139
+msgid ""
+"To account for failure, there is an ``Alternative`` implementation for "
+"``Elab``. The ``<|>`` operator first tries the script to its left. If "
+"that script fails, any changes that it made to the state are undone and "
+"the right argument is executed. If the first argument succeeds, then the "
+"second argument is not executed."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:145
+msgid "Querying the Elaboration State"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:147
+msgid ""
+"``Elab`` includes operations to query the elaboration state, allowing "
+"scripts to use information about their environment to steer the "
+"elaboration process. The ordinary Idris bind syntax can be used to "
+"propagate this information. For example, a tactic that solves the current"
+" goal when it is the unit type might look like this:"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:164
+msgid ""
+"The tactic ``compute`` normalises the type of its goal with respect to "
+"the current context. While not strictly necessary, this allows ``triv`` "
+"to be used in contexts where the triviality of the goal is not "
+"immediately apparent. Then, ``getGoal`` is used, and its result is bound "
+"to ``g``. Because it returns a pair consisting of the current goal's name"
+" and type, we case-split on its second projection. If the goal type turns"
+" out to have been the unit type, we fill using the unit constructor and "
+"solve the goal. Otherwise, we fail with an error message informing the "
+"user that the current goal is not trivial."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:171
+msgid ""
+"Additionally, the elaboration state can be dumped into an error message "
+"with the ``debug`` tactic. A variant, ``debugMessage``, allows arbitrary "
+"messages to be included with the state, allowing for a kind of "
+"\"``printf`` debugging\" of elaboration scripts. The message format used "
+"by ``debugMessage`` is the same for errors produced by the error "
+"reflection mechanism, allowing the re-use of the Idris pretty-printer "
+"when rendering messages."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:176
+msgid "Changing the Global Context"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:178
+msgid ""
+"``Elab`` scripts can modify the global context during execution. Just as "
+"the Idris elaborator produces auxiliary definitions to implement features"
+" such as ``where``-blocks and ``case`` expressions, user elaboration "
+"scripts may need to define functions. Furthermore, this allows ``Elab`` "
+"reflection to be used to implement features such as interface deriving. "
+"The operations ``declareType``, ``defineFunction``, and "
+"``addImplementation`` allow ``Elab`` scripts to modify the global "
+"context."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:184
+msgid "Using Idris's Features"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:186
+msgid ""
+"The Idris compiler has a number of ways to automate the construction of "
+"terms. On its own, the ``Elab`` state and its interactions with the "
+"unifier allow implicits to be solved using unification. Additional "
+"operations use further features of Idris. In particular, ``resolveTC`` "
+"solves the current goal using interface resolution, ``search`` invokes "
+"the proof search mechanism, and ``sourceLocation`` finds the context in "
+"the original file at which the elaboration script is invoked."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:193
+msgid "Recursive Elaboration"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:195
+msgid ""
+"The elaboration mechanism can be invoked recursively using the "
+"``runElab`` tactic. This tactic takes a goal type and an elaboration "
+"script as arguments and runs the script in a fresh lexical environment to"
+" create an inhabitant of the provided goal type. This is primarily useful"
+" for code generation, particularly for generating pattern-matching "
+"clauses, where variable scope needs to be one that isn't the present "
+"local context."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:200
+msgid "Learn More"
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:202
+msgid ""
+"Some tactics are introduced in the :ref:`proofs-index` section with "
+"further details, of those most relevant to elaborator reflection, on the "
+"following pages."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:204
+msgid ""
+"The list of built-in tactics can be obtained using the ``:browse`` "
+"command in an Idris REPL or the corresponding feature in one of the "
+"graphical IDE clients to explore the ``Language.Reflection.Elab.Tactics``"
+" namespace. All of the built-in tactics contain documentation strings."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:207
+msgid ""
+"For alternative ways to extend the Idris language see the :ref"
+":`reference-index` section."
+msgstr ""
+
+#: ../elaboratorReflection/elaborator-reflection.rst:209
+msgid ""
+"The following pages explain more about the theory and practice of "
+"elaborator reflection."
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:2
+msgid "Elaborator Reflection - Identity Example"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:6
+msgid ""
+"This example of elaborator reflection steps through this metaprogram that"
+" generates the identity function:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:19
+msgid ""
+"At the beginning of executing the elaboration script, the initial state "
+"consists of a single hole of type Nat -> Nat."
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:21
+msgid ""
+"As a first approximation, the state consists of a term with holes in it, "
+"an indicator of which hole is focused, a queue of the next holes to focus"
+" on, and miscellaneous information like a source of fresh names. The "
+"intro tactic modifies this state, replacing the focused hole with a "
+"lambda and focusing on the lambda's body."
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:26
+msgid "The following is a walkthough looking at the state after each tactic:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:30
+msgid "Start with the type signature like this:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:38
+msgid ""
+"In order to investigate how the program works this table shows the proof "
+"state at each stage as the tactics are applied. So here is the proof "
+"state at the start:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:43
+msgid ""
+"This table shows the hole types and what they depend on. The aim is to "
+"illustrate the types by analogy with proofs, as a line with the premises "
+"above it and the conclusion below it."
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:48
+msgid "The term is:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:49
+#: ../elaboratorReflection/tactics.rst:292
+msgid "?{hole_0} ≈ ? {hole_2} . {hole_2} . {hole_0}"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:51
+msgid ""
+"It is possible to read the state from the script by calling getEnv, "
+"getGoal and getHoles."
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:53
+msgid ""
+"The output of these calls contain structures with TT code. To show the "
+"results I hacked this: `my code`_. TT code is not really designed to be "
+"readable by humans, all the names are fully expanded, everything has a "
+"type down to universes (type of types). This is shown here to illustrate "
+"the information available."
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:68
+#: ../elaboratorReflection/example1.rst:102
+#: ../elaboratorReflection/example1.rst:136
+#: ../elaboratorReflection/example1.rst:177
+#: ../elaboratorReflection/primitive.rst:392
+msgid "getGuess"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:69
+#: ../elaboratorReflection/example1.rst:103
+msgid "error no guess"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:71
+#: ../elaboratorReflection/tactics.rst:377
+msgid "Introduce a lambda binding around the current hole and focus on the body."
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:72
+#: ../elaboratorReflection/tactics.rst:361
+msgid "intro \\`{{x}}"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:74
+msgid "The state now looks like this:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:79
+#: ../elaboratorReflection/example1.rst:113
+#: ../elaboratorReflection/example1.rst:148
+msgid "The hole types now looks like this:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:84
+#: ../elaboratorReflection/example1.rst:118
+#: ../elaboratorReflection/example1.rst:153
+msgid "The term now looks like this:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:85
+#: ../elaboratorReflection/tactics.rst:305
+msgid "?{hole_0} ≈ λ x . ? {hole_2} . {hole_2} . {hole_0}"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:87
+#: ../elaboratorReflection/example1.rst:121
+msgid ""
+"Again we can check the state by calling getEnv, getGoal and getHoles: see"
+" `my code`_"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:105
+msgid "Place a term into a hole, unifying its type"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:106
+msgid "fill (Var \\`{{x}})"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:108
+msgid "The state still looks like this:"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:119
+#: ../elaboratorReflection/tactics.rst:317
+msgid "?{hole_0} ≈ λ x . ?{hole_2} ≈ x . {hole_2} . {hole_0}"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:145
+#: ../elaboratorReflection/primitive.rst:22
+msgid "Substitute a guess into a hole."
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:146
+#: ../elaboratorReflection/primitive.rst:21
+msgid "solve"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:154
+#: ../elaboratorReflection/tactics.rst:329
+msgid "?{hole_0} ≈ λ x . x . {hole_0}"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:156
+#: ../elaboratorReflection/primitive.rst:371
+msgid "getEnv"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:158
+#: ../elaboratorReflection/primitive.rst:378
+msgid "getGoal"
+msgstr ""
+
+#: ../elaboratorReflection/example1.rst:160
+#: ../elaboratorReflection/primitive.rst:385
+msgid "getHoles"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:2
+msgid "Generating Datatypes and Functions at Compile Time"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:4
+msgid ""
+"Program elements, such as datatypes and functions can be constructed at "
+"compile-time in the Elab monad. This can allow proofs to be generated for"
+" user defined types or it could allow types to be automatically generated"
+" to support user defined types. An example is the code, from `Elaborator "
+"reflection: extending Idris in Idris`_, that automatically generates "
+"accessibility predicates using the Bove-Capretta method."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:9
+msgid "Generating Datatypes"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:11
+msgid "There are two main 'tactics' associated with generating datatypes:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:13
+#: ../elaboratorReflection/generatingData.rst:209
+msgid "declareDatatype"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:14
+#: ../elaboratorReflection/generatingData.rst:216
+msgid "defineDatatype"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:16
+msgid "Which declare and define the datatype as the names suggest."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:20
+#: ../elaboratorReflection/generatingData.rst:77
+msgid ""
+"These 'tactics' and the data structures associated with them are listed "
+"in the tables later on this page, for now, here is a summary:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst
+msgid ""
+"diagram illustrating data structures associated with declareDatatype "
+"defineDatatype."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:28
+msgid ""
+"As a first example, the following boolean-like type can be constructed. "
+"When the compiler has run it will be available to us as if we had "
+"compiled it in the usual way:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:36
+msgid "This was generated by the following code:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:57
+msgid "The constructors T and F can be called as would be expected:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:66
+msgid "Generating Functions"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:68
+msgid "There are two main 'tactics' associated with generating functions:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:70
+#: ../elaboratorReflection/generatingData.rst:196
+msgid "declareType"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:71
+#: ../elaboratorReflection/generatingData.rst:202
+msgid "defineFunction"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:73
+msgid "Which declare and define the function as the names suggest."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst
+msgid ""
+"diagram illustrating data structures associated with function declare and"
+" define."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:83
+msgid ""
+"Note: The left hand side (lhs) and right hand side (rhs) of FunClause "
+"typically is of type 'Raw'."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:87
+msgid ""
+"Bound pattern variables are represented by 'PVar' binders: This diagram "
+"shows an example of a possible Raw structure that might be used in a "
+"function definition."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst
+msgid "diagram illustrating data structures associated with functions."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:96
+msgid ""
+"Some function definitions can now be added to the above datatype. This is"
+" what they will look like:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:108
+msgid "This was generated with the following code:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:128
+msgid "This is what happens when we call the functions:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:140
+msgid ""
+"So far these datatypes and functions could have been written, statically,"
+" in the usual way. However, it is possible to imagine situations where we"
+" may need a lot of functions to be generated automatically at compile "
+"time. For example, if we extend this Boolean datatype to a datatype with "
+"more simple constructors (a finite set), we could generate a function for"
+" every possible permutation of that datatype back to itself."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:143
+msgid "A Different Example which has Type Parameters"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:147
+msgid "Here is an example of a datatype with type parameters:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:154
+msgid "This was produced by the following code:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:174
+msgid ""
+"So this declares and defines the following data structure 'N' with a "
+"constructor 'MkN' which can have an implicit or an explicit Nat argument."
+" Which can be used like this:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:188
+msgid "Table of 'tactics' for Generating Data and Functions"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:190
+msgid ""
+"These are the functions that we can use to create data and functions in "
+"the Elab monad:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:197
+msgid "Add a type declaration to the global context."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:199
+#: ../elaboratorReflection/generatingData.rst:205
+#: ../elaboratorReflection/generatingData.rst:212
+#: ../elaboratorReflection/generatingData.rst:217
+#: ../elaboratorReflection/generatingData.rst:229
+#: ../elaboratorReflection/generatingData.rst:240
+#: ../elaboratorReflection/primitive.rst:17
+#: ../elaboratorReflection/primitive.rst:33
+#: ../elaboratorReflection/primitive.rst:57
+#: ../elaboratorReflection/primitive.rst:95
+#: ../elaboratorReflection/primitive.rst:126
+#: ../elaboratorReflection/primitive.rst:135
+#: ../elaboratorReflection/primitive.rst:142
+#: ../elaboratorReflection/primitive.rst:158
+#: ../elaboratorReflection/primitive.rst:169
+#: ../elaboratorReflection/primitive.rst:176
+#: ../elaboratorReflection/primitive.rst:185
+#: ../elaboratorReflection/primitive.rst:195
+#: ../elaboratorReflection/primitive.rst:204
+#: ../elaboratorReflection/primitive.rst:215
+#: ../elaboratorReflection/primitive.rst:230
+#: ../elaboratorReflection/primitive.rst:250
+#: ../elaboratorReflection/primitive.rst:261
+#: ../elaboratorReflection/primitive.rst:270
+#: ../elaboratorReflection/primitive.rst:277
+#: ../elaboratorReflection/primitive.rst:287
+#: ../elaboratorReflection/primitive.rst:298
+#: ../elaboratorReflection/primitive.rst:307
+#: ../elaboratorReflection/primitive.rst:330
+#: ../elaboratorReflection/primitive.rst:350
+#: ../elaboratorReflection/primitive.rst:359
+#: ../elaboratorReflection/primitive.rst:374
+#: ../elaboratorReflection/primitive.rst:381
+#: ../elaboratorReflection/primitive.rst:388
+#: ../elaboratorReflection/primitive.rst:395
+#: ../elaboratorReflection/primitive.rst:402
+#: ../elaboratorReflection/primitive.rst:409
+#: ../elaboratorReflection/primitive.rst:416
+#: ../elaboratorReflection/primitive.rst:423
+#: ../elaboratorReflection/primitive.rst:430
+#: ../elaboratorReflection/primitive.rst:437
+#: ../elaboratorReflection/primitive.rst:444
+#: ../elaboratorReflection/primitive.rst:451
+#: ../elaboratorReflection/primitive.rst:461
+#: ../elaboratorReflection/primitive.rst:476
+#: ../elaboratorReflection/primitive.rst:495
+#: ../elaboratorReflection/tactics.rst:383
+#: ../elaboratorReflection/tactics.rst:396
+#: ../elaboratorReflection/tactics.rst:405
+#: ../elaboratorReflection/tactics.rst:412
+#: ../elaboratorReflection/tactics.rst:425
+msgid "Signature:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:201
+msgid "declareType : TyDecl -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:203
+msgid ""
+"Define a function in the global context. The function must have already "
+"been declared, either in ordinary Idris code or using `declareType`."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:207
+msgid "defineFunction : FunDefn Raw -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:210
+msgid ""
+"Declare a datatype in the global context. This step only establishes the "
+"type constructor; use `defineDatatype` to give it constructors."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:214
+msgid "declareDatatype : TyDecl -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:219
+msgid "defineDatatype : DataDefn -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:221
+msgid "addImplementation"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:222
+msgid "Register a new implementation for interface resolution."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:224
+#: ../elaboratorReflection/generatingData.rst:236
+msgid "Arguments:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:226
+msgid ""
+"ifaceName the name of the interface for which an implementation is being "
+"registered"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:227
+msgid "implName the name of the definition to use in implementation search"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:231
+msgid "addImplementation : (ifaceName, implName : TTName) -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:233
+msgid "isTCName"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:234
+msgid "Determine whether a name denotes an interface."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:238
+msgid "name - a name that might denote an interface."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:242
+msgid "isTCName : (name : TTName) -> Elab Bool"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:245
+msgid "Table of Datatypes Associated with Generating Data and Functions"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:247
+msgid "The above functions use the following data/records:"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:253
+msgid "Plicity"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:254
+msgid "How an argument is provided in high-level Idris"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:266
+msgid "FunArg"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:267
+msgid "Function arguments"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:269
+msgid ""
+"These are the simplest representation of argument lists, and are used for"
+" functions. Additionally, because a FunArg provides enough information to"
+" build an application, a generic type lookup of a top-level identifier "
+"will return its FunArgs, if applicable."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:281
+msgid "TyConArg"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:282
+msgid "Type constructor arguments"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:284
+msgid "Each argument is identified as being either a parameter that is"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:286
+msgid "consistent in all constructors, or an index that varies based on"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:288
+msgid "which constructor is selected."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:298
+msgid "TyDecl"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:299
+msgid "A type declaration for a function or datatype"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:312
+msgid "FunClause"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:313
+msgid "A single pattern-matching clause"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:321
+msgid "FunDefn"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:322
+msgid "A reflected function definition."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:331
+msgid "ConstructorDefn"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:332
+msgid "A constructor to be associated with a new datatype."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:347
+msgid "DataDefn"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:348
+msgid "A definition of a datatype to be added during an elaboration script."
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:361
+msgid "CtorArg"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:362
+msgid "CtorParameter"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:368
+msgid "Datatype"
+msgstr ""
+
+#: ../elaboratorReflection/generatingData.rst:369
+msgid "A reflected datatype definition"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:2
+msgid "Elaborator Reflection - Holes"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:4
+msgid ""
+"The process of doing proofs and elaborator reflection tends to involve "
+"stating with a desired conclusion and working back to known premises. "
+"This often needs intermediate sub-goals which may only be partially "
+"solved, these are encoded using 'holes' and 'guesses'."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:6
+msgid ""
+"A hole is a term (an expression - a chunk of code) which is yet to be "
+"determined. We do have information about its type (this process tends to "
+"be type driven)."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:7
+msgid "A guess is like a hole that is not yet bound."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:9
+msgid ""
+"The theory around this was developed in `Dependently Typed Functional "
+"Programs and their Proofs by McBride 1999`_."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:12
+msgid "Notation for Holes and Guesses"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:14
+msgid ""
+"There is a notation used in the McBride 1999 thesis which is adapted for "
+"the TT language. When working on elaborator reflection it is useful to "
+"know this notation, for instance when reading the output of the 'debug' "
+"tactic."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:16
+msgid "A focused hole is notated like this ?x:t . t"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:17
+msgid "A guess is notated like this ?x ≈ t:t . t"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:19
+msgid "The following example shows how this is used:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:22
+msgid "Simple Example"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:24
+msgid "Start with a code file that just contains:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:33
+msgid "when this is loaded the following is displayed:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:47
+msgid ""
+"This shows information about the state when debug is encountered, during "
+"tactic execution, which allows us to investigate what is happening at "
+"each stage."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:49
+msgid ""
+"The \"Holes\" part shows the types of the holes and the local context of "
+"each"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:50
+msgid ""
+"The \"Term\" part shows where these holes are in the expression being "
+"constructed."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:52
+msgid "So starting with the \"Term\" part we have."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:-1
+msgid "attack tactic"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:60
+msgid ""
+"This kind of thing tends to arise from \"attack\", which helps keep "
+"binding forms in order."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:62
+msgid ""
+"The meaning of this is not immediately apparent so it helps to add some "
+"parentheses to make the structure clearer:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:68
+msgid "First lets look at the inner part:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:74
+msgid "We can substitute in the type from the \"Holes\" part:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:80
+msgid ""
+"So we are looking for a hole of type Nat and all we know is it has type "
+"Nat."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:82
+msgid ""
+"Going back to the full term, the above is wrapped in a guess, so it "
+"means: 'a guess that is itself a hole'."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:84
+msgid ""
+"Since the elaborator does not have any further information it has to be "
+"given a value:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:95
+msgid "Now we have a guess for hole_2 which is itself a guess for hole_0:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:101
+msgid "The guesses can be accepted by calling the 'solve' tactic."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:104
+msgid "Example Showing Patterns"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:106
+msgid ""
+"In this next example a parameter 'n' has been added to the function. This"
+" allows us to see how patterns are used. Starting with this file:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:115 ../elaboratorReflection/holes.rst:154
+msgid "when loaded gives:"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:136
+msgid ""
+"The ns above the lines show the context of the holes on the right hand "
+"side - they include the variable n that is an argument!"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:138
+msgid ""
+"patTy is a binding form in Idris's core language that introduces a "
+"pattern variable. The idea is that the left-hand side and right-hand side"
+" of each pattern should have the same type. Because pattern variables may"
+" occur multiple times on either side of the equation, we can achieve this"
+" by documenting their types with a binding form that wraps each side. "
+"This new binding form is why an \"attack\" was necessary prior to "
+"elaborating the RHS."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:140
+msgid ""
+"patTy is a type former, and pat is the corresponding introduction form. "
+"So you can think of patTy as being a bit like a dependent function type, "
+"and pat as being a bit like lambda, except they don't introduce functions"
+" (they instead are used for pattern-matching definitions)."
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:143
+msgid "More Complicated Example"
+msgstr ""
+
+#: ../elaboratorReflection/holes.rst:145
+msgid ""
+"This example does not introduce any new notation but the extra complexity"
+" gives a more realistic idea of how it is used. Here we start with this "
+"file:"
+msgstr ""
+
+#: ../elaboratorReflection/index.rst:5
+msgid "Elaborator Reflection"
+msgstr ""
+
+#: ../elaboratorReflection/index.rst:7
+msgid "A tutorial on theorem proving in Idris."
+msgstr ""
+
+#: ../elaboratorReflection/index.rst:11
+msgid ""
+"The documentation for Idris has been published under the Creative Commons"
+" CC0 License. As such to the extent possible under law, *The Idris "
+"Community* has waived all copyright and related or neighboring rights to "
+"Documentation for Idris."
+msgstr ""
+
+#: ../elaboratorReflection/index.rst:16
+msgid ""
+"More information concerning the CC0 can be found online at: "
+"http://creativecommons.org/publicdomain/zero/1.0/"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:2
+msgid "Primitive Operators"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:8
+msgid "gensym"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:9
+msgid "Generate a unique name based on some hint."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:11
+msgid "Useful when establishing a new binder."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:13
+msgid "**NB**: the generated name is unique **for this run of the elaborator**."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:15
+msgid "Do not assume that they are globally unique."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:19
+msgid "gensym : (hint : String) -> Elab TTName"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst
+msgid "diagram illustrating solve tactic"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:31
+msgid ""
+"Substitute the focused guess throughout its scope, eliminating it and "
+"moving focus to the next element of the hole queue. Fail if the focus is "
+"not a guess."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:35
+msgid "solve : Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:37
+#: ../elaboratorReflection/primitive.rst:73
+msgid "Example:"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:47
+msgid "fill"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:48
+msgid ""
+"Place a term into a hole, unifying its type. Fails if the focus is not a "
+"hole."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst
+msgid "diagram illustrating fill tactic"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:59
+msgid "fill : (e : Raw) -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:61
+msgid "Place a term e with type tc into the focused hole:"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:63
+msgid "?h : th.e'"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:65
+msgid "and convert it to a guess:"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:67
+msgid "?h ≈ e:t.e'"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:69
+msgid ""
+"and fail if the current focus is not a hole. The type t of the  guess is "
+"constructed by unifying tc and th, which may instantiate holes that they "
+"refer to. Fail if the current focus is not a hole or if unification "
+"fails."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:71
+msgid ""
+"This unification can result in the solution of further holes or the "
+"establishment of additional unsolved unification constraints."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:83
+msgid "apply"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:84
+msgid ""
+"Attempt to apply an operator to fill the current hole, potentially "
+"solving arguments by unification."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:86
+msgid "A hole is established for each argument."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:88
+#: ../elaboratorReflection/primitive.rst:119
+msgid ""
+"The return value is the list of holes established for the arguments to "
+"the function."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:90
+#: ../elaboratorReflection/primitive.rst:121
+msgid ""
+"Note that not all of the returned hole names still exist, as they may "
+"have been solved."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:92
+#: ../elaboratorReflection/primitive.rst:123
+msgid "@ op the term to apply"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:93
+msgid ""
+"@ argSpec - A list of booleans, one for each argument that the operator "
+"will be applied to. If true then attempt to solve the argument by "
+"unification."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:97
+msgid "apply : (op : Raw) -> (argSpec : List Bool) -> Elab (List TTName)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:99
+msgid ""
+"Example: elaborating an application of a function f that takes one "
+"implicit and two explicit arguments might invoke:"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:101
+msgid "apply \\`(f) [False, True, True]"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:103
+msgid ""
+"Here is an example of an elab script that uses apply to insert the term "
+"plus Z (S Z) into a goal of type Nat."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:112
+msgid "The names of the established holes are returned."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:114
+msgid ""
+"Note: This was added to the original tactic language to allow elaborator "
+"reflection."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:116
+msgid "matchApply"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:117
+msgid ""
+"Attempt to apply an operator to fill the current hole, potentially "
+"solving arguments by matching."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:124
+msgid ""
+"@ argSpec instructions for finding the arguments to the term, where the "
+"Boolean states whether or not to attempt to solve the argument by "
+"matching."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:128
+msgid "matchApply : (op : Raw) -> (argSpec : List Bool) -> Elab (List TTName)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:130
+msgid "focus"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:131
+msgid ""
+"Move the focus to the specified hole, bringing it to the front of the "
+"hole queue. Fails if the hole does not exist."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:133
+msgid "@ hole the hole to focus on"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:137
+msgid "focus : (hole : TTName) -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:139
+msgid "unfocus"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:140
+msgid ""
+"Send the currently-focused hole to the end of the hole queue and focus on"
+" the next hole."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:144
+msgid "unfocus : TTName -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:146
+msgid "attack"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:147
+msgid "Convert a hole to make it suitable for bindings."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst
+msgid "diagram illustrating attack tactic"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:156
+msgid ""
+"The binding tactics require that a hole be directly under its binding, or"
+" else the scopes of the generated terms won't make sense. This tactic "
+"creates a new hole of the proper form, and points the old hole at it."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:160
+msgid "attack : Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:162
+msgid "claim"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:163
+msgid ""
+"Establish a new hole binding named n with type t, surrounding the current"
+" focus."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:165
+msgid "Introduce a new hole with a specified name and type."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:167
+msgid ""
+"The new hole will be focused, and the previously-focused hole will be "
+"immediately after it in the hole queue. Because this tactic introduces a "
+"new binding, you may need to 'attack' first."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:171
+msgid "claim : TTName -> Raw -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:173
+msgid "patvar"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:174
+msgid "Convert a hole into a pattern variable."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:178
+msgid "patvar : TTName -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:180
+msgid "compute"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:181
+msgid "Normalise the goal."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:183
+msgid ""
+"Often this is not necessary because normanisation is applied during other"
+" tactics."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:187
+msgid "compute : Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:189
+msgid "normalise"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:190
+msgid "Normalise a term in some lexical environment"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:192
+msgid "@ env the environment in which to compute (get one of these from `getEnv`)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:193
+msgid "@ term the term to normalise"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:197
+msgid "normalise : (env : List (TTName, Binder TT)) -> (term : TT) -> Elab TT"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:199
+msgid "whnf"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:200
+msgid "Reduce a closed term to weak-head normal form"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:202
+msgid "@ term the term to reduce"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:206
+msgid "whnf : (term : TT) -> Elab TT"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:208
+msgid "convertsInEnv"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:209
+msgid ""
+"Check that two terms are convertible in the current context and in some "
+"environment."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:211
+msgid "@ env a lexical environment to compare the terms in (see `getEnv`)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:212
+#: ../elaboratorReflection/primitive.rst:222
+msgid "@ term1 the first term to convert"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:213
+msgid "@ term2 the second term to convert"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:217
+msgid ""
+"convertsInEnv : (env : List (TTName, Binder TT)) -> (term1, term2 : TT) "
+"-> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:219
+msgid "converts"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:220
+msgid ""
+"Check that two terms are convertable in the current context and "
+"environment"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:223
+msgid ""
+"@ term2 the second term to convertconverts : (term1, term2 : TT) -> Elab "
+"()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:225
+msgid "converts term1 term2 = convertsInEnv !getEnv term1 term2"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:227
+msgid "getSourceLocation"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:228
+msgid "Find the source context for the elaboration script"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:232
+msgid "getSourceLocation : Elab SourceLocation"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:234
+msgid "sourceLocation"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:235
+msgid "Attempt to solve the current goal with the source code"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:237
+msgid "locationsourceLocation : Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:245
+msgid "currentNamespace"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:246
+msgid ""
+"Get the current namespace at the point of tactic execution. This allows "
+"scripts to define top-level names conveniently."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:248
+msgid ""
+"The namespace is represented as a reverse-order list of strings, just as "
+"in the representation of names."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:252
+msgid "currentNamespace : Elab (List String)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:254
+msgid "rewriteWith"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:255
+msgid "Attempt to rewrite the goal using an equality."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:257
+msgid ""
+"The tactic searches the goal for applicable subterms, and constructs a "
+"context for `replace` using them. In some cases, this is not possible, "
+"and `replace` must be called manually with an appropriate context."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:259
+msgid ""
+"Because this tactic internally introduces a `let` binding, it requires "
+"that the hole be immediately under its binder (use 'attack' if it might "
+"not be)."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:263
+msgid "rewriteWith : Raw -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:265
+msgid "resolveTC"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:266
+msgid "Attempt to solve the current goal with an interface dictionary"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:268
+msgid ""
+"@ fn the name of the definition being elaborated (to prevent Idris from "
+"looping)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:272
+msgid "resolveTC : (fn : TTName) -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:274
+msgid "search"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:275
+msgid "Use Idris's internal proof search."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:279
+msgid "search : Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:281
+msgid "search'"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:282
+msgid "Use Idris's internal proof search, with more control."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:284
+msgid "@ depth the search depth"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:285
+msgid "@ hints additional names to try"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:289
+msgid "search' : (depth : Int) -> (hints : List TTName) -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:291
+msgid "operatorFixity"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:292
+msgid "Look up the declared fixity for an operator."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:294
+msgid ""
+"The lookup fails if the operator does not yet have a fixity or if the "
+"string is not a valid operator."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:296
+msgid "@ operator the operator string to look up"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:300
+msgid "operatorFixity : (operator : String) -> Elab Fixity"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:302
+msgid "debug"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:303
+msgid "Halt elaboration, dumping the internal state for inspection."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:305
+#: ../elaboratorReflection/primitive.rst:326
+msgid ""
+"This is intended for elaboration script developers, not for end-users. "
+"Use `fail` for final scripts."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:309
+msgid "debug : Elab a"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:311
+msgid ""
+"If 'debug' is not the last tactic then make sure its type is sufficiently"
+" constrained. In particular, its type is Elab a, but there's no way for "
+"Idris to find out which type was meant for a. This can be fixed by either"
+" writing an explicit type (e.g. debug {a = ()}) or by using a helper that"
+" constrains the type (such as simple in Pruviloj, e.g. simple debug as a "
+"line)."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:323
+msgid "debugMessage"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:324
+msgid "Halt elaboration, dumping the internal state and displaying a message."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:328
+msgid "@ msg the message to display"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:332
+msgid "debugMessage : (msg : List ErrorReportPart) -> Elab a"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:334
+msgid ""
+"If 'debugMessage' is not the last tactic then make sure its type is "
+"sufficiently constrained. In particular, its type is Elab a, but there's "
+"no way for Idris to find out which type was meant for a. This can be "
+"fixed by either writing an explicit type (e.g. debugMessage [TextPart "
+"\"message\"] {a = ()}) or by using a helper that constrains the type "
+"(such as simple in Pruviloj, e.g. simple debug as a line)."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:345
+msgid "metavar"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:346
+msgid "Create a new top-level metavariable to solve the current hole."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:348
+msgid "@ name the name for the top-level variable"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:352
+msgid "metavar : (name : TTName) -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:354
+msgid "runElab"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:355
+msgid "Recursively invoke the reflected elaborator with some goal."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:357
+msgid "The result is the final term and its type."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:361
+msgid "runElab : Raw -> Elab () -> Elab (TT, TT)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:365
+msgid "Read and Write State"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:372
+msgid ""
+"Look up the lexical binding at the focused hole. Fails if no holes are "
+"present."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:376
+msgid "getEnv : Elab (List (TTName, Binder TT))"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:379
+msgid "Get the name and type of the focused hole. Fails if not holes are present."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:383
+msgid "getGoal : Elab (TTName, TT)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:386
+msgid "Get the hole queue, in order."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:390
+msgid "getHoles : Elab (List TTName)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:393
+msgid "If the current hole contains a guess, return it. Otherwise, fail."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:397
+msgid "getGuess : Elab TT"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:399
+msgid "lookupTy"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:400
+msgid "Look up the types of every overloading of a name."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:404
+msgid "lookupTy :  TTName -> Elab (List (TTName, NameType, TT))"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:406
+msgid "lookupTyExact"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:407
+msgid ""
+"Get the type of a fully-qualified name. Fail if it doesn't  resolve "
+"uniquely."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:411
+msgid "lookupTyExact : TTName -> Elab (TTName, NameType, TT)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:413
+msgid "lookupDatatype"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:414
+msgid ""
+"Find the reflected representation of all datatypes whose names are "
+"overloadings of some name."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:418
+msgid "lookupDatatype : TTName -> Elab (List Datatype)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:420
+msgid "lookupDatatypeExact"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:421
+msgid ""
+"Find the reflected representation of a datatype, given its fully-"
+"qualified name. Fail if the name does not uniquely resolve to a datatype."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:425
+msgid "lookupDatatypeExact : TTName -> Elab Datatype"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:427
+msgid "lookupFunDefn"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:428
+msgid ""
+"Find the reflected function definition of all functions whose names are "
+"overloadings of some name."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:432
+msgid "lookupFunDefn : TTName -> Elab (List (FunDefn TT))"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:434
+msgid "lookupFunDefnExact"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:435
+msgid ""
+"Find the reflected function definition of a function, given its fully-"
+"qualified name. Fail if the name does not uniquely resolve to a function."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:439
+msgid "lookupFunDefnExact : TTName -> Elab (FunDefn TT)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:441
+msgid "lookupArgs"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:442
+msgid "Get the argument specification for each overloading of a name."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:446
+msgid "lookupArgs : TTName -> Elab (List (TTName, List FunArg, Raw))"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:448
+msgid "lookupArgsExact"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:449
+msgid ""
+"Get the argument specification for a name. Fail if the name does not "
+"uniquely resolve."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:453
+msgid "lookupArgsExact : TTName -> Elab (TTName, List FunArg, Raw)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:455
+msgid "check"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:456
+msgid "Attempt to type-check a term, getting back itself and its type."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:458
+msgid "@ env the environment within which to check the type"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:459
+msgid "@ tm the term to check"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:463
+msgid "check : (env : List (TTName, Binder TT)) -> (tm : Raw) -> Elab (TT, TT)"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:466
+msgid "Error Handling"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:472
+msgid "tryCatch"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:473
+msgid ""
+"`tryCatch t (\\err => t')` will run `t`, and if it fails, roll back the "
+"elaboration state and run `t'`, but with access to the knowledge of why "
+"`t` failed."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:478
+msgid "tryCatch : Elab a -> (Err -> Elab a) -> Elab a"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:492
+msgid "fail"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:493
+msgid "Halt elaboration with an error"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:497
+msgid "fail : List ErrorReportPart -> Elab a"
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:499
+msgid ""
+"Note: we may need to make sure the return type 'a' is sufficiently "
+"constrained. If required add an explicit type {a = ()}."
+msgstr ""
+
+#: ../elaboratorReflection/primitive.rst:501
+msgid ""
+"Below is some code which includes 'fail'. This will always fail but we "
+"could replace 'True' with some more useful condition."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:2
+msgid "Elaborator Reflection - Tactics"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:4
+msgid ""
+"The Idris part of the code for elaborator reflection is in Elab.idr "
+"`<https://github.com/idris-lang/Idris-"
+"dev/blob/master/libs/prelude/Language/Reflection/Elab.idr>`_ Before "
+"looking at the Elab monad we need to know how to construct terms."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:10
+msgid "Proof State"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:12
+msgid ""
+"The terminology 'Proof State' is used by analogy to proof assistants but,"
+" as used here, it's really more of a metaprogramming state."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:14
+msgid ""
+"Tactics operate on the proof state. The proof state contains various "
+"pieces of information, at this stage, the important ones for us are:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:16
+msgid ""
+"A hole queue - This contains a list of the names of the holes used in the"
+" proof term. The solution to each hole may depend on the other holes. For"
+" more information about holes and guesses see `Dependently Typed "
+"Functional Programs and their Proofs by McBride 1999`_."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:17
+msgid ""
+"A goal type - The type of the term that is under construction for the "
+"current goal."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:18
+msgid ""
+"A possibly incomplete proof term, which is being calculated and should be"
+" the goal type at the end of elaboration."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:19
+msgid ""
+"Context - A collection of open unification problems, representing "
+"recoverable failures of unification that may yet unify once more "
+"variables are solved."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:21
+msgid ""
+"There  are many other pieces of information in the proof state such as "
+"the names used , such as the bodies of case blocks that need to be "
+"elaborated.but, for now, we will leave the system to handle these."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:28
+msgid "Names TTName"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:30
+msgid ""
+"Names in an Idris program are evaluated at runtime but sometimes a "
+"'variable name' is needed, which can be referred to as an unevaluated "
+"symbol. The  names used in terms have different constructors depending on"
+" their type:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:34
+msgid "UN String"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:34
+msgid "A user-provided name"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:36
+msgid "NS (UN \"foo\") [\"B\", \"A\"])"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:36
+msgid "A name in some namespace"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:38
+msgid "MN Int String"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:38
+msgid "Machine-chosen names"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:40
+msgid "SN SpecialName"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:40
+msgid ""
+"Special names, to make conflicts impossible and language features "
+"predictable"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:45
+msgid "A user defined name can be constructed like this:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:57
+msgid "machine-chosen names"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:59
+msgid ""
+"A machine-chosen name needs to be generated within an Elab monad (see "
+"below for details) and is unique within that monad. This produced: "
+"{abc_140}{abc_141} so although gensym \"abc\" was called twice each one "
+"had a different integer:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:60
+msgid "example of unique names:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:80
+msgid "Quasiquotation"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:82
+msgid ""
+"Since names are used frequently in elaborator reflection there is a "
+"shortcut for constructing them:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:86
+msgid "An unresolved variable \"x\" is wrapped in backtick and double braces:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:93
+msgid "Single braces are used for existing variables:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:103
+msgid "brackets are used for an expression:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:105
+msgid "here type is inferable"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:113
+msgid "Expression with explicit type:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:120
+msgid ""
+"If we want the value we can escape from quasiquotation by using anti-"
+"quotation (tilde)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:126
+msgid "quasiquotation summary:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:129
+msgid "Reification"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:131
+msgid "\\`{{n}}"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:131
+#: ../elaboratorReflection/tactics.rst:133
+msgid "TTName"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:131
+msgid "Use for new names. Unresolved quotation of the name n."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:133
+msgid "\\`{n}"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:133
+msgid ""
+"Use for existing names. Resolved quotation of the name n. n is a "
+"reference to a unique name in scope."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:136
+msgid "\\`(e)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:136
+msgid "expression e for which a type is inferable."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:138
+msgid "\\`(e:t)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:138
+msgid "expression e with a given type e."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:140
+msgid "~a"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:140
+msgid "anti-quotation - sub region which can be evaluated rather than quoted."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:143
+msgid "(Var\\`{{x}})"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:143
+#: ../elaboratorReflection/tactics.rst:235
+msgid "Raw"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:147
+msgid "TT"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:149
+msgid ""
+"There is a notation for a term in TT as it is being constructed (based on"
+" a BNF-like grammar), this is used for example in the debug output, it is"
+" a compact way to see the state of the term so it is used here. So "
+"internally the program is stored as a tree structure using the following "
+"syntax:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:153
+msgid "Syntax"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:153
+msgid "More Information"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:155
+msgid "term"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:155
+msgid "t"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:157
+msgid "binding"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:157
+msgid "b"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:159
+msgid "constant"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:159
+#: ../elaboratorReflection/tactics.rst:161
+#: ../elaboratorReflection/tactics.rst:163
+#: ../elaboratorReflection/tactics.rst:166
+#: ../elaboratorReflection/tactics.rst:171
+#: ../elaboratorReflection/tactics.rst:174
+msgid "t ::="
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:159
+msgid "c"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:161
+msgid "variable"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:161
+msgid "x"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:163
+msgid "variable binding"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:163
+msgid "b.t"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:163
+msgid "so a dot '.' tells us this is some sort of binding."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:166
+msgid "application"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:166
+msgid "t t"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:166
+msgid ""
+"As with Idris, juxtaposition indicates function application. Note: the "
+"same symbol 't' is used for both terms, this does not imply they are the "
+"same term."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:171
+msgid "Type constructor"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:171
+msgid "T"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:174
+msgid "Data constructor"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:174
+msgid "C"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:177
+#: ../elaboratorReflection/tactics.rst:182
+msgid "function"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:177
+#: ../elaboratorReflection/tactics.rst:180
+#: ../elaboratorReflection/tactics.rst:182
+msgid "b::="
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:177
+msgid "λ c:t"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:177
+msgid "colon ':' separates parameters from body of binding."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:180
+msgid "let binding"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:180
+msgid "let\\|-> t:t"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:182
+msgid "∀ x:t"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:184
+msgid "Type universe"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:184
+msgid "c::="
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:184
+msgid "\\*i"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:184
+msgid ""
+"The universe hierarchy is usually handled automatically so we can just "
+"use\\* for the type of types."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:188
+msgid "integer literal"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:188
+#: ../elaboratorReflection/tactics.rst:191
+#: ../elaboratorReflection/tactics.rst:193
+#: ../elaboratorReflection/tactics.rst:196
+msgid "c:=="
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:188
+msgid "i"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:191
+msgid "integer type"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:191
+msgid "Integer"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:193
+msgid "string literal"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:193
+msgid "s"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:196
+msgid "string type"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:196
+msgid "String"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:198
+msgid "focused hole"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:198
+msgid "?x : t"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:198
+#: ../elaboratorReflection/tactics.rst:200
+msgid "Conor McBride 1999 thesis."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:200
+msgid "guess"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:200
+msgid "?x ≈ t : t"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:203
+msgid "Sometimes the part of the term in focus is underlined."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:205
+msgid "Reflection of the well typed core language"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:227
+msgid ""
+"TT stores local bound variables using De Bruijn index, when working in "
+"Idris this does not concern the user because string names are used for "
+"variables. Converting bound variables internally to index values means "
+"that the same variable name can be used, in different lambda terms, "
+"without ambiguity and without the need for α-substitution. De Bruijn "
+"index which is a integer where:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:230
+msgid "0=inside current (inner) lambda term"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:231
+msgid "1= next outer lambda term"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:232
+msgid "2= next outer and so on"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:237
+msgid ""
+"Raw is similar to TT except it is used before types are known. The types "
+"should be resolved by the type checker."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:256
+msgid "Expression Syntax"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:258
+msgid ""
+"There is a way of notating expressions such as those used in the proof "
+"state (example: goal type and proof terms) which is reasonably standard "
+"in the papers written about this subject."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:260
+msgid ""
+"This notation is not entered directly by metaprogrammers but it is seen, "
+"for example in debug output. So this notation is explained here because "
+"it is useful to be familiar with it."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:262
+msgid ""
+"The notation assumes right-associativity, in the absence of brackets, the"
+" term to the right binds more tightly than the one on the left. So, for "
+"nested lambda terms:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:266
+msgid "λ a . λ b . f"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:266
+#: ../elaboratorReflection/tactics.rst:272
+msgid "means"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:266
+msgid "λ a .( λ b . f)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:269
+msgid "and the same for function application:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:272
+msgid "f g x"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:272
+msgid "f (g x)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:275
+msgid ""
+"In contrast, in lambda calculus, function application is usually regarded"
+" as left-associative, Here are some typical examples of the notation used"
+" for expressions:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:279
+msgid "? {hole_0} . {hole_0}"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:282
+msgid ""
+"The term, to be derived, may start off in this state following something "
+"like this:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:289
+msgid "The dot '.' tells us this is some sort of binding."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:295
+msgid "This is a slightly more complicated example arising from:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:302
+msgid "This introduces a guess that hole_0 = hole_2 ."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:308
+msgid ""
+"Following on from the previous example  a lambda function is introduced "
+"like this:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:314
+msgid "So now the expression is wrapped in a lambda binding."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:320
+msgid "Following on, we can use the fill tactic like this:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:326
+msgid "which introduces another guess."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:332
+msgid "The solve tactic completes the proof"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:335
+#: ../elaboratorReflection/tactics.rst:372
+msgid "Binders"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:337
+msgid ""
+"Here we look at each tactic in turn to see how they affect the proof "
+"state."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:339
+msgid "Introduction tactics for binders. The binder types are:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:341
+msgid "lambda function (intro)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:342
+msgid "dependent function (forall)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:343
+msgid "let (letBind)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:344
+msgid "pattern (patbind)"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:346
+msgid "A precondition of these tactics is that the focused hole is of the form:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:349
+msgid "?h : t.h"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:352
+msgid ""
+"that is, that the body of its scope consists directly of a reference to "
+"the hole-bound variable.  If a hole binder were of the form:"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:355
+msgid "?h : t1 -> t2.f h"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:358
+msgid "and a tactic such as"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:364
+msgid "were applied, the result would be the term"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:367
+msgid "?h : t2 .    λ x:t1. f h"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:370
+msgid ""
+"However this would cause the application of f to be ill-typed, as it "
+"expects an argument of type t1->t2, not an argument of type t2. "
+"Additionally, some binding tactics require that t, the type of the hole "
+"h, have a specific form, because the binder to be established may have a "
+"typing rule associated with it."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:376
+msgid "intro"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:379
+msgid ""
+"Requires that the hole be in binding form (use 'attack' if it might not "
+"be)."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:381
+msgid "@ n the name to use for the argument."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:385
+msgid "intro : (n : TTName) -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:387
+msgid "Result"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:389
+msgid "λn:t1.?h:[n/x]t2.h"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:391
+msgid "intro'"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:392
+msgid ""
+"Introduce a lambda binding around the current hole and focus on the body,"
+" using the name provided by the type of the hole."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:394
+#: ../elaboratorReflection/tactics.rst:419
+msgid ""
+"Requires that the hole be immediately under its binder (use 'attack' if "
+"it might not be)."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:398
+msgid "intro' : Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:400
+msgid "forall"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:401
+msgid ""
+"Introduce a dependent function type binding into the current hole, and "
+"focus on the body. Requires that the hole be immediately under its binder"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:403
+msgid "(use 'attack' if it might not be)."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:407
+msgid "forall : TTName -> Raw -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:409
+msgid "patbind"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:410
+msgid ""
+"Introduce a new pattern binding. Requires that the hole be immediately "
+"under its binder (use 'attack' if it might not be)."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:414
+msgid "patbind : TTName -> Elab ()"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:416
+msgid "letbind"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:417
+msgid "Introduce a new let binding."
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:421
+msgid "@ n the name to let bind"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:422
+msgid "@ ty the type of the term to be let-bound"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:423
+msgid "@ tm the term to be bound"
+msgstr ""
+
+#: ../elaboratorReflection/tactics.rst:427
+msgid "letbind : (n : TTName) -> (ty, tm : Raw) -> Elab ()"
+msgstr ""
+

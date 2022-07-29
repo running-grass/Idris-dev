@@ -1,0 +1,2181 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017-2020, The Idris Community
+# This file is distributed under the same license as the Idris package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Idris 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-29 09:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../st/composing.rst:5
+msgid "Composing State Machines"
+msgstr ""
+
+#: ../st/composing.rst:7
+msgid ""
+"In the previous section, we defined a ``DataStore`` interface and used it"
+" to implement the following small program which allows a user to log in "
+"to the store then display the store's contents;"
+msgstr ""
+
+#: ../st/composing.rst:23
+msgid ""
+"This function only uses one state, the store itself. Usually, though, "
+"larger programs have lots of states, and might add, delete and update "
+"states over the course of its execution. Here, for example, a useful "
+"extension might be to loop forever, keeping count of the number of times "
+"there was a login failure in a state."
+msgstr ""
+
+#: ../st/composing.rst:29
+msgid ""
+"Furthermore, we may have *hierarchies* of state machines, in that one "
+"state machine could be implemented by composing several others. For "
+"example, we can have a state machine representing the state of a graphics"
+" system, and use this to implement a *higher level* graphics API such as "
+"turtle graphics, which uses the graphics system plus some additional "
+"state for the turtle."
+msgstr ""
+
+#: ../st/composing.rst:36
+msgid ""
+"In this section, we'll see how to work with multiple states, and how to "
+"compose state machines to make higher level state machines. We'll begin "
+"by seeing how to add a login failure counter to ``getData``."
+msgstr ""
+
+#: ../st/composing.rst:41
+msgid "Working with multiple resources"
+msgstr ""
+
+#: ../st/composing.rst:43
+msgid ""
+"To see how to work with multiple resources, we'll modify ``getData`` so "
+"that it loops, and counts the total number of times the user fails to log"
+" in. For example, if we write a ``main`` program which initialises the "
+"count to zero, a session might run as follows:"
+msgstr ""
+
+#: ../st/composing.rst:63
+msgid ""
+"We'll start by adding a state resource to ``getData`` to keep track of "
+"the number of failures:"
+msgstr ""
+
+#: ../st/composing.rst:-1
+msgid "Type checking ``getData``"
+msgstr ""
+
+#: ../st/composing.rst:73
+msgid ""
+"If you're following along in the code, you'll find that ``getData`` no "
+"longer compiles when you update this type. That is to be expected! For "
+"the moment, comment out the definition of ``getData``. We'll come back to"
+" it shortly."
+msgstr ""
+
+#: ../st/composing.rst:78
+msgid ""
+"Then, we can create a ``main`` program which initialises the state to "
+"``0`` and invokes ``getData``, as follows:"
+msgstr ""
+
+#: ../st/composing.rst:88
+msgid ""
+"We'll start our implementation of ``getData`` just by adding the new "
+"argument for the failure count:"
+msgstr ""
+
+#: ../st/composing.rst:105
+msgid ""
+"Unfortunately, this doesn't type check, because we have the wrong "
+"resources for calling ``connect``. The error messages shows how the "
+"resources don't match:"
+msgstr ""
+
+#: ../st/composing.rst:118
+msgid ""
+"In other words, ``connect`` requires that there are *no* resources on "
+"entry, but we have *one*, the failure count! This shouldn't be a problem,"
+" though: the required resources are a *subset* of the resources we have, "
+"after all, and the additional resources (here, the failure count) are not"
+" relevant to ``connect``. What we need, therefore, is a way to "
+"temporarily *hide* the additional resource."
+msgstr ""
+
+#: ../st/composing.rst:125
+msgid "We can achieve this with the ``call`` function:"
+msgstr ""
+
+#: ../st/composing.rst:135
+msgid ""
+"Here we've left a hole for the rest of ``getData`` so that you can see "
+"the effect of ``call``. It has removed the unnecessary parts of the "
+"resource list for calling ``connect``, then reinstated them on return. "
+"The type of ``whatNow`` therefore shows that we've added a new resource "
+"``st``, and still have ``failcount`` available:"
+msgstr ""
+
+#: ../st/composing.rst:152
+msgid ""
+"By the end of the function, ``whatNow`` says that we need to have "
+"finished with ``st``, but still have ``failcount`` available. We can "
+"complete ``getData`` so that it works with an additional state resource "
+"by adding ``call`` whenever we invoke one of the operations on the data "
+"store, to reduce the list of resources:"
+msgstr ""
+
+#: ../st/composing.rst:172
+msgid ""
+"This is a little noisy, and in fact we can remove the need for it by "
+"making ``call`` implicit. By default, you need to add the ``call`` "
+"explicitly, but if you import ``Control.ST.ImplicitCall``, Idris will "
+"insert ``call`` where it is necessary."
+msgstr ""
+
+#: ../st/composing.rst:181
+msgid "It's now possible to write ``getData`` exactly as before:"
+msgstr ""
+
+#: ../st/composing.rst:197
+msgid ""
+"There is a trade off here: if you import ``Control.ST.ImplicitCall`` then"
+" functions which use multiple resources are much easier to read, because "
+"the noise of ``call`` has gone. On the other hand, Idris has to work a "
+"little harder to type check your functions, and as a result it can take "
+"slightly longer, and the error messages can be less helpful."
+msgstr ""
+
+#: ../st/composing.rst:203
+msgid "It is instructive to see the type of ``call``:"
+msgstr ""
+
+#: ../st/composing.rst:210
+msgid ""
+"The function being called has a list of resources ``sub``, and there is "
+"an implicit proof, ``SubRes sub old`` that the resource list in the "
+"function being called is a subset of the overall resource list. The "
+"ordering of resources is allowed to change, although resources which "
+"appear in ``old`` can't appear in the ``sub`` list more than once (you "
+"will get a type error if you try this)."
+msgstr ""
+
+#: ../st/composing.rst:217
+msgid ""
+"The function ``updateWith`` takes the *output* resources of the called "
+"function, and updates them in the current resource list. It makes an "
+"effort to preserve ordering as far as possible, although this isn't "
+"always possible if the called function does some complicated resource "
+"manipulation."
+msgstr ""
+
+#: ../st/composing.rst:-1
+msgid "Newly created resources in called functions"
+msgstr ""
+
+#: ../st/composing.rst:225
+msgid ""
+"If the called function creates any new resources, these will typically "
+"appear at the *end* of the resource list, due to the way ``updateWith`` "
+"works. You can see this in the type of ``whatNow`` in our incomplete "
+"definition of ``getData`` above."
+msgstr ""
+
+#: ../st/composing.rst:230
+msgid ""
+"Finally, we can update ``getData`` so that it loops, and keeps "
+"``failCount`` updated as necessary:"
+msgstr ""
+
+#: ../st/composing.rst:252
+msgid ""
+"Note that here, we're connecting and disconnecting on every iteration. "
+"Another way to implement this would be to ``connect`` first, then call "
+"``getData``, and implement ``getData`` as follows:"
+msgstr ""
+
+#: ../st/composing.rst:272
+msgid ""
+"It is important to add the explicit ``{m}`` in the type of ``Store {m} "
+"LoggedOut`` for ``st``, because this gives Idris enough information to "
+"know which implementation of ``DataStore`` to use to find the appropriate"
+" implementation for ``Store``. Otherwise, if we only write ``Store "
+"LoggedOut``, there's no way to know that the ``Store`` is linked with the"
+" computation context ``m``."
+msgstr ""
+
+#: ../st/composing.rst:279
+msgid "We can then ``connect`` and ``disconnect`` only once, in ``main``:"
+msgstr ""
+
+#: ../st/composing.rst:290
+msgid ""
+"By using ``call``, and importing ``Control.ST.ImplicitCall``, we can "
+"write programs which use multiple resources, and reduce the list of "
+"resources as necessary when calling functions which only use a subset of "
+"the overall resources."
+msgstr ""
+
+#: ../st/composing.rst:296
+msgid "Composite resources: Hierarchies of state machines"
+msgstr ""
+
+#: ../st/composing.rst:298
+msgid ""
+"We've now seen how to use multiple resources in one function, which is "
+"necessary for any realistic program which manipulates state. We can think"
+" of this as \"horizontal\" composition: using multiple resources at once."
+" We'll often also need \"vertical\" composition: implementing one "
+"resource in terms of one or more other resources."
+msgstr ""
+
+#: ../st/composing.rst:304
+msgid ""
+"We'll see an example of this in this section. First, we'll implement a "
+"small API for graphics, in an interface ``Draw``, supporting:"
+msgstr ""
+
+#: ../st/composing.rst:307
+msgid "Opening a window, creating a double-buffered surface to draw on"
+msgstr ""
+
+#: ../st/composing.rst:308
+msgid "Drawing lines and rectangles onto a surface"
+msgstr ""
+
+#: ../st/composing.rst:309
+msgid ""
+"\"Flipping\" buffers, displaying the surface we've just drawn onto in the"
+" window"
+msgstr ""
+
+#: ../st/composing.rst:311
+msgid "Closing a window"
+msgstr ""
+
+#: ../st/composing.rst:313
+msgid ""
+"Then, we'll use this API to implement a higher level API for turtle "
+"graphics, in an ``interface``. This will require not only the ``Draw`` "
+"interface, but also a representation of the turtle state (location, "
+"direction and pen colour)."
+msgstr ""
+
+#: ../st/composing.rst:-1
+msgid "SDL bindings"
+msgstr ""
+
+#: ../st/composing.rst:320
+msgid ""
+"For the examples in this section, you'll need to install the (very "
+"basic!) SDL bindings for Idris, available from https://github.com/edwinb"
+"/SDL-idris. These bindings implement a small subset of the SDL API, and "
+"are for illustrative purposes only. Nevertheless, they are enough to "
+"implement small graphical programs and demonstrate the concepts of this "
+"section."
+msgstr ""
+
+#: ../st/composing.rst:327
+msgid ""
+"Once you've installed this package, you can start Idris with the ``-p "
+"sdl`` flag, for the SDL bindings, and the ``-p contrib`` flag, for the "
+"``Control.ST`` library."
+msgstr ""
+
+#: ../st/composing.rst:332
+msgid "The ``Draw`` interface"
+msgstr ""
+
+#: ../st/composing.rst:334
+msgid ""
+"We're going to use the Idris SDL bindings for this API, so you'll need to"
+" import ``Graphics.SDL`` once you've installed the bindings. We'll start "
+"by defining the ``Draw`` interface, which includes a data type "
+"representing a surface on which we'll draw lines and rectangles:"
+msgstr ""
+
+#: ../st/composing.rst:344
+msgid "We'll need to be able to create a new ``Surface`` by opening a window:"
+msgstr ""
+
+#: ../st/composing.rst:350
+msgid ""
+"However, this isn't quite right. It's possible that opening a window will"
+" fail, for example if our program is running in a terminal without a "
+"windowing system available. So, somehow, ``initWindow`` needs to cope "
+"with the possibility of failure. We can do this by returning a ``Maybe "
+"Var``, rather than a ``Var``, and only adding the ``Surface`` on success:"
+msgstr ""
+
+#: ../st/composing.rst:361
+msgid ""
+"This uses a type level function ``addIfJust``, defined in ``Control.ST`` "
+"which returns an ``Action`` that only adds a resource if the operation "
+"succeeds (that is, returns a result of the form ``Just val``."
+msgstr ""
+
+#: ../st/composing.rst:332
+msgid "``addIfJust`` and ``addIfRight``"
+msgstr ""
+
+#: ../st/composing.rst:367
+msgid ""
+"``Control.ST`` defines functions for constructing new resources if an "
+"operation succeeds. As well as ``addIfJust``, which adds a resource if an"
+" operation returns ``Just ty``, there's also ``addIfRight``:"
+msgstr ""
+
+#: ../st/composing.rst:376
+msgid ""
+"Each of these is implemented in terms of the following primitive action "
+"``Add``, which takes a function to construct a resource list from the "
+"result of an operation:"
+msgstr ""
+
+#: ../st/composing.rst:384
+msgid ""
+"Using this, you can create your own actions to add resources based on the"
+" result of an operation, if required. For example, ``addIfJust`` is "
+"implemented as follows:"
+msgstr ""
+
+#: ../st/composing.rst:393
+msgid "If we create windows, we'll also need to be able to delete them:"
+msgstr ""
+
+#: ../st/composing.rst:399
+msgid ""
+"We'll also need to respond to events such as keypresses and mouse clicks."
+" The ``Graphics.SDL`` library provides an ``Event`` type for this, and we"
+" can ``poll`` for events which returns the last event which occurred, if "
+"any:"
+msgstr ""
+
+#: ../st/composing.rst:408
+msgid ""
+"The remaining methods of ``Draw`` are ``flip``, which flips the buffers "
+"displaying everything that we've drawn since the previous ``flip``, and "
+"two methods for drawing: ``filledRectangle`` and ``drawLine``."
+msgstr ""
+
+#: ../st/composing.rst:418
+msgid ""
+"We define colours as follows, as four components (red, green, blue, "
+"alpha):"
+msgstr ""
+
+#: ../st/composing.rst:435
+msgid ""
+"If you import ``Graphics.SDL``, you can implement the ``Draw`` interface "
+"using the SDL bindings as follows:"
+msgstr ""
+
+#: ../st/composing.rst:462
+msgid ""
+"In this implementation, we've used ``startSDL`` to initialise a window, "
+"which, returns ``Nothing`` if it fails. Since the type of ``initWindow`` "
+"states that it adds a resource when it returns a value of the form ``Just"
+" val``, we add the surface returned by ``startSDL`` on success, and "
+"nothing on failure.  We can only successfully initialise if ``startDSL`` "
+"succeeds."
+msgstr ""
+
+#: ../st/composing.rst:468
+msgid ""
+"Now that we have an implementation of ``Draw``, we can try writing some "
+"functions for drawing into a window and execute them via the SDL "
+"bindings. For example, assuming we have a surface ``win`` to draw onto, "
+"we can write a ``render`` function as follows which draws a line onto a "
+"black background:"
+msgstr ""
+
+#: ../st/composing.rst:480
+msgid ""
+"The ``flip win`` at the end is necessary because the drawing primitives "
+"are double buffered, to prevent flicker. We draw onto one buffer, off-"
+"screen, and display the other.  When we call ``flip``, it displays the "
+"off-screen buffer, and creates a new off-screen buffer for drawing the "
+"next frame."
+msgstr ""
+
+#: ../st/composing.rst:485
+msgid ""
+"To include this in a program, we'll write a main loop which renders our "
+"image and waits for an event to indicate the user wants to close the "
+"application:"
+msgstr ""
+
+#: ../st/composing.rst:497
+msgid ""
+"Finally, we can create a main program which initialises a window, if "
+"possible, then runs the main loop:"
+msgstr ""
+
+#: ../st/composing.rst:508
+msgid "We can try this at the REPL using ``run``:"
+msgstr ""
+
+#: ../st/composing.rst:515
+msgid "A higher level interface: ``TurtleGraphics``"
+msgstr ""
+
+#: ../st/composing.rst:517
+msgid ""
+"Turtle graphics involves a \"turtle\" moving around the screen, drawing a"
+" line as it moves with a \"pen\". A turtle has attributes describing its "
+"location, the direction it's facing, and the current pen colour. There "
+"are commands for moving the turtle forwards, turning through an angle, "
+"and changing the pen colour, among other things. One possible interface "
+"would be the following:"
+msgstr ""
+
+#: ../st/composing.rst:541
+msgid ""
+"Like ``Draw``, we have a command for initialising the turtle (here called"
+" ``start``) which might fail if it can't create a surface for the turtle "
+"to draw on. There is also a ``render`` method, which is intended to "
+"render the picture drawn so far in a window.  One possible program with "
+"this interface is the following, with draws a colourful square:"
+msgstr ""
+
+#: ../st/composing.rst:-1
+msgid "``with ST do``"
+msgstr ""
+
+#: ../st/composing.rst:566
+msgid ""
+"The purpose of ``with ST do`` in ``turtle`` is to disambiguate ``(>>=)``,"
+" which could be either the version from the ``Monad`` interface, or the "
+"version from ``ST``. Idris can work this out itself, but it takes time to"
+" try all of the possibilities, so the ``with`` clause can speed up type "
+"checking."
+msgstr ""
+
+#: ../st/composing.rst:572
+msgid ""
+"To implement the interface, we could try using ``Surface`` to represent "
+"the surface for the turtle to draw on:"
+msgstr ""
+
+#: ../st/composing.rst:580
+msgid ""
+"Knowing that a ``Turtle`` is represented as a ``Surface``, we can use the"
+" methods provided by ``Draw`` to implement the turtle.  Unfortunately, "
+"though, this isn't quite enough. We need to store more information: in "
+"particular, the turtle has several attributes which we need to store "
+"somewhere. So, not only do we need to represent the turtle as a "
+"``Surface``, we need to store some additional state. We can achieve this "
+"using a *composite* resource."
+msgstr ""
+
+#: ../st/composing.rst:589
+msgid "Introducing composite resources"
+msgstr ""
+
+#: ../st/composing.rst:591
+msgid ""
+"A *composite* resource is built up from a list of other resources, and is"
+" implemented using the following type, defined by ``Control.ST``:"
+msgstr ""
+
+#: ../st/composing.rst:598
+msgid ""
+"If we have a composite resource, we can split it into its constituent "
+"resources, and create new variables for each of those resources, using "
+"the *split* function. For example:"
+msgstr ""
+
+#: ../st/composing.rst:608
+msgid ""
+"The call ``split comp`` extracts the ``State Int`` and ``State String`` "
+"from the composite resource ``comp``, and stores them in the variables "
+"``int`` and ``str`` respectively. If we check the type of ``whatNow``, "
+"we'll see how this has affected the resource list:"
+msgstr ""
+
+#: ../st/composing.rst:623
+msgid ""
+"So, we have two new resources ``int`` and ``str``, and the type of "
+"``comp`` has been updated to the unit type, so currently holds no data. "
+"This is to be expected: we've just extracted the data into individual "
+"resources after all."
+msgstr ""
+
+#: ../st/composing.rst:628
+msgid ""
+"Now that we've extracted the individual resources, we can manipulate them"
+" directly (say, incrementing the ``Int`` and adding a newline to the "
+"``String``) then rebuild the composite resource using ``combine``:"
+msgstr ""
+
+#: ../st/composing.rst:642
+msgid ""
+"As ever, we can check the type of ``whatNow`` to see the effect of "
+"``combine``:"
+msgstr ""
+
+#: ../st/composing.rst:655
+msgid ""
+"The effect of ``combine``, therefore, is to take existing resources and "
+"merge them into one composite resource. Before we run ``combine``, the "
+"target resource must exist (``comp`` here) and must be of type ``State "
+"()``."
+msgstr ""
+
+#: ../st/composing.rst:660
+msgid ""
+"It is instructive to look at the types of ``split`` and ``combine`` to "
+"see the requirements on resource lists they work with. The type of "
+"``split`` is the following:"
+msgstr ""
+
+#: ../st/composing.rst:669
+msgid ""
+"The implicit ``prf`` argument says that the ``lbl`` being split must be a"
+" composite resource. It returns a variable list, built from the composite"
+" resource, and the ``mkRes`` function makes a list of resources of the "
+"appropriate types. Finally, ``updateRes`` updates the composite resource "
+"to have the type ``State ()``."
+msgstr ""
+
+#: ../st/composing.rst:675
+msgid "The ``combine`` function does the inverse:"
+msgstr ""
+
+#: ../st/composing.rst:684
+msgid ""
+"The implicit ``prf`` argument here ensures that the target resource "
+"``comp`` has type ``State ()``. That is, we're not overwriting any other "
+"data. The implicit ``var_prf`` argument is similar to ``SubRes`` in "
+"``call``, and ensures that every variable we're using to build the "
+"composite resource really does exist in the current resource list."
+msgstr ""
+
+#: ../st/composing.rst:690
+msgid ""
+"We can use composite resources to implement our higher level "
+"``TurtleGraphics`` API in terms of ``Draw``, and any additional resources"
+" we need."
+msgstr ""
+
+#: ../st/composing.rst:694
+msgid "Implementing ``Turtle``"
+msgstr ""
+
+#: ../st/composing.rst:696
+msgid ""
+"Now that we've seen how to build a new resource from an existing "
+"collection, we can implement ``Turtle`` using a composite resource, "
+"containing the ``Surface`` to draw on, and individual states for the pen "
+"colour and the pen location and direction. We also have a list of lines, "
+"which describes what we'll draw onto the ``Surface`` when we call "
+"``render``:"
+msgstr ""
+
+#: ../st/composing.rst:709
+msgid "A ``Line`` is defined as a start location, and end location, and a colour:"
+msgstr ""
+
+#: ../st/composing.rst:716
+msgid ""
+"To implement ``start``, which creates a new ``Turtle`` (or returns "
+"``Nothing`` if this is impossible), we begin by initialising the drawing "
+"surface then all of the components of the state. Finally, we combine all "
+"of these into a composite resource for the turtle:"
+msgstr ""
+
+#: ../st/composing.rst:732
+msgid ""
+"To implement ``end``, which needs to dispose of the turtle, we "
+"deconstruct the composite resource, close the window, then remove each "
+"individual resource. Remember that we can only ``delete`` a ``State``, so"
+" we need to ``split`` the composite resource, close the drawing surface "
+"cleanly with ``closeWindow``, then ``delete`` the states:"
+msgstr ""
+
+#: ../st/composing.rst:743
+msgid ""
+"For the other methods, we need to ``split`` the resource to get each "
+"component, and ``combine`` into a composite resource when we're done. As "
+"an example, here's ``penup``:"
+msgstr ""
+
+#: ../st/composing.rst:754
+msgid ""
+"The remaining operations on the turtle follow a similar pattern. See "
+"``samples/ST/Graphics/Turtle.idr`` in the Idris distribution for the full"
+" details. It remains to render the image created by the turtle:"
+msgstr ""
+
+#: ../st/examples.rst:5
+msgid "Example: Network Socket Programming"
+msgstr ""
+
+#: ../st/examples.rst:7
+msgid ""
+"The POSIX sockets API supports communication between processes across a "
+"network. A *socket* represents an endpoint of a network communication, "
+"and can be in one of several states:"
+msgstr ""
+
+#: ../st/examples.rst:11
+msgid "``Ready``, the initial state"
+msgstr ""
+
+#: ../st/examples.rst:12
+msgid ""
+"``Bound``, meaning that it has been bound to an address ready for "
+"incoming connections"
+msgstr ""
+
+#: ../st/examples.rst:14
+msgid "``Listening``, meaning that it is listening for incoming connections"
+msgstr ""
+
+#: ../st/examples.rst:15
+msgid "``Open``, meaning that it is ready for sending and receiving data;"
+msgstr ""
+
+#: ../st/examples.rst:16
+msgid "``Closed``, meaning that it is no longer active."
+msgstr ""
+
+#: ../st/examples.rst:18
+msgid ""
+"The following diagram shows how the operations provided by the API modify"
+" the state, where ``Ready`` is the initial state:"
+msgstr ""
+
+#: ../st/examples.rst:21
+msgid "|netstate|"
+msgstr ""
+
+#: ../st/examples.rst:437
+msgid "netstate"
+msgstr ""
+
+#: ../st/examples.rst:23
+msgid ""
+"If a connection is ``Open``, then we can also ``send`` messages to the "
+"other end of the connection, and ``recv`` messages from it."
+msgstr ""
+
+#: ../st/examples.rst:26
+msgid ""
+"The ``contrib`` package provides a module ``Network.Socket`` which "
+"provides primitives for creating sockets and sending and receiving "
+"messages. It includes the following functions:"
+msgstr ""
+
+#: ../st/examples.rst:40
+msgid ""
+"These functions cover the state transitions in the diagram above, but "
+"none of them explain how the operations affect the state! It's perfectly "
+"possible, for example, to try to send a message on a socket which is not "
+"yet ready, or to try to receive a message after the socket is closed."
+msgstr ""
+
+#: ../st/examples.rst:45
+msgid ""
+"Using ``ST``, we can provide a better API which explains exactly how each"
+" operation affects the state of a connection. In this section, we'll "
+"define a sockets API, then use it to implement an \"echo\" server which "
+"responds to requests from a client by echoing back a single message sent "
+"by the client."
+msgstr ""
+
+#: ../st/examples.rst:52
+msgid "Defining a ``Sockets`` interface"
+msgstr ""
+
+#: ../st/examples.rst:54
+msgid ""
+"Rather than using ``IO`` for low level socket programming, we'll "
+"implement an interface using ``ST`` which describes precisely how each "
+"operation affects the states of sockets, and describes when sockets are "
+"created and removed. We'll begin by creating a type to describe the "
+"abstract state of a socket:"
+msgstr ""
+
+#: ../st/examples.rst:64
+msgid ""
+"Then, we'll begin defining an interface, starting with a ``Sock`` type "
+"for representing sockets, parameterised by their current state:"
+msgstr ""
+
+#: ../st/examples.rst:72
+msgid ""
+"We create sockets using the ``socket`` method. The ``SocketType`` is "
+"defined by the sockets library, and describes whether the socket is TCP, "
+"UDP, or some other form. We'll use ``Stream`` for this throughout, which "
+"indicates a TCP socket."
+msgstr ""
+
+#: ../st/examples.rst:81
+msgid ""
+"Remember that ``addIfRight`` adds a resource if the result of the "
+"operation is of the form ``Right val``. By convention in this interface, "
+"we'll use ``Either`` for operations which might fail, whether or not they"
+" might carry any additional information about the error, so that we can "
+"consistently use ``addIfRight`` and some other type level functions."
+msgstr ""
+
+#: ../st/examples.rst:87
+msgid ""
+"To define a server, once we've created a socket, we need to ``bind`` it "
+"to a port. We can do this with the ``bind`` method:"
+msgstr ""
+
+#: ../st/examples.rst:95
+msgid ""
+"Binding a socket might fail, for example if there is already a socket "
+"bound to the given port, so again it returns a value of type ``Either``. "
+"The action here uses a type level function ``or``, and says that:"
+msgstr ""
+
+#: ../st/examples.rst:99
+msgid "If ``bind`` fails, the socket moves to the ``Sock Closed`` state"
+msgstr ""
+
+#: ../st/examples.rst:100
+msgid ""
+"If ``bind`` succeeds, the socket moves to the ``Sock Bound`` state, as "
+"shown in the diagram above"
+msgstr ""
+
+#: ../st/examples.rst:103
+msgid "``or`` is implemented as follows:"
+msgstr ""
+
+#: ../st/examples.rst:110
+msgid "So, the type of ``bind`` could equivalently be written as:"
+msgstr ""
+
+#: ../st/examples.rst:118
+msgid ""
+"However, using ``or`` is much more concise than this, and attempts to "
+"reflect the state transition diagram as directly as possible while still "
+"capturing the possibility of failure."
+msgstr ""
+
+#: ../st/examples.rst:122
+msgid ""
+"Once we've bound a socket to a port, we can start listening for "
+"connections from clients:"
+msgstr ""
+
+#: ../st/examples.rst:130
+msgid ""
+"A socket in the ``Listening`` state is ready to accept connections from "
+"individual clients:"
+msgstr ""
+
+#: ../st/examples.rst:139
+msgid ""
+"If there is an incoming connection from a client, ``accept`` adds a *new*"
+" resource to the end of the resource list (by convention, it's a good "
+"idea to add resources to the end of the list, because this works more "
+"tidily with ``updateWith``, as discussed in the previous section). So, we"
+" now have *two* sockets: one continuing to listen for incoming "
+"connections, and one ready for communication with the client."
+msgstr ""
+
+#: ../st/examples.rst:146
+msgid "We also need methods for sending and receiving data on a socket:"
+msgstr ""
+
+#: ../st/examples.rst:155
+msgid ""
+"Once we've finished communicating with another machine via a socket, "
+"we'll want to ``close`` the connection and remove the socket:"
+msgstr ""
+
+#: ../st/examples.rst:165
+msgid ""
+"We have a predicate ``CloseOK``, used by ``close`` in an implicit proof "
+"argument, which describes when it is okay to close a socket:"
+msgstr ""
+
+#: ../st/examples.rst:174
+msgid ""
+"That is, we can close a socket which is ``Open``, talking to another "
+"machine, which causes the communication to terminate.  We can also close "
+"a socket which is ``Listening`` for incoming connections, which causes "
+"the server to stop accepting requests."
+msgstr ""
+
+#: ../st/examples.rst:179
+msgid ""
+"In this section, we're implementing a server, but for completeness we may"
+" also want a client to connect to a server on another machine. We can do "
+"this with ``connect``:"
+msgstr ""
+
+#: ../st/examples.rst:188
+msgid "For reference, here is the complete interface:"
+msgstr ""
+
+#: ../st/examples.rst:211
+msgid ""
+"We'll see how to implement this shortly; mostly, the methods can be "
+"implemented in ``IO`` by using the raw sockets API directly. First, "
+"though, we'll see how to use the API to implement an \"echo\" server."
+msgstr ""
+
+#: ../st/examples.rst:216
+msgid "Implementing an \"Echo\" server with ``Sockets``"
+msgstr ""
+
+#: ../st/examples.rst:218
+msgid ""
+"At the top level, our echo server begins and ends with no resources "
+"available, and uses the ``ConsoleIO`` and ``Sockets`` interfaces:"
+msgstr ""
+
+#: ../st/examples.rst:225
+msgid ""
+"The first thing we need to do is create a socket for binding to a port "
+"and listening for incoming connections, using ``socket``. This might "
+"fail, so we'll need to deal with the case where it returns ``Right "
+"sock``, where ``sock`` is the new socket variable, or where it returns "
+"``Left err``:"
+msgstr ""
+
+#: ../st/examples.rst:238
+msgid ""
+"It's a good idea to implement this kind of function interactively, step "
+"by step, using holes to see what state the overall system is in after "
+"each step. Here, we can see that after a successful call to ``socket``, "
+"we have a socket available in the ``Ready`` state:"
+msgstr ""
+
+#: ../st/examples.rst:252
+msgid ""
+"Next, we need to bind the socket to a port, and start listening for "
+"connections. Again, each of these could fail. If they do, we'll remove "
+"the socket. Failure always results in a socket in the ``Closed`` state, "
+"so all we can do is ``remove`` it:"
+msgstr ""
+
+#: ../st/examples.rst:266
+msgid "Finally, we have a socket which is listening for incoming connections:"
+msgstr ""
+
+#: ../st/examples.rst:280
+msgid ""
+"We'll implement this in a separate function. The type of ``runServer`` "
+"tells us what the type of ``echoServer`` must be (noting that we need to "
+"give the ``m`` argument to ``Sock`` explicitly):"
+msgstr ""
+
+#: ../st/examples.rst:289
+msgid "We can complete the definition of ``startServer`` as follows:"
+msgstr ""
+
+#: ../st/examples.rst:300
+msgid ""
+"In ``echoServer``, we'll keep accepting requests and responding to them "
+"until something fails, at which point we'll close the sockets and return."
+" We begin by trying to accept an incoming connection:"
+msgstr ""
+
+#: ../st/examples.rst:312
+msgid ""
+"If ``accept`` fails, we need to close the ``Listening`` socket and remove"
+" it before returning, because the type of ``echoServer`` requires this."
+msgstr ""
+
+#: ../st/examples.rst:316
+msgid ""
+"As always, implementing ``echoServer`` incrementally means that we can "
+"check the state we're in as we develop. If ``accept`` succeeds, we have "
+"the existing ``sock`` which is still listening for connections, and a "
+"``new`` socket, which is open for communication:"
+msgstr ""
+
+#: ../st/examples.rst:332
+msgid ""
+"To complete ``echoServer``, we'll receive a message on the ``new`` "
+"socket, and echo it back. When we're done, we close the ``new`` socket, "
+"and go back to the beginning of ``echoServer`` to handle the next "
+"connection:"
+msgstr ""
+
+#: ../st/examples.rst:349
+msgid "Implementing ``Sockets``"
+msgstr ""
+
+#: ../st/examples.rst:351
+msgid ""
+"To implement ``Sockets`` in ``IO``, we'll begin by giving a concrete type"
+" for ``Sock``. We can use the raw sockets API (implemented in "
+"``Network.Socket``) for this, and use a ``Socket`` stored in a ``State``,"
+" no matter what abstract state the socket is in:"
+msgstr ""
+
+#: ../st/examples.rst:361
+msgid ""
+"Most of the methods can be implemented by using the raw socket API "
+"directly, returning ``Left`` or ``Right`` as appropriate. For example, we"
+" can implement ``socket``, ``bind`` and ``listen`` as follows:"
+msgstr ""
+
+#: ../st/examples.rst:380
+msgid ""
+"There is a small difficulty with ``accept``, however, because when we use"
+" ``new`` to create a new resource for the open connection, it appears at "
+"the *start* of the resource list, not the end. We can see this by writing"
+" an incomplete definition, using ``returning`` to see what the resources "
+"need to be if we return ``Right lbl``:"
+msgstr ""
+
+#: ../st/examples.rst:393
+msgid ""
+"It's convenient for ``new`` to add the resource to the beginning of the "
+"list because, in general, this makes automatic proof construction with an"
+" ``auto``-implicit easier for Idris. On the other hand, when we use "
+"``call`` to make a smaller set of resources, ``updateWith`` puts newly "
+"created resources at the *end* of the list, because in general that "
+"reduces the amount of re-ordering of resources."
+msgstr ""
+
+#: ../st/examples.rst:400
+msgid ""
+"If we look at the type of ``fixResources``, we can see what we need to do"
+" to finish ``accept``:"
+msgstr ""
+
+#: ../st/examples.rst:414
+msgid ""
+"The current list of resources is ordered ``lbl``, ``sock``, and we need "
+"them to be in the order ``sock``, ``lbl``. To help with this situation, "
+"``Control.ST`` provides a primitive ``toEnd`` which moves a resource to "
+"the end of the list. We can therefore complete ``accept`` as follows:"
+msgstr ""
+
+#: ../st/examples.rst:426
+msgid ""
+"For the complete implementation of ``Sockets``, take a look at "
+"``samples/ST/Net/Network.idr`` in the Idris distribution. You can also "
+"find the complete echo server there, ``EchoServer.idr``. There is also a "
+"higher level network protocol, ``RandServer.idr``, using a hierarchy of "
+"state machines to implement a high level network communication protocol "
+"in terms of the lower level sockets API. This also uses threading, to "
+"handle incoming requests asynchronously. You can find some more detail on"
+" threading and the random number server in the draft paper `State "
+"Machines All The Way Down <https://www.idris-lang.org/drafts/sms.pdf>`_ "
+"by Edwin Brady."
+msgstr ""
+
+#: ../st/index.rst:5
+msgid "Implementing State-aware Systems in Idris: The ST Tutorial"
+msgstr ""
+
+#: ../st/index.rst:7
+msgid ""
+"A tutorial on implementing state-aware systems using the `Control.ST` "
+"library in `Idris`."
+msgstr ""
+
+#: ../st/index.rst:12
+msgid ""
+"The documentation for Idris has been published under the Creative Commons"
+" CC0 License. As such to the extent possible under law, *The Idris "
+"Community* has waived all copyright and related or neighbouring rights to"
+" Documentation for Idris."
+msgstr ""
+
+#: ../st/index.rst:17
+msgid ""
+"More information concerning the CC0 can be found online at: "
+"https://creativecommons.org/publicdomain/zero/1.0/"
+msgstr ""
+
+#: ../st/introduction.rst:3
+msgid "Overview"
+msgstr ""
+
+#: ../st/introduction.rst:5
+msgid ""
+"Pure functional languages with dependent types such as `Idris "
+"<https://www.idris-lang.org/>`_ support reasoning about programs directly"
+" in the type system, promising that we can *know* a program will run "
+"correctly (i.e. according to the specification in its type) simply "
+"because it compiles."
+msgstr ""
+
+#: ../st/introduction.rst:11
+msgid ""
+"Realistically, though,  software relies on state, and many components "
+"rely on state machines. For example, they describe network transport "
+"protocols like TCP, and implement event-driven systems and regular "
+"expression matching. Furthermore, many fundamental resources like network"
+" sockets and files are, implicitly, managed by state machines, in that "
+"certain operations are only valid on resources in certain states, and "
+"those operations can change the states of the underlying resource. For "
+"example, it only makes sense to send a message on a connected network "
+"socket, and closing a socket changes its state from \"open\" to "
+"\"closed\". State machines can also encode important security properties."
+" For example, in the software which implements an ATM, it’s important "
+"that the ATM dispenses cash only when the machine is in a state where a "
+"card has been inserted and the PIN verified."
+msgstr ""
+
+#: ../st/introduction.rst:24
+msgid ""
+"In this tutorial we will introduce the ``Control.ST`` library, which is "
+"included with the Idris distribution (currently as part of the "
+"``contrib`` package) and supports programming and reasoning with state "
+"and side effects.  This tutorial assumes familiarity with pure "
+"programming in Idris, as described in :ref:`tutorial-index`. For further "
+"background information, the ``ST`` library is based on ideas discussed in"
+" Chapter 13 (available as a free sample chapter) and Chapter 14 of `Type-"
+"Driven Development with Idris <https://www.manning.com/books/type-driven-"
+"development-with-idris>`_."
+msgstr ""
+
+#: ../st/introduction.rst:33
+msgid ""
+"The ``ST`` library allows us to write programs which are composed of "
+"multiple state transition systems. It supports composition in two ways: "
+"firstly, we can use several independently implemented state transition "
+"systems at once; secondly, we can implement one state transition system "
+"in terms of others."
+msgstr ""
+
+#: ../st/introduction.rst:40
+msgid "Introductory example: a data store requiring a login"
+msgstr ""
+
+#: ../st/introduction.rst:42
+msgid ""
+"Many software components rely on some form of state, and there may be "
+"operations which are only valid in specific states. For example, consider"
+" a secure data store in which a user must log in before getting access to"
+" some secret data. This system can be in one of two states:"
+msgstr ""
+
+#: ../st/introduction.rst:47
+msgid "``LoggedIn``, in which the user is allowed to read the secret"
+msgstr ""
+
+#: ../st/introduction.rst:48
+msgid "``LoggedOut``, in which the user has no access to the secret"
+msgstr ""
+
+#: ../st/introduction.rst:50
+msgid ""
+"We can provide commands to log in, log out, and read the data, as "
+"illustrated in the following diagram:"
+msgstr ""
+
+#: ../st/introduction.rst:53 ../st/machines.rst:11
+msgid "|login|"
+msgstr ""
+
+#: ../st/introduction.rst:90 ../st/machines.rst:535
+msgid "login"
+msgstr ""
+
+#: ../st/introduction.rst:55
+msgid ""
+"The ``login`` command, if it succeeds, moves the overall system state "
+"from ``LoggedOut`` to ``LoggedIn``. The ``logout`` command moves the "
+"state from ``LoggedIn`` to ``LoggedOut``. Most importantly, the "
+"``readSecret`` command is only valid when the system is in the "
+"``LoggedIn`` state."
+msgstr ""
+
+#: ../st/introduction.rst:60
+msgid ""
+"We routinely use type checkers to ensure that variables and arguments are"
+" used consistently. However, statically checking that operations are "
+"performed only on resources in an appropriate state is not well supported"
+" by mainstream type systems. In the data store example, for example, it's"
+" important to check that the user is successfully logged in before using "
+"``readSecret``. The ``ST`` library allows us to represent this kind of "
+"*protocol* in the type system, and ensure at *compile-time* that the "
+"secret is only read when the user is logged in."
+msgstr ""
+
+#: ../st/introduction.rst:70
+msgid "Outline"
+msgstr ""
+
+#: ../st/introduction.rst:72
+msgid ""
+"This tutorial starts (:ref:`introst`) by describing how to manipulate "
+"individual states, introduces a data type ``STrans`` for describing "
+"stateful functions, and ``ST`` which describes top level state "
+"transitions. Next (:ref:`smstypes`) it describes how to represent state "
+"machines in types, and how to define *interfaces* for describing stateful"
+" systems. Then (:ref:`composing`) it describes how to compose systems of "
+"multiple state machines. It explains how to implement systems which use "
+"several state machines at once, and how to implement a high level "
+"stateful system in terms of lower level systems. Finally "
+"(:ref:`netexample`) we'll see a specific example of a stateful API in "
+"practice, implementing the POSIX network sockets API."
+msgstr ""
+
+#: ../st/introduction.rst:84
+msgid ""
+"The ``Control.ST`` library is also described in a draft paper by `Edwin "
+"Brady <https://edwinb.wordpress.com/>`_, \"State Machines All The Way "
+"Down\", available `here <https://www.idris-lang.org/drafts/sms.pdf>`_. "
+"This paper presents many of the examples from this tutorial, and "
+"describes the motivation, design and implementation of the library in "
+"more depth."
+msgstr ""
+
+#: ../st/machines.rst:5
+msgid "State Machines in Types"
+msgstr ""
+
+#: ../st/machines.rst:7
+msgid ""
+"In the introduction, we saw the following state transition diagram "
+"representing the (abstract) states of a data store, and the actions we "
+"can perform on the store:"
+msgstr ""
+
+#: ../st/machines.rst:13
+msgid ""
+"We say that these are the *abstract* states of the store, because the "
+"concrete state will contain a lot more information: for example, it might"
+" contain user names, hashed passwords, the store contents, and so on. "
+"However, as far as we are concerned for the actions ``login``, ``logout``"
+" and ``readSecret``, it's whether we are logged in or not which affects "
+"which are valid."
+msgstr ""
+
+#: ../st/machines.rst:19
+msgid ""
+"We've seen how to manipulate states using ``ST``, and some small examples"
+" of dependent types in states. In this section, we'll see how to use "
+"``ST`` to provide a safe API for the data store. In the API, we'll encode"
+" the above diagram in the types, in such a way that we can only execute "
+"the operations ``login``, ``logout`` and ``readSecret`` when the state is"
+" valid."
+msgstr ""
+
+#: ../st/machines.rst:26
+msgid ""
+"So far, we've used ``State`` and the primitive operations, ``new``, "
+"``read``, ``write`` and ``delete`` to manipulate states. For the data "
+"store API, however, we'll begin by defining an *interface* (see :ref"
+":`sect-interfaces` in the Idris tutorial) which describes the operations "
+"on the store, and explains in their types exactly when each operation is "
+"valid, and how it affects the store's state. By using an interface, we "
+"can be sure that this is the *only* way to access the store."
+msgstr ""
+
+#: ../st/machines.rst:35
+msgid "Defining an interface for the data store"
+msgstr ""
+
+#: ../st/machines.rst:37
+msgid ""
+"We'll begin by defining a data type, in a file ``Login.idr``, which "
+"represents the two abstract states of the store, either ``LoggedOut`` or "
+"``LoggedIn``:"
+msgstr ""
+
+#: ../st/machines.rst:44
+msgid ""
+"We can define a data type for representing the current state of a store, "
+"holding all of the necessary information (this might be user names, "
+"hashed passwords, store contents and so on) and parameterise it by the "
+"logged in status of the store:"
+msgstr ""
+
+#: ../st/machines.rst:53
+msgid ""
+"Rather than defining a concrete type now, however, we'll include this in "
+"a data store *interface* and define a concrete type later:"
+msgstr ""
+
+#: ../st/machines.rst:61
+msgid ""
+"We can continue to populate this interface with operations on the store."
+"  Among other advantages, by separating the *interface* from its "
+"*implementation* we can provide different concrete implementations for "
+"different contexts. Furthermore, we can write programs which work with a "
+"store without needing to know any details of how the store is "
+"implemented."
+msgstr ""
+
+#: ../st/machines.rst:67
+msgid ""
+"We'll need to be able to ``connect`` to a store, and ``disconnect`` when "
+"we're done. Add the following methods to the ``DataStore`` interface:"
+msgstr ""
+
+#: ../st/machines.rst:75
+msgid ""
+"The type of ``connect`` says that it returns a new resource which has the"
+" initial type ``Store LoggedOut``. Conversely, ``disconnect``, given a "
+"resource in the state ``Store LoggedOut``, removes that resource. We can "
+"see more clearly what ``connect`` does by trying the following "
+"(incomplete) definition:"
+msgstr ""
+
+#: ../st/machines.rst:87
+msgid ""
+"Note that we're working in a *generic* context ``m``, constrained so that"
+" there must be an implementation of ``DataStore`` for ``m`` to be able to"
+" execute ``doConnect``. If we check the type of ``?whatNow``, we'll see "
+"that the remaining operations begin with a resource ``st`` in the state "
+"``Store LoggedOut``, and we need to finish with no resources."
+msgstr ""
+
+#: ../st/machines.rst:102
+msgid "Then, we can remove the resource using ``disconnect``:"
+msgstr ""
+
+#: ../st/machines.rst:111
+msgid ""
+"Now checking the type of ``?whatNow`` shows that we have no resources "
+"available:"
+msgstr ""
+
+#: ../st/machines.rst:122
+msgid ""
+"To continue our implementation of the ``DataStore`` interface, next we'll"
+" add a method for reading the secret data. This requires that the "
+"``store`` is in the state ``Store LoggedIn``:"
+msgstr ""
+
+#: ../st/machines.rst:130
+msgid ""
+"At this point we can try writing a function which connects to a store, "
+"reads the secret, then disconnects. However, it will be unsuccessful, "
+"because ``readSecret`` requires us to be logged in:"
+msgstr ""
+
+#: ../st/machines.rst:141
+msgid ""
+"This results in the following error, because ``connect`` creates a new "
+"store in the ``LoggedOut`` state, and ``readSecret`` requires the store "
+"to be in the ``LoggedIn`` state:"
+msgstr ""
+
+#: ../st/machines.rst:154
+msgid ""
+"The error message explains how the required input states (the "
+"preconditions) and the required output states (the postconditions) differ"
+" from the states in the operation. In order to use ``readSecret``, we'll "
+"need a way to get from a ``Store LoggedOut`` to a ``Store LoggedIn``. As "
+"a first attempt, we can try the following type for ``login``:"
+msgstr ""
+
+#: ../st/machines.rst:164
+msgid ""
+"Note that in the *interface* we say nothing about *how* ``login`` works; "
+"merely how it affects the overall state. Even so, there is a problem with"
+" the type of ``login``, because it makes the assumption that it will "
+"always succeed. If it fails - for example because the implementation "
+"prompts for a password and the user enters the password incorrectly - "
+"then it must not result in a ``LoggedIn`` store."
+msgstr ""
+
+#: ../st/machines.rst:171
+msgid ""
+"Instead, therefore, ``login`` will return whether logging in was "
+"successful, via the following type;"
+msgstr ""
+
+#: ../st/machines.rst:178
+msgid ""
+"Then, we can *calculate* the result state (see :ref:`depstate`) from the "
+"result. Add the following method to the ``DataStore`` interface:"
+msgstr ""
+
+#: ../st/machines.rst:189
+msgid ""
+"If ``login`` was successful, then the state after ``login`` is ``Store "
+"LoggedIn``. Otherwise, the state is ``Store LoggedOut``."
+msgstr ""
+
+#: ../st/machines.rst:192
+msgid ""
+"To complete the interface, we'll add a method for logging out of the "
+"store. We'll assume that logging out is always successful, and moves the "
+"store from the ``Store LoggedIn`` state to the ``Store LoggedOut`` state."
+msgstr ""
+
+#: ../st/machines.rst:200
+msgid "This completes the interface, repeated in full for reference below:"
+msgstr ""
+
+#: ../st/machines.rst:218
+msgid ""
+"Before we try creating any implementations of this interface, let's see "
+"how we can write a function with it, to log into a data store, read the "
+"secret if login is successful, then log out again."
+msgstr ""
+
+#: ../st/machines.rst:223
+msgid "Writing a function with the data store"
+msgstr ""
+
+#: ../st/machines.rst:225
+msgid ""
+"As an example of working with the ``DataStore`` interface, we'll write a "
+"function ``getData``, which connects to a store in order to read some "
+"data from it. We'll write this function interactively, step by step, "
+"using the types of the operations to guide its development. It has the "
+"following type:"
+msgstr ""
+
+#: ../st/machines.rst:234
+msgid ""
+"This type means that there are no resources available on entry or exit. "
+"That is, the overall list of actions is ``[]``, meaning that at least "
+"externally, the function has no overall effect on the resources. In other"
+" words, for every resource we create during ``getData``, we'll also need "
+"to delete it before exit."
+msgstr ""
+
+#: ../st/machines.rst:240
+msgid ""
+"Since we want to use methods of the ``DataStore`` interface, we'll "
+"constraint the computation context ``m`` so that there must be an "
+"implementation of ``DataStore``. We also have a constraint ``ConsoleIO "
+"m`` so that we can display any data we read from the store, or any error "
+"messages."
+msgstr ""
+
+#: ../st/machines.rst:246
+msgid ""
+"We start by connecting to the store, creating a new resource ``st``, then"
+" trying to ``login``:"
+msgstr ""
+
+#: ../st/machines.rst:256
+msgid ""
+"Logging in will either succeed or fail, as reflected by the value of "
+"``ok``. If we check the type of ``?whatNow``, we'll see what state the "
+"store currently has:"
+msgstr ""
+
+#: ../st/machines.rst:273
+msgid ""
+"The current state of ``st`` therefore depends on the value of ``ok``, "
+"meaning that we can make progress by case splitting on ``ok``:"
+msgstr ""
+
+#: ../st/machines.rst:285
+msgid ""
+"The types of the holes in each branch, ``?whatNow_1`` and ``?whatNow_2``,"
+" show how the state changes depending on whether logging in was "
+"successful. If it succeeded, the store is ``LoggedIn``:"
+msgstr ""
+
+#: ../st/machines.rst:294
+msgid "On the other hand, if it failed, the store is ``LoggedOut``:"
+msgstr ""
+
+#: ../st/machines.rst:301
+msgid ""
+"In ``?whatNow_1``, since we've successfully logged in, we can now read "
+"the secret and display it to the console:"
+msgstr ""
+
+#: ../st/machines.rst:315
+msgid ""
+"We need to finish the ``OK`` branch with no resources available. We can "
+"do this by logging out of the store then disconnecting:"
+msgstr ""
+
+#: ../st/machines.rst:330
+msgid ""
+"Note that we *must* ``logout`` of ``st`` before calling ``disconnect``, "
+"because ``disconnect`` requires that the store is in the ``LoggedOut`` "
+"state."
+msgstr ""
+
+#: ../st/machines.rst:334
+msgid ""
+"Furthermore, we can't simply use ``delete`` to remove the resource, as we"
+" did with the ``State`` examples in the previous section, because "
+"``delete`` only works when the resource has type ``State ty``, for some "
+"type ``ty``. If we try to use ``delete`` instead of ``disconnect``, we'll"
+" see an error message like the following:"
+msgstr ""
+
+#: ../st/machines.rst:346
+msgid ""
+"In other words, the type checker can't find a proof that the resource "
+"``st`` has a type of the form ``State st``, because its type is ``Store "
+"LoggedOut``. Since ``Store`` is part of the ``DataStore`` interface, we "
+"*can't* yet know the concrete representation of the ``Store``, so we need"
+" to remove the resource via the interface, with ``disconnect``, rather "
+"than directly with ``delete``."
+msgstr ""
+
+#: ../st/machines.rst:353
+msgid ""
+"We can complete ``getData`` as follows, using a pattern matching bind "
+"alternative (see the Idris tutorial, :ref:`monadsdo`) rather than a "
+"``case`` statement to catch the possibility of an error with ``login``:"
+msgstr ""
+
+#: ../st/machines.rst:369
+msgid ""
+"We can't yet try this out, however, because we don't have any "
+"implementations of ``DataStore``! If we try to execute it in an ``IO`` "
+"context, for example, we'll get an error saying that there's no "
+"implementation of ``DataStore IO``:"
+msgstr ""
+
+#: ../st/machines.rst:379
+msgid ""
+"The final step in implementing a data store which correctly follows the "
+"state transition diagram, therefore, is to provide an implementation of "
+"``DataStore``."
+msgstr ""
+
+#: ../st/machines.rst:384
+msgid "Implementing the interface"
+msgstr ""
+
+#: ../st/machines.rst:386
+msgid ""
+"To execute ``getData`` in ``IO``, we'll need to provide an implementation"
+" of ``DataStore`` which works in the ``IO`` context. We can begin as "
+"follows:"
+msgstr ""
+
+#: ../st/machines.rst:394
+msgid ""
+"Then, we can ask Idris to populate the interface with skeleton "
+"definitions for the necessary methods (press ``Ctrl-Alt-A`` in Atom for "
+"\"add definition\" or the corresponding shortcut for this in the Idris "
+"mode in your favourite editor):"
+msgstr ""
+
+#: ../st/machines.rst:409
+msgid ""
+"The first decision we'll need to make is how to represent the data store."
+" We'll keep this simple, and store the data as a single ``String``, using"
+" a hard coded password to gain access. So, we can define ``Store`` as "
+"follows, using a ``String`` to represent the data no matter whether we "
+"are ``LoggedOut`` or ``LoggedIn``:"
+msgstr ""
+
+#: ../st/machines.rst:419
+msgid ""
+"Now that we've given a concrete type for ``Store``, we can implement "
+"operations for connecting, disconnecting, and accessing the data. And, "
+"since we used ``State``, we can use ``new``, ``delete``, ``read`` and "
+"``write`` to manipulate the store."
+msgstr ""
+
+#: ../st/machines.rst:424
+msgid ""
+"Looking at the types of the holes tells us how we need to manipulate the "
+"state. For example, the ``?DataStore_rhs_2`` hole tells us what we need "
+"to do to implement ``connect``. We need to return a new ``Var`` which "
+"represents a resource of type ``State String``:"
+msgstr ""
+
+#: ../st/machines.rst:434
+msgid ""
+"We can implement this by creating a new variable with some data for the "
+"content of the store (we can use any ``String`` for this) and returning "
+"that variable:"
+msgstr ""
+
+#: ../st/machines.rst:443
+msgid "For ``disconnect``, we only need to delete the resource:"
+msgstr ""
+
+#: ../st/machines.rst:449
+msgid ""
+"For ``readSecret``, we need to read the secret data and return the "
+"``String``. Since we now know the concrete representation of the data is "
+"a ``State String``, we can use ``read`` to access the data directly:"
+msgstr ""
+
+#: ../st/machines.rst:457
+msgid ""
+"We'll do ``logout`` next and return to ``login``. Checking the hole "
+"reveals the following:"
+msgstr ""
+
+#: ../st/machines.rst:466
+msgid "So, in this minimal implementation, we don't actually have to do anything!"
+msgstr ""
+
+#: ../st/machines.rst:472
+msgid ""
+"For ``login``, we need to return whether logging in was successful. We'll"
+" do this by prompting for a password, and returning ``OK`` if it matches "
+"a hard coded password, or ``BadPassword`` otherwise:"
+msgstr ""
+
+#: ../st/machines.rst:484
+msgid ""
+"For reference, here is the complete implementation which allows us to "
+"execute a ``DataStore`` program at the REPL:"
+msgstr ""
+
+#: ../st/machines.rst:502
+msgid ""
+"Finally, we can try this at the REPL as follows (Idris defaults to the "
+"``IO`` context at the REPL if there is an implementation available, so no"
+" need to give the ``m`` argument explicitly here):"
+msgstr ""
+
+#: ../st/machines.rst:516
+msgid ""
+"We can only use ``read``, ``write``, ``new`` and ``delete`` on a resource"
+" with a ``State`` type. So, *within* the implementation of ``DataStore``,"
+" or anywhere where we know the context is ``IO``, we can access the data "
+"store however we like: this is where the internal details of "
+"``DataStore`` are implemented. However, if we merely have a constraint "
+"``DataStore m``, we can't know how the store is implemented, so we can "
+"only access via the API given by the ``DataStore`` interface."
+msgstr ""
+
+#: ../st/machines.rst:524
+msgid ""
+"It is therefore good practice to use a *generic* context ``m`` for "
+"functions like ``getData``, and constrain by only the interfaces we need,"
+" rather than using a concrete context ``IO``."
+msgstr ""
+
+#: ../st/machines.rst:528
+msgid ""
+"We've now seen how to manipulate states, and how to encapsulate state "
+"transitions for a specific system like the data store in an interface. "
+"However, realistic systems will need to *compose* state machines. We'll "
+"either need to use more than one state machine at a time, or implement "
+"one state machine in terms of one or more others. We'll see how to "
+"achieve this in the next section."
+msgstr ""
+
+#: ../st/state.rst:5
+msgid "Introducing ST: Working with State"
+msgstr ""
+
+#: ../st/state.rst:7
+msgid ""
+"The ``Control.ST`` library provides facilities for creating, reading, "
+"writing and destroying state in Idris functions, and tracking changes of "
+"state in a function's type. It is based around the concept of "
+"*resources*, which are, essentially, mutable variables, and a dependent "
+"type, ``STrans`` which tracks how those resources change when a function "
+"runs:"
+msgstr ""
+
+#: ../st/state.rst:21
+msgid ""
+"A value of type ``STrans m resultType in_res out_res_fn`` represents a "
+"sequence of actions which can manipulate state. The arguments are:"
+msgstr ""
+
+#: ../st/state.rst:24
+msgid ""
+"``m``, which is an underlying *computation context* in which the actions "
+"will be executed. Usually, this will be a generic type with a ``Monad`` "
+"implementation, but it isn't necessarily so. In particular, there is no "
+"need to understand monads to be able to use ``ST`` effectively!"
+msgstr ""
+
+#: ../st/state.rst:28
+msgid "``resultType``, which is the type of the value the sequence will produce"
+msgstr ""
+
+#: ../st/state.rst:29
+msgid ""
+"``in_res``, which is a list of *resources* available *before* executing "
+"the actions."
+msgstr ""
+
+#: ../st/state.rst:30
+msgid ""
+"``out_res``, which is a list of resources available *after* executing the"
+" actions, and may differ depending on the result of the actions."
+msgstr ""
+
+#: ../st/state.rst:33
+msgid ""
+"We can use ``STrans`` to describe *state transition systems* in a "
+"function's type. We'll come to the definition of ``Resources`` shortly, "
+"but for the moment you can consider it an abstract representation of the "
+"\"state of the world\". By giving the input resources (``in_res``) and "
+"the output resources (``out_res``) we are describing the *preconditions* "
+"under which a function is allowed to execute, and *postconditions* which "
+"describe how a function affects the overall state of the world."
+msgstr ""
+
+#: ../st/state.rst:41
+msgid ""
+"We'll begin in this section by looking at some small examples of "
+"``STrans`` functions, and see how to execute them. We'll also introduce "
+"``ST``, a type-level function which allows us to describe the state "
+"transitions of a stateful function concisely."
+msgstr ""
+
+#: ../st/state.rst:-1
+msgid "Type checking the examples"
+msgstr ""
+
+#: ../st/state.rst:48
+msgid ""
+"For the examples in this section, and throughout this tutorial, you'll "
+"need to ``import Control.ST`` and add the ``contrib`` package by passing "
+"the ``-p contrib`` flag to ``idris``."
+msgstr ""
+
+#: ../st/state.rst:54
+msgid "Introductory examples: manipulating ``State``"
+msgstr ""
+
+#: ../st/state.rst:56
+msgid ""
+"An ``STrans`` function explains, in its type, how it affects a collection"
+" of ``Resources``. A resource has a *label* (of type ``Var``), which we "
+"use to refer to the resource throughout the function, and we write the "
+"state of a resource, in the ``Resources`` list, in the form ``label ::: "
+"type``."
+msgstr ""
+
+#: ../st/state.rst:61
+msgid ""
+"For example, the following function has a resource ``x`` available on "
+"input, of type ``State Integer``, and that resource is still a ``State "
+"Integer`` on output:"
+msgstr ""
+
+#: ../st/state.rst:-1
+msgid "Verbosity of the type of ``increment``"
+msgstr ""
+
+#: ../st/state.rst:74
+msgid ""
+"The type of ``increment`` may seem somewhat verbose, in that the *input* "
+"and *output* resources are repeated, even though they are the same. We'll"
+" introduce a much more concise way of writing this type at the end of "
+"this section (:ref:`sttype`), when we describe the ``ST`` type itself."
+msgstr ""
+
+#: ../st/state.rst:80
+msgid ""
+"This function reads the value stored at the resource ``x`` with ``read``,"
+" increments it then writes the result back into the resource ``x`` with "
+"``write``. We'll see the types of ``read`` and ``write`` shortly (see "
+":ref:`stransprimops`). We can also create and delete resources:"
+msgstr ""
+
+#: ../st/state.rst:94
+msgid ""
+"The type of ``makeAndIncrement`` states that it has *no* resources "
+"available on entry (``[]``) or exit (``const []``). It creates a new "
+"``State`` resource with ``new`` (which takes an initial value for the "
+"resource), increments the value, reads it back, then deletes it using "
+"``delete``, returning the final value of the resource. Again, we'll see "
+"the types of ``new`` and ``delete`` shortly."
+msgstr ""
+
+#: ../st/state.rst:101
+msgid ""
+"The ``m`` argument to ``STrans`` (of type ``Type -> Type``) is the "
+"*computation context* in which the function can be run. Here, the type "
+"level variable indicates that we can run it in *any* context. We can run "
+"it in the identity context with ``runPure``. For example, try entering "
+"the above definitions in a file ``Intro.idr`` then running the following "
+"at the REPL:"
+msgstr ""
+
+#: ../st/state.rst:112
+msgid ""
+"It's a good idea to take an interactive, type-driven approach to "
+"implementing ``STrans`` programs. For example, after creating the "
+"resource with ``new init``, you can leave a *hole* for the rest of the "
+"program to see how creating the resource has affected the type:"
+msgstr ""
+
+#: ../st/state.rst:123
+msgid ""
+"If you check the type of ``?whatNext``, you'll see that there is now a "
+"resource available, ``var``, and that by the end of the function there "
+"should be no resource available:"
+msgstr ""
+
+#: ../st/state.rst:135
+msgid ""
+"These small examples work in any computation context ``m``. However, "
+"usually, we are working in a more restricted context. For example, we "
+"might want to write programs which only work in a context that supports "
+"interactive programs. For this, we'll need to see how to *lift* "
+"operations from the underlying context."
+msgstr ""
+
+#: ../st/state.rst:142
+msgid "Lifting: Using the computation context"
+msgstr ""
+
+#: ../st/state.rst:144
+msgid ""
+"Let's say that, instead of passing an initial integer to "
+"``makeAndIncrement``, we want to read it in from the console. Then, "
+"instead of working in a generic context ``m``, we can work in the "
+"specific context ``IO``:"
+msgstr ""
+
+#: ../st/state.rst:152
+msgid ""
+"This gives us access to ``IO`` operations, via the ``lift`` function. We "
+"can define ``ioMakeAndIncrement`` as follows:"
+msgstr ""
+
+#: ../st/state.rst:167
+msgid ""
+"The ``lift`` function allows us to use functions from the underlying "
+"computation context (``IO`` here) directly. Again, we'll see the exact "
+"type of ``lift`` shortly."
+msgstr ""
+
+#: ../st/state.rst:-1
+msgid "!-notation"
+msgstr ""
+
+#: ../st/state.rst:173
+msgid ""
+"In ``ioMakeAndIncrement`` we've used ``!(read var)`` to read from the "
+"resource. You can read about this ``!``-notation in the main Idris "
+"tutorial (see :ref:`monadsdo`). In short, it allows us to use an "
+"``STrans`` function inline, rather than having to bind the result to a "
+"variable first."
+msgstr ""
+
+#: ../st/state.rst:179
+msgid "Conceptually, at least, you can think of it as having the following type:"
+msgstr ""
+
+#: ../st/state.rst:185
+msgid ""
+"It is syntactic sugar for binding a variable immediately before the "
+"current action in a ``do`` block, then using that variable in place of "
+"the ``!``-expression."
+msgstr ""
+
+#: ../st/state.rst:190
+msgid ""
+"In general, though, it's bad practice to use a *specific* context like "
+"``IO``. Firstly, it requires us to sprinkle ``lift`` liberally throughout"
+" our code, which hinders readability. Secondly, and more importantly, it "
+"will limit the safety of our functions, as we'll see in the next section "
+"(:ref:`smstypes`)."
+msgstr ""
+
+#: ../st/state.rst:196
+msgid ""
+"So, instead, we define *interfaces* to restrict the computation context. "
+"For example, ``Control.ST`` defines a ``ConsoleIO`` interface which "
+"provides the necessary methods for performing basic console interaction:"
+msgstr ""
+
+#: ../st/state.rst:206
+msgid ""
+"That is, we can write to and read from the console with any available "
+"resources ``res``, and neither will affect the available resources. This "
+"has the following implementation for ``IO``:"
+msgstr ""
+
+#: ../st/state.rst:216
+msgid "Now, we can define ``ioMakeAndIncrement`` as follows:"
+msgstr ""
+
+#: ../st/state.rst:230
+msgid ""
+"Instead of working in ``IO`` specifically, this works in a generic "
+"context ``io``, provided that there is an implementation of ``ConsoleIO``"
+" for that context. This has several advantages over the first version:"
+msgstr ""
+
+#: ../st/state.rst:234
+msgid ""
+"All of the calls to ``lift`` are in the implementation of the interface, "
+"rather than ``ioMakeAndIncrement``"
+msgstr ""
+
+#: ../st/state.rst:236
+msgid ""
+"We can provide alternative implementations of ``ConsoleIO``, perhaps "
+"supporting exceptions or logging in addition to basic I/O."
+msgstr ""
+
+#: ../st/state.rst:238
+msgid ""
+"As we'll see in the next section (:ref:`smstypes`), it will allow us to "
+"define safe APIs for manipulating specific resources more precisely."
+msgstr ""
+
+#: ../st/state.rst:241
+msgid ""
+"Earlier, we used ``runPure`` to run ``makeAndIncrement`` in the identity "
+"context. Here, we use ``run``, which allows us to execute an ``STrans`` "
+"program in any context (as long as it has an implementation of "
+"``Applicative``) and we can execute ``ioMakeAndIncrement`` at the REPL as"
+" follows:"
+msgstr ""
+
+#: ../st/state.rst:256
+msgid "Manipulating ``State`` with dependent types"
+msgstr ""
+
+#: ../st/state.rst:258
+msgid ""
+"In our first example of ``State``, when we incremented the value its "
+"*type* remained the same. However, when we're working with *dependent* "
+"types, updating a state may also involve updating its type. For example, "
+"if we're adding an element to a vector stored in a state, its length will"
+" change:"
+msgstr ""
+
+#: ../st/state.rst:272
+msgid "Note that you'll need to ``import Data.Vect`` to try this example."
+msgstr ""
+
+#: ../st/state.rst:256
+msgid "Updating a state directly with ``update``"
+msgstr ""
+
+#: ../st/state.rst:276
+msgid ""
+"Rather than using ``read`` and ``write`` separately, you can also use "
+"``update`` which reads from a ``State``, applies a function to it, then "
+"writes the result. Using ``update`` you could write ``addElement`` as "
+"follows:"
+msgstr ""
+
+#: ../st/state.rst:288
+msgid ""
+"We don't always know *how* exactly the type will change in the course of "
+"a sequence actions, however. For example, if we have a state containing a"
+" vector of integers, we might read an input from the console and only add"
+" it to the vector if the input is a valid integer. Somehow, we need a "
+"different type for the output state depending on whether reading the "
+"integer was successful, so neither of the following types is quite right:"
+msgstr ""
+
+#: ../st/state.rst:306
+msgid ""
+"Remember, though, that the *output* resource types can be *computed* from"
+" the result of a function. So far, we've used ``const`` to note that the "
+"output resources are always the same, but here, instead, we can use a "
+"type level function to *calculate* the output resources. We start by "
+"returning a ``Bool`` instead of an empty tuple, which is ``True`` if "
+"reading the input was successful, and leave a *hole* for the output "
+"resources:"
+msgstr ""
+
+#: ../st/state.rst:319
+msgid ""
+"If you check the type of ``?output_res``, you'll see that Idris expects a"
+" function of type ``Bool -> Resources``, meaning that the output resource"
+" type can be different depending on the result of ``readAndAdd``:"
+msgstr ""
+
+#: ../st/state.rst:333
+msgid ""
+"So, the output resource is either a ``Vect n Integer`` if the input is "
+"invalid (i.e. ``readAndAdd`` returns ``False``) or a ``Vect (S n) "
+"Integer`` if the input is valid. We can express this in the type as "
+"follows:"
+msgstr ""
+
+#: ../st/state.rst:344
+msgid ""
+"Then, when we implement ``readAndAdd`` we need to return the appropriate "
+"value for the output state. If we've added an item to the vector, we need"
+" to return ``True``, otherwise we need to return ``False``:"
+msgstr ""
+
+#: ../st/state.rst:362
+msgid ""
+"There is a slight difficulty if we're developing interactively, which is "
+"that if we leave a hole, the required output state isn't easily visible "
+"until we know the value that's being returned. For example. in the "
+"following incomplete definition of ``readAndAdd`` we've left a hole for "
+"the successful case:"
+msgstr ""
+
+#: ../st/state.rst:376
+msgid ""
+"We can look at the type of ``?whatNow``, but it is unfortunately rather "
+"less than informative:"
+msgstr ""
+
+#: ../st/state.rst:394
+msgid ""
+"The problem is that we'll only know the required output state when we "
+"know the value we're returning. To help with interactive development, "
+"``Control.ST`` provides a function ``returning`` which allows us to "
+"specify the return value up front, and to update the state accordingly. "
+"For example, we can write an incomplete ``readAndAdd`` as follows:"
+msgstr ""
+
+#: ../st/state.rst:408
+msgid ""
+"This states that, in the successful branch, we'll be returning ``True``, "
+"and ``?whatNow`` should explain how to update the states appropriately so"
+" that they are correct for a return value of ``True``. We can see this by"
+" checking the type of ``?whatNow``, which is now a little more "
+"informative:"
+msgstr ""
+
+#: ../st/state.rst:424
+msgid ""
+"This type now shows, in the output resource list of ``STrans``, that we "
+"can complete the definition by adding an item to ``vec``, which we can do"
+" as follows:"
+msgstr ""
+
+#: ../st/state.rst:439
+msgid "``STrans`` Primitive operations"
+msgstr ""
+
+#: ../st/state.rst:441
+msgid ""
+"Now that we've written a few small examples of ``STrans`` functions, it's"
+" a good time to look more closely at the types of the state manipulation "
+"functions we've used. First, to read and write states, we've used "
+"``read`` and ``write``:"
+msgstr ""
+
+#: ../st/state.rst:454
+msgid ""
+"These types may look a little daunting at first, particularly due to the "
+"implicit ``prf`` argument, which has the following type:"
+msgstr ""
+
+#: ../st/state.rst:461
+msgid ""
+"This relies on a predicate ``InState``. A value of type ``InState x ty "
+"res`` means that the reference ``x`` must have type ``ty`` in the list of"
+" resources ``res``. So, in practice, all this type means is that we can "
+"only read or write a resource if a reference to it exists in the list of "
+"resources."
+msgstr ""
+
+#: ../st/state.rst:467
+msgid ""
+"Given a resource label ``res``, and a proof that ``res`` exists in a list"
+" of resources, ``updateRes`` will update the type of that resource. So, "
+"the type of ``write`` states that the type of the resource will be "
+"updated to the type of the given value."
+msgstr ""
+
+#: ../st/state.rst:472
+msgid ""
+"The type of ``update`` is similar to that for ``read`` and ``write``, "
+"requiring that the resource has the input type of the given function, and"
+" updating it to have the output type of the function:"
+msgstr ""
+
+#: ../st/state.rst:482
+msgid ""
+"The type of ``new`` states that it returns a ``Var``, and given an "
+"initial value of type ``state``, the output resources contains a new "
+"resource of type ``State state``:"
+msgstr ""
+
+#: ../st/state.rst:491
+msgid ""
+"It's important that the new resource has type ``State state``, rather "
+"than merely ``state``, because this will allow us to hide implementation "
+"details of APIs. We'll see more about what this means in the next "
+"section, :ref:`smstypes`."
+msgstr ""
+
+#: ../st/state.rst:496
+msgid ""
+"The type of ``delete`` states that the given label will be removed from "
+"the list of resources, given an implicit proof that the label exists in "
+"the input resources:"
+msgstr ""
+
+#: ../st/state.rst:505
+msgid ""
+"Here, ``drop`` is a type level function which updates the resource list, "
+"removing the given resource ``lbl`` from the list."
+msgstr ""
+
+#: ../st/state.rst:508
+msgid ""
+"We've used ``lift`` to run functions in the underlying context. It has "
+"the following type:"
+msgstr ""
+
+#: ../st/state.rst:515
+msgid ""
+"Given a ``result`` value, ``pure`` is an ``STrans`` program which "
+"produces that value, provided that the current list of resources is "
+"correct when producing that value:"
+msgstr ""
+
+#: ../st/state.rst:523
+msgid ""
+"We can use ``returning`` to break down returning a value from an "
+"``STrans`` functions into two parts: providing the value itself, and "
+"updating the resource list so that it is appropriate for returning that "
+"value:"
+msgstr ""
+
+#: ../st/state.rst:533
+msgid ""
+"Finally, we've used ``run`` and ``runPure`` to execute ``STrans`` "
+"functions in a specific context. ``run`` will execute a function in any "
+"context, provided that there is an ``Applicative`` implementation for "
+"that context, and ``runPure`` will execute a function in the identity "
+"context:"
+msgstr ""
+
+#: ../st/state.rst:543
+msgid ""
+"Note that in each case, the input and output resource list must be empty."
+" There's no way to provide an initial resource list, or extract the final"
+" resources. This is deliberate: it ensures that *all* resource management"
+" is carried out in the controlled ``STrans`` environment and, as we'll "
+"see, this allows us to implement safe APIs with precise types explaining "
+"exactly how resources are tracked throughout a program."
+msgstr ""
+
+#: ../st/state.rst:550
+msgid ""
+"These functions provide the core of the ``ST`` library; there are some "
+"others which we'll encounter later, for more advanced situations, but the"
+" functions we have seen so far already allow quite sophisticated state-"
+"aware programming and reasoning in Idris."
+msgstr ""
+
+#: ../st/state.rst:558
+msgid "`ST`: Representing state transitions directly"
+msgstr ""
+
+#: ../st/state.rst:560
+msgid ""
+"We've seen a few examples of small ``STrans`` functions now, and their "
+"types can become quite verbose given that we need to provide explicit "
+"input and output resource lists. This is convenient for giving types for "
+"the primitive operations, but for more general use it's much more "
+"convenient to be able to express *transitions* on individual resources, "
+"rather than giving input and output resource lists in full. We can do "
+"this with ``ST``:"
+msgstr ""
+
+#: ../st/state.rst:574
+msgid ""
+"``ST`` is a type level function which computes an appropriate ``STrans`` "
+"type given a list of *actions*, which describe transitions on resources. "
+"An ``Action`` in a function type can take one of the following forms "
+"(plus some others which we'll see later in the tutorial):"
+msgstr ""
+
+#: ../st/state.rst:579
+msgid ""
+"``lbl ::: ty`` expresses that the resource ``lbl`` begins and ends in the"
+" state ``ty``"
+msgstr ""
+
+#: ../st/state.rst:581
+msgid ""
+"``lbl ::: ty_in :-> ty_out`` expresses that the resource ``lbl`` begins "
+"in state ``ty_in`` and ends in state ``ty_out``"
+msgstr ""
+
+#: ../st/state.rst:583
+msgid ""
+"``lbl ::: ty_in :-> (\\res -> ty_out)`` expresses that the resource "
+"``lbl`` begins in state ``ty_in`` and ends in a state ``ty_out``, where "
+"``ty_out`` is computed from the result of the function ``res``."
+msgstr ""
+
+#: ../st/state.rst:587
+msgid "So, we can write some of the function types we've seen so far as follows:"
+msgstr ""
+
+#: ../st/state.rst:593
+msgid ""
+"That is, ``increment`` begins and ends with ``x`` in state ``State "
+"Integer``."
+msgstr ""
+
+#: ../st/state.rst:599
+msgid "That is, ``makeAndIncrement`` begins and ends with no resources."
+msgstr ""
+
+#: ../st/state.rst:606
+msgid ""
+"That is, ``addElement`` changes ``vec`` from ``State (Vect n a)`` to "
+"``State (Vect (S n) a)``."
+msgstr ""
+
+#: ../st/state.rst:617
+msgid ""
+"By writing the types in this way, we express the minimum necessary to "
+"explain how each function affects the overall resource state. If there is"
+" a resource update depending on a result, as with ``readAndAdd``, then we"
+" need to describe it in full. Otherwise, as with ``increment`` and "
+"``makeAndIncrement``, we can write the input and output resource lists "
+"without repetition."
+msgstr ""
+
+#: ../st/state.rst:623
+msgid "An ``Action`` can also describe *adding* and *removing* states:"
+msgstr ""
+
+#: ../st/state.rst:625
+msgid ""
+"``add ty``, assuming the operation returns a ``Var``, adds a new resource"
+" of type ``ty``."
+msgstr ""
+
+#: ../st/state.rst:627
+msgid ""
+"``remove lbl ty`` expresses that the operation removes the resource named"
+" ``lbl``, beginning in state ``ty`` from the resource list."
+msgstr ""
+
+#: ../st/state.rst:630
+msgid "So, for example, we can write:"
+msgstr ""
+
+#: ../st/state.rst:637
+msgid ""
+"The first of these, ``newState``, returns a new resource label, and adds "
+"that resource to the list with type ``State Int``. The second, "
+"``removeState``, given a label ``lbl``, removes the resource from the "
+"list. These types are equivalent to the following:"
+msgstr ""
+
+#: ../st/state.rst:647
+msgid ""
+"These are the primitive methods of constructing an ``Action``.  Later, we"
+" will encounter some other ways using type level functions to help with "
+"readability."
+msgstr ""
+
+#: ../st/state.rst:650
+msgid ""
+"In the remainder of this tutorial, we will generally use ``ST`` except on"
+" the rare occasions we need the full precision of ``STrans``. In the next"
+" section, we'll see how to use the facilities provided by ``ST`` to write"
+" a precise API for a system with security properties: a data store "
+"requiring a login."
+msgstr ""
+

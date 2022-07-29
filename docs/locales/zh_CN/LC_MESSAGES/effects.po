@@ -1,0 +1,2058 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2017-2020, The Idris Community
+# This file is distributed under the same license as the Idris package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Idris 1.3\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-07-29 09:06+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.10.3\n"
+
+#: ../effects/conclusions.rst:5
+msgid "Further Reading"
+msgstr ""
+
+#: ../effects/conclusions.rst:7
+msgid ""
+"This tutorial has given an introduction to writing and reasoning about "
+"side-effecting programs in Idris, using the ``Effects`` library. More "
+"details about the *implementation* of the library, such as how ``run`` "
+"works, how handlers are invoked, etc, are given in a separate paper [1]_."
+msgstr ""
+
+#: ../effects/conclusions.rst:13
+msgid ""
+"Some libraries and programs which use ``Effects`` can be found in the "
+"following places:"
+msgstr ""
+
+#: ../effects/conclusions.rst:16
+msgid ""
+"https://github.com/edwinb/SDL-idris — some bindings for the SDL media "
+"library, supporting graphics in particular."
+msgstr ""
+
+#: ../effects/conclusions.rst:19
+msgid ""
+"https://github.com/edwinb/idris-demos — various demonstration programs, "
+"including several examples from this tutorial, and a “Space Invaders” "
+"game."
+msgstr ""
+
+#: ../effects/conclusions.rst:23
+msgid "https://github.com/SimonJF/IdrisNet2 — networking and socket libraries."
+msgstr ""
+
+#: ../effects/conclusions.rst:26
+msgid ""
+"https://github.com/edwinb/Protocols — a high level communication protocol"
+" description language."
+msgstr ""
+
+#: ../effects/conclusions.rst:29
+msgid ""
+"The inspiration for the ``Effects`` library was Bauer and Pretnar’s Eff "
+"language [2]_, which describes a language based on algebraic effects and "
+"handlers.  Other recent languages and libraries have also been built on "
+"this ideas, for example [3]_ and [4]_. The theoretical foundations are "
+"also well-studied see [5]_, [6]_, [7]_, [8]_."
+msgstr ""
+
+#: ../effects/conclusions.rst:37
+msgid ""
+"Edwin Brady. 2013. Programming and reasoning with algebraic effects and "
+"dependent types. SIGPLAN Not. 48, 9 (September 2013), 133-144. "
+"DOI=10.1145/2544174.2500581 "
+"https://dl.acm.org/citation.cfm?doid=2544174.2500581"
+msgstr ""
+
+#: ../effects/conclusions.rst:42
+msgid ""
+"Andrej Bauer, Matija Pretnar, Programming with algebraic effects and "
+"handlers, Journal of Logical and Algebraic Methods in Programming, Volume"
+" 84, Issue 1, January 2015, Pages 108-123, ISSN 2352-2208, "
+"http://math.andrej.com/wp-content/uploads/2012/03/eff.pdf"
+msgstr ""
+
+#: ../effects/conclusions.rst:49
+#, python-format
+msgid ""
+"Ben Lippmeier. 2009. Witnessing Purity, Constancy and Mutability. In "
+"Proceedings of the 7th Asian Symposium on Programming Languages and "
+"Systems (APLAS '09), Zhenjiang Hu (Ed.). Springer-Verlag, Berlin, "
+"Heidelberg, 95-110. DOI=10.1007/978-3-642-10672-9_9 "
+"https://link.springer.com/chapter/10.1007%2F978-3-642-10672-9_9"
+msgstr ""
+
+#: ../effects/conclusions.rst:57
+msgid ""
+"Ohad Kammar, Sam Lindley, and Nicolas Oury. 2013. Handlers in action. "
+"SIGPLAN Not. 48, 9 (September 2013), 145-158. DOI=10.1145/2544174.2500590"
+" https://dl.acm.org/citation.cfm?doid=2544174.2500590"
+msgstr ""
+
+#: ../effects/conclusions.rst:62
+msgid ""
+"Martin Hyland, Gordon Plotkin, John Power, Combining effects: Sum and "
+"tensor, Theoretical Computer Science, Volume 357, Issues 1–3, 25 July "
+"2006, Pages 70-99, ISSN 0304-3975, "
+"(https://www.sciencedirect.com/science/article/pii/S0304397506002659)"
+msgstr ""
+
+#: ../effects/conclusions.rst:67
+msgid ""
+"Paul Blain Levy. 2004. Call-By-Push-Value: A Functional/Imperative "
+"Synthesis (Semantics Structures in Computation, V. 2). Kluwer Academic "
+"Publishers, Norwell, MA, USA."
+msgstr ""
+
+#: ../effects/conclusions.rst:72
+msgid ""
+"Plotkin, Gordon, and Matija Pretnar. \"Handlers of algebraic effects.\" "
+"Programming Languages and Systems. Springer Berlin Heidelberg, 2009. "
+"80-94."
+msgstr ""
+
+#: ../effects/conclusions.rst:76
+msgid "Pretnar, Matija. \"Logic and handling of algebraic effects.\" (2010)."
+msgstr ""
+
+#: ../effects/depeff.rst:5
+msgid "Dependent Effects"
+msgstr ""
+
+#: ../effects/depeff.rst:7
+msgid ""
+"In the programs we have seen so far, the available effects have remained "
+"constant. Sometimes, however, an operation can *change* the available "
+"effects. The simplest example occurs when we have a state with a "
+"dependent type—adding an element to a vector also changes its type, for "
+"example, since its length is explicit in the type. In this section, we "
+"will see how the library supports this. Firstly, we will see how states "
+"with dependent types can be implemented. Secondly, we will see how the "
+"effects can depend on the *result* of an effectful operation. Finally, we"
+" will see how this can be used to implement a type-safe and resource-safe"
+" protocol for file management."
+msgstr ""
+
+#: ../effects/depeff.rst:19
+msgid "Dependent States"
+msgstr ""
+
+#: ../effects/depeff.rst:21
+msgid ""
+"Suppose we have a function which reads input from the console, converts "
+"it to an integer, and adds it to a list which is stored in a ``STATE``. "
+"It might look something like the following:"
+msgstr ""
+
+#: ../effects/depeff.rst:31
+msgid ""
+"But what if, instead of a list of integers, we would like to store a "
+"``Vect``, maintaining the length in the type?"
+msgstr ""
+
+#: ../effects/depeff.rst:40
+msgid ""
+"This will not type check! Although the vector has length ``n`` on entry "
+"to ``readInt``, it has length ``S n`` on exit. The library allows us to "
+"express this as follows:"
+msgstr ""
+
+#: ../effects/depeff.rst:51
+msgid ""
+"The type ``Eff a xs xs'`` means that the operation begins with effects "
+"``xs`` available, and ends with effects ``xs’`` available. We have used "
+"``putM`` to update the state, where the ``M`` suffix indicates that the "
+"*type* is being updated as well as the value. It has the following type:"
+msgstr ""
+
+#: ../effects/depeff.rst:62
+msgid "Result-dependent Effects"
+msgstr ""
+
+#: ../effects/depeff.rst:64
+msgid ""
+"Often, whether a state is updated could depend on the success or "
+"otherwise of an operation. In our ``readInt`` example, we might wish to "
+"update the vector only if the input is a valid integer (i.e. all digits)."
+" As a first attempt, we could try the following, returning a ``Bool`` "
+"which indicates success:"
+msgstr ""
+
+#: ../effects/depeff.rst:80
+msgid ""
+"Unfortunately, this will not type check because the vector does not get "
+"extended in both branches of the ``case``!"
+msgstr ""
+
+#: ../effects/depeff.rst:89
+msgid ""
+"Clearly, the size of the resulting vector depends on whether or not the "
+"value read from the user was valid. We can express this in the type:"
+msgstr ""
+
+#: ../effects/depeff.rst:103
+msgid ""
+"Using ``pureM`` rather than ``pure`` allows the output effects to be "
+"calculated from the value given. Its type is:"
+msgstr ""
+
+#: ../effects/depeff.rst:110
+msgid ""
+"When using ``readInt``, we will have to check its return value in order "
+"to know what the new set of effects is. For example, to read a set number"
+" of values into a vector, we could write the following:"
+msgstr ""
+
+#: ../effects/depeff.rst:124
+msgid ""
+"The ``case`` analysis on the result of ``readInt`` means that we know in "
+"each branch whether reading the integer succeeded, and therefore how many"
+" values still need to be read into the vector. What this means in "
+"practice is that the type system has verified that a necessary dynamic "
+"check (i.e. whether reading a value succeeded) has indeed been done."
+msgstr ""
+
+#: ../effects/depeff.rst:131
+msgid ""
+"Only ``case`` will work here. We cannot use ``if/then/else`` because the "
+"``then`` and ``else`` branches must have the same type. The ``case`` "
+"construct, however, abstracts over the value being inspected in the type "
+"of each branch."
+msgstr ""
+
+#: ../effects/depeff.rst:137 ../effects/impleff.rst:288
+msgid "File Management"
+msgstr ""
+
+#: ../effects/depeff.rst:139
+msgid ""
+"A practical use for dependent effects is in specifying resource usage "
+"protocols and verifying that they are executed correctly. For example, "
+"file management follows a resource usage protocol with the following "
+"(informally specified) requirements:"
+msgstr ""
+
+#: ../effects/depeff.rst:144
+msgid "It is necessary to open a file for reading before reading it"
+msgstr ""
+
+#: ../effects/depeff.rst:146
+msgid ""
+"Opening may fail, so the programmer should check whether opening was "
+"successful"
+msgstr ""
+
+#: ../effects/depeff.rst:149
+msgid "A file which is open for reading must not be written to, and vice versa"
+msgstr ""
+
+#: ../effects/depeff.rst:152
+msgid "When finished, an open file handle should be closed"
+msgstr ""
+
+#: ../effects/depeff.rst:154
+msgid "When a file is closed, its handle should no longer be used"
+msgstr ""
+
+#: ../effects/depeff.rst:156
+msgid ""
+"These requirements can be expressed formally by creating a ``FILE_IO`` "
+"effect parameterised over a file handle state, which is either empty, "
+"open for reading, or open for writing. The ``FILE_IO`` effect’s "
+"definition is given below."
+msgstr ""
+
+#: ../effects/depeff.rst:162
+msgid ""
+"This effect is mainly for illustrative purposes. Typically we would also "
+"like to support random access files and better reporting of error "
+"conditions."
+msgstr ""
+
+#: ../effects/depeff.rst:166
+msgid ""
+"Moreover, the ``FILE`` effect in the ``Effect.File`` module of the "
+"``effects`` library uses slightly more complicated types to support "
+"erroneous behaviour of each function and to support more compilcated "
+"modes of opening, like for reading **and** writing, appending or "
+"truncating."
+msgstr ""
+
+#: ../effects/depeff.rst:197
+msgid "In particular, consider the type of ``open``:"
+msgstr ""
+
+#: ../effects/depeff.rst:208
+msgid ""
+"This returns a ``Bool`` which indicates whether opening the file was "
+"successful. The resulting state depends on whether the operation was "
+"successful; if so, we have a file handle open for the stated purpose, and"
+" if not, we have no file handle. By ``case`` analysis on the result, we "
+"continue the protocol accordingly."
+msgstr ""
+
+#: ../effects/depeff.rst:224
+msgid ""
+"Given a function ``readFile``, above, which reads from an open file until"
+" reaching the end, we can write a program which opens a file, reads it, "
+"then displays the contents and closes it, as follows, correctly following"
+" the protocol:"
+msgstr ""
+
+#: ../effects/depeff.rst:237
+msgid ""
+"The type of ``dumpFile``, with ``FILE_IO ()`` in its effect list, "
+"indicates that any use of the file resource will follow the protocol "
+"correctly (i.e. it both begins and ends with an empty resource). If we "
+"fail to follow the protocol correctly (perhaps by forgetting to close the"
+" file, failing to check that ``open`` succeeded, or opening the file for "
+"writing) then we will get a compile-time error. For example, changing "
+"``open name Read`` to ``open name Write`` yields a compile-time error of "
+"the following form:"
+msgstr ""
+
+#: ../effects/depeff.rst:254
+msgid ""
+"In other words: when reading a file, we need a file which is open for "
+"reading, but the effect list contains a ``FILE_IO`` effect carrying a "
+"file open for writing."
+msgstr ""
+
+#: ../effects/depeff.rst:259
+msgid "Pattern-matching bind"
+msgstr ""
+
+#: ../effects/depeff.rst:261
+msgid ""
+"It might seem that having to test each potentially failing operation with"
+" a ``case`` clause could lead to ugly code, with lots of nested case "
+"blocks. Many languages support exceptions to improve this, but "
+"unfortunately exceptions may not allow completely clean resource "
+"management—for example, guaranteeing that any ``open`` which did succeed "
+"has a corresponding close."
+msgstr ""
+
+#: ../effects/depeff.rst:268
+msgid "Idris supports *pattern-matching* bindings, such as the following:"
+msgstr ""
+
+#: ../effects/depeff.rst:277
+msgid ""
+"This also has a problem: we are no longer dealing with the case where "
+"opening a file failed! The solution is to extend the pattern-matching "
+"binding syntax to give brief clauses for failing matches. Here, for "
+"example, we could write:"
+msgstr ""
+
+#: ../effects/depeff.rst:289
+msgid ""
+"This is exactly equivalent to the definition with the explicit ``case``. "
+"In general, in a ``do``-block, the syntax:"
+msgstr ""
+
+#: ../effects/depeff.rst:297
+msgid "is desugared to"
+msgstr ""
+
+#: ../effects/depeff.rst:306
+msgid ""
+"There can be several ``alternatives``, separated by a vertical bar ``|``."
+" For example, there is a ``SYSTEM`` effect which supports reading command"
+" line arguments, among other things (see Appendix :ref:`sect-appendix`). "
+"To read command line arguments, we can use ``getArgs``:"
+msgstr ""
+
+#: ../effects/depeff.rst:316
+msgid ""
+"A main program can read command line arguments as follows, where in the "
+"list which is returned, the first element ``prog`` is the executable name"
+" and the second is an expected argument:"
+msgstr ""
+
+#: ../effects/depeff.rst:327
+msgid ""
+"Unfortunately, this will not fail gracefully if no argument is given, or "
+"if too many arguments are given. We can use pattern matching bind "
+"alternatives to give a better (more informative) error:"
+msgstr ""
+
+#: ../effects/depeff.rst:340
+msgid ""
+"If ``getArgs`` does not return something of the form ``[prog, arg]`` the "
+"alternative which does match is executed instead, and that value "
+"returned."
+msgstr ""
+
+#: ../effects/hangman.rst:5
+msgid "Example: A “Mystery Word” Guessing Game"
+msgstr ""
+
+#: ../effects/hangman.rst:7
+msgid ""
+"In this section, we will use the techniques and specific effects "
+"discussed in the tutorial so far to implement a larger example, a simple "
+"text-based word-guessing game. In the game, the computer chooses a word, "
+"which the player must guess letter by letter. After a limited number of "
+"wrong guesses, the player loses [1]_."
+msgstr ""
+
+#: ../effects/hangman.rst:13
+msgid "We will implement the game by following these steps:"
+msgstr ""
+
+#: ../effects/hangman.rst:15
+msgid "Define the game state, in enough detail to express the rules"
+msgstr ""
+
+#: ../effects/hangman.rst:17
+msgid ""
+"Define the rules of the game (i.e. what actions the player may take, and "
+"how these actions affect the game state)"
+msgstr ""
+
+#: ../effects/hangman.rst:20
+msgid ""
+"Implement the rules of the game (i.e. implement state updates for each "
+"action)"
+msgstr ""
+
+#: ../effects/hangman.rst:23
+msgid "Implement a user interface which allows a player to direct actions"
+msgstr ""
+
+#: ../effects/hangman.rst:25
+msgid ""
+"Step 2 may be achieved by defining an effect which depends on the state "
+"defined in step 1. Then step 3 involves implementing a ``Handler`` for "
+"this effect. Finally, step 4 involves implementing a program in ``Eff`` "
+"using the newly defined effect (and any others required to implement the "
+"interface)."
+msgstr ""
+
+#: ../effects/hangman.rst:32
+msgid "Step 1: Game State"
+msgstr ""
+
+#: ../effects/hangman.rst:34
+msgid ""
+"First, we categorise the game states as running games (where there are a "
+"number of guesses available, and a number of letters still to guess), or "
+"non-running games (i.e. games which have not been started, or games which"
+" have been won or lost)."
+msgstr ""
+
+#: ../effects/hangman.rst:43
+msgid ""
+"Notice that at this stage, we say nothing about what it means to make a "
+"guess, what the word to be guessed is, how to guess letters, or any other"
+" implementation detail. We are only interested in what is necessary to "
+"describe the game rules."
+msgstr ""
+
+#: ../effects/hangman.rst:48
+msgid ""
+"We will, however, parameterise a concrete game state ``Mystery`` over "
+"this data:"
+msgstr ""
+
+#: ../effects/hangman.rst:56
+msgid "Step 2: Game Rules"
+msgstr ""
+
+#: ../effects/hangman.rst:58
+msgid ""
+"We describe the game rules as a dependent effect, where each action has a"
+" *precondition* (i.e. what the game state must be before carrying out the"
+" action) and a *postcondition* (i.e. how the action affects the game "
+"state). Informally, these actions with the pre- and postconditions are:"
+msgstr ""
+
+#: ../effects/hangman.rst:71
+msgid "Guess"
+msgstr ""
+
+#: ../effects/hangman.rst:64
+msgid "Guess a letter in the word."
+msgstr ""
+
+#: ../effects/hangman.rst:66
+msgid ""
+"Precondition: The game must be running, and there must be both guesses "
+"still available, and letters still to be guessed."
+msgstr ""
+
+#: ../effects/hangman.rst:69
+msgid ""
+"Postcondition: If the guessed letter is in the word and not yet guessed, "
+"reduce the number of letters, otherwise reduce the number of guesses."
+msgstr ""
+
+#: ../effects/hangman.rst:79
+msgid "Won"
+msgstr ""
+
+#: ../effects/hangman.rst:74
+msgid "Declare victory"
+msgstr ""
+
+#: ../effects/hangman.rst:76
+msgid ""
+"Precondition: The game must be running, and there must be no letters "
+"still to be guessed."
+msgstr ""
+
+#: ../effects/hangman.rst:79 ../effects/hangman.rst:87
+msgid "Postcondition: The game is no longer running."
+msgstr ""
+
+#: ../effects/hangman.rst:87
+msgid "Lost"
+msgstr ""
+
+#: ../effects/hangman.rst:82
+msgid "Accept defeat"
+msgstr ""
+
+#: ../effects/hangman.rst:84
+msgid "Precondition: The game must be running, and there must be no guesses left."
+msgstr ""
+
+#: ../effects/hangman.rst:96
+msgid "NewWord"
+msgstr ""
+
+#: ../effects/hangman.rst:90
+msgid "Set a new word to be guessed"
+msgstr ""
+
+#: ../effects/hangman.rst:92
+msgid "Precondition: The game must not be running."
+msgstr ""
+
+#: ../effects/hangman.rst:94
+msgid ""
+"Postcondition: The game is running, with 6 guesses available (the choice "
+"of 6 is somewhat arbitrary here) and the number of unique letters in the "
+"word still to be guessed."
+msgstr ""
+
+#: ../effects/hangman.rst:100
+msgid "Get"
+msgstr ""
+
+#: ../effects/hangman.rst:99
+msgid ""
+"Get a string representation of the game state. This is for display "
+"purposes; there are no pre- or postconditions."
+msgstr ""
+
+#: ../effects/hangman.rst:102
+msgid ""
+"We can make these rules precise by declaring them more formally in an "
+"effect signature:"
+msgstr ""
+
+#: ../effects/hangman.rst:122
+msgid ""
+"This description says nothing about how the rules are implemented. In "
+"particular, it does not specify *how* to tell whether a guessed letter "
+"was in a word, just that the result of ``Guess`` depends on it."
+msgstr ""
+
+#: ../effects/hangman.rst:126
+msgid ""
+"Nevertheless, we can still create an ``EFFECT`` from this, and use it in "
+"an ``Eff`` program. Implementing a ``Handler`` for ``MysteryRules`` will "
+"then allow us to play the game."
+msgstr ""
+
+#: ../effects/hangman.rst:136
+msgid "Step 3: Implement Rules"
+msgstr ""
+
+#: ../effects/hangman.rst:138
+msgid ""
+"To *implement* the rules, we begin by giving a concrete definition of "
+"game state:"
+msgstr ""
+
+#: ../effects/hangman.rst:153
+msgid ""
+"If a game is ``NotRunning``, that is either because it has not yet "
+"started (``Init``) or because it is won or lost (``GameWon`` and "
+"``GameLost``, each of which carry the word so that showing the game state"
+" will reveal the word to the player). Finally, ``MkG`` captures a running"
+" game’s state, including the target word, the letters successfully "
+"guessed, and the missing letters. Using a ``Vect`` for the missing "
+"letters is convenient since its length is used in the type."
+msgstr ""
+
+#: ../effects/hangman.rst:161
+msgid ""
+"To initialise the state, we implement the following functions: "
+"``letters``, which returns a list of unique letters in a ``String`` "
+"(ignoring spaces) and ``initState`` which sets up an initial state "
+"considered valid as a postcondition for ``NewWord``."
+msgstr ""
+
+#: ../effects/hangman.rst:171
+msgid ""
+"When checking if a guess is in the vector of missing letters, it is "
+"convenient to return a *proof* that the guess is in the vector, using "
+"``isElem`` below, rather than merely a ``Bool``:"
+msgstr ""
+
+#: ../effects/hangman.rst:183
+msgid ""
+"The reason for returning a proof is that we can use it to remove an "
+"element from the correct position in a vector:"
+msgstr ""
+
+#: ../effects/hangman.rst:190
+msgid ""
+"We leave the definitions of ``letters``, ``init``, ``isElem`` and "
+"``shrink`` as exercises. Having implemented these, the ``Handler`` "
+"implementation for ``MysteryRules`` is surprisingly straightforward:"
+msgstr ""
+
+#: ../effects/hangman.rst:208
+msgid ""
+"Each case simply involves directly updating the game state in a way which"
+" is consistent with the declared rules. In particular, in ``Guess``, if "
+"the handler claims that the guessed letter is in the word (by passing "
+"``True`` to ``k``), there is no way to update the state in such a way "
+"that the number of missing letters or number of guesses does not follow "
+"the rules."
+msgstr ""
+
+#: ../effects/hangman.rst:216
+msgid "Step 4: Implement Interface"
+msgstr ""
+
+#: ../effects/hangman.rst:218
+msgid ""
+"Having described the rules, and implemented state transitions which "
+"follow those rules as an effect handler, we can now write an interface "
+"for the game which uses the ``MYSTERY`` effect:"
+msgstr ""
+
+#: ../effects/hangman.rst:227
+msgid ""
+"The type indicates that the game must start in a running state, with some"
+" guesses available, and eventually reach a not-running state (i.e. won or"
+" lost). The only way to achieve this is by correctly following the stated"
+" rules."
+msgstr ""
+
+#: ../effects/hangman.rst:232
+msgid ""
+"Note that the type of ``game`` makes no assumption that there are letters"
+" to be guessed in the given word (i.e. it is ``w`` rather than ``S w``). "
+"This is because we will be choosing a word at random from a vector of "
+"``String``, and at no point have we made it explicit that those "
+"``String`` are non-empty."
+msgstr ""
+
+#: ../effects/hangman.rst:238
+msgid ""
+"Finally, we need to initialise the game by picking a word at random from "
+"a list of candidates, setting it as the target using ``NewWord``, then "
+"running ``game``:"
+msgstr ""
+
+#: ../effects/hangman.rst:251
+msgid ""
+"We use the system time (``time`` from the ``SYSTEM`` effect; see Appendix"
+" :ref:`sect-appendix`) to initialise the random number generator, then "
+"pick a random ``Fin`` to index into a list of ``words``. For example, we "
+"could initialise a word list as follows:"
+msgstr ""
+
+#: ../effects/hangman.rst:266
+msgid ""
+"Rather than have to explicitly declare a type with the vector’s length, "
+"it is convenient to give a hole ``?wtype`` and let Idris’s proof search "
+"mechanism find the type. This is a limited form of type inference, but "
+"very useful in practice."
+msgstr ""
+
+#: ../effects/hangman.rst:271
+msgid "A possible complete implementation of ``game`` is presented below:"
+msgstr ""
+
+#: ../effects/hangman.rst:302
+msgid "Discussion"
+msgstr ""
+
+#: ../effects/hangman.rst:304
+msgid ""
+"Writing the rules separately as an effect, then an implementation which "
+"uses that effect, ensures that the implementation must follow the rules."
+"  This has practical applications in more serious contexts; "
+"``MysteryRules`` for example can be though of as describing a *protocol* "
+"that a game player most follow, or alternative a *precisely-typed API*."
+msgstr ""
+
+#: ../effects/hangman.rst:311
+msgid ""
+"In practice, we wouldn’t really expect to write rules first then "
+"implement the game once the rules were complete. Indeed, I didn’t do so "
+"when constructing this example! Rather, I wrote down a set of likely "
+"rules making any assumptions *explicit* in the state transitions for "
+"``MysteryRules``. Then, when implementing ``game`` at first, any "
+"incorrect assumption was caught as a type error. The following errors "
+"were caught during development:"
+msgstr ""
+
+#: ../effects/hangman.rst:319
+msgid ""
+"Not realising that allowing ``NewWord`` to be an arbitrary string would "
+"mean that ``game`` would have to deal with a zero-length word as a "
+"starting state."
+msgstr ""
+
+#: ../effects/hangman.rst:321
+msgid ""
+"Forgetting to check whether a game was won before recursively calling "
+"``processGuess``, thus accidentally continuing a finished game."
+msgstr ""
+
+#: ../effects/hangman.rst:323
+msgid ""
+"Accidentally checking the number of missing letters, rather than the "
+"number of remaining guesses, when checking if a game was lost."
+msgstr ""
+
+#: ../effects/hangman.rst:325
+msgid ""
+"These are, of course, simple errors, but were caught by the type checker "
+"before any testing of the game."
+msgstr ""
+
+#: ../effects/hangman.rst:329
+msgid "Readers may recognise this game by the name “Hangman”."
+msgstr ""
+
+#: ../effects/impleff.rst:5
+msgid "Creating New Effects"
+msgstr ""
+
+#: ../effects/impleff.rst:7
+msgid ""
+"We have now seen several side-effecting operations provided by the "
+"``Effects`` library, and examples of their use in Section :ref:`sect-"
+"simpleff`. We have also seen how operations may *modify* the available "
+"effects by changing state in Section :ref:`sect-depeff`. We have not, "
+"however, yet seen how these operations are implemented. In this section, "
+"we describe how a selection of the available effects are implemented, and"
+" show how new effectful operations may be provided."
+msgstr ""
+
+#: ../effects/impleff.rst:17 ../effects/state.rst:5
+msgid "State"
+msgstr ""
+
+#: ../effects/impleff.rst:19
+msgid ""
+"Effects are described by *algebraic data types*, where the constructors "
+"describe the operations provided when the effect is available. Stateful "
+"operations are described as follows:"
+msgstr ""
+
+#: ../effects/impleff.rst:29
+msgid ""
+"``Effect`` itself is a type synonym, giving the required type for an "
+"effect signature:"
+msgstr ""
+
+#: ../effects/impleff.rst:39
+msgid ""
+"Each effect is associated with a *resource*. The second argument to an "
+"effect signature is the resource type on *input* to an operation, and the"
+" third is a function which computes the resource type on *output*. Here, "
+"it means:"
+msgstr ""
+
+#: ../effects/impleff.rst:44
+msgid ""
+"``Get`` takes no arguments. It has a resource of type ``a``, which is not"
+" updated, and running the ``Get`` operation returns something of type "
+"``a``."
+msgstr ""
+
+#: ../effects/impleff.rst:46
+msgid ""
+"``Put`` takes a ``b`` as an argument. It has a resource of type ``a`` on "
+"input, which is updated to a resource of type ``b``. Running the ``Put`` "
+"operation returns the element of the unit type."
+msgstr ""
+
+#: ../effects/impleff.rst:48
+msgid ""
+"The effects library provides an overloaded function ``sig`` which can "
+"make effect signatures more concise, particularly when the result has no "
+"effect on the resource type. For ``State``, we can write:"
+msgstr ""
+
+#: ../effects/impleff.rst:59
+msgid ""
+"There are four versions of ``sig``, depending on whether we are "
+"interested in the resource type, and whether we are updating the "
+"resource. Idris will infer the appropriate version from usage."
+msgstr ""
+
+#: ../effects/impleff.rst:75
+msgid ""
+"In order to convert ``State`` (of type ``Effect``) into something usable "
+"in an effects list, of type ``EFFECT``, we write the following:"
+msgstr ""
+
+#: ../effects/impleff.rst:83
+msgid ""
+"``MkEff`` constructs an ``EFFECT`` by taking the resource type (here, the"
+" ``t`` which parameterises ``STATE``) and the effect signature (here, "
+"``State``). For reference, ``EFFECT`` is declared as follows:"
+msgstr ""
+
+#: ../effects/impleff.rst:92
+msgid ""
+"Recall that to run an effectful program in ``Eff``, we use one of the "
+"``run`` family of functions to run the program in a particular "
+"computation context ``m``. For each effect, therefore, we must explain "
+"how it is executed in a particular computation context for ``run`` to "
+"work in that context. This is achieved with the following interface:"
+msgstr ""
+
+#: ../effects/impleff.rst:104
+msgid ""
+"We have already seen some implementation declarations in the effect "
+"summaries in Section :ref:`sect-simpleff`. An implementation of ``Handler"
+" e m`` means that the effect declared with signature ``e`` can be run in "
+"computation context ``m``. The ``handle`` function takes:"
+msgstr ""
+
+#: ../effects/impleff.rst:109
+msgid ""
+"The ``resource`` on input (so, the current value of the state for "
+"``State``)"
+msgstr ""
+
+#: ../effects/impleff.rst:111
+msgid "The effectful operation (either ``Get`` or ``Put x`` for ``State``)"
+msgstr ""
+
+#: ../effects/impleff.rst:113
+msgid ""
+"A *continuation*, which we conventionally call ``k``, and should be "
+"passed the result value of the operation, and an updated resource."
+msgstr ""
+
+#: ../effects/impleff.rst:115
+msgid ""
+"There are two reasons for taking a continuation here: firstly, this is "
+"neater because there are multiple return values (a new resource and the "
+"result of the operation); secondly, and more importantly, the "
+"continuation can be called zero or more times."
+msgstr ""
+
+#: ../effects/impleff.rst:120
+msgid ""
+"A ``Handler`` for ``State`` simply passes on the value of the state, in "
+"the case of ``Get``, or passes on a new state, in the case of ``Put``.  "
+"It is defined the same way for all computation contexts:"
+msgstr ""
+
+#: ../effects/impleff.rst:130
+msgid ""
+"This gives enough information for ``Get`` and ``Put`` to be used directly"
+" in ``Eff`` programs. It is tidy, however, to define top level functions "
+"in ``Eff``, as follows:"
+msgstr ""
+
+#: ../effects/impleff.rst:145
+msgid ""
+"**An implementation detail (aside):** The ``call`` function converts an "
+"``Effect`` to a function in ``Eff``, given a proof that the effect is "
+"available. This proof can be constructed automatically, since it is "
+"essentially an index into a statically known list of effects:"
+msgstr ""
+
+#: ../effects/impleff.rst:156
+msgid ""
+"This is the reason for the ``Can’t solve goal`` error when an effect is "
+"not available: the implicit proof ``prf`` has not been solved "
+"automatically because the required effect is not in the list of effects "
+"``xs``."
+msgstr ""
+
+#: ../effects/impleff.rst:161
+msgid ""
+"Such details are not important for using the library, or even writing new"
+" effects, however."
+msgstr ""
+
+#: ../effects/impleff.rst:165
+msgid "Summary"
+msgstr ""
+
+#: ../effects/impleff.rst:167
+msgid ""
+"The following listing summarises what is required to define the ``STATE``"
+" effect:"
+msgstr ""
+
+#: ../effects/impleff.rst:194 ../effects/simpleeff.rst:44
+msgid "Console I/O"
+msgstr ""
+
+#: ../effects/impleff.rst:196
+msgid ""
+"Then listing below gives the definition of the ``STDIO`` effect, "
+"including handlers for ``IO`` and ``IOExcept``. We omit the definition of"
+" the top level ``Eff`` functions, as this merely invoke the effects "
+"``PutStr``, ``GetStr``, ``PutCh`` and ``GetCh`` directly."
+msgstr ""
+
+#: ../effects/impleff.rst:201
+msgid ""
+"Note that in this case, the resource is the unit type in every case, "
+"since the handlers merely apply the ``IO`` equivalents of the effects "
+"directly."
+msgstr ""
+
+#: ../effects/impleff.rst:230 ../effects/simpleeff.rst:135
+msgid "Exceptions"
+msgstr ""
+
+#: ../effects/impleff.rst:232
+msgid ""
+"The listing below gives the definition of the ``Exception`` effect, "
+"including two of its handlers for ``Maybe`` and ``List``. The only "
+"operation provided is ``Raise``. The key point to note in the definitions"
+" of these handlers is that the continuation ``k`` is not used. Running "
+"``Raise`` therefore means that computation stops with an error."
+msgstr ""
+
+#: ../effects/impleff.rst:255 ../effects/simpleeff.rst:321
+msgid "Non-determinism"
+msgstr ""
+
+#: ../effects/impleff.rst:257
+msgid ""
+"The following listing gives the definition of the ``Select`` effect for "
+"writing non-deterministic programs, including a handler for ``List`` "
+"context which returns all possible successful values, and a handler for "
+"``Maybe`` context which returns the first successful value."
+msgstr ""
+
+#: ../effects/impleff.rst:282
+msgid ""
+"Here, the continuation is called multiple times in each handler, for each"
+" value in the list of possible values. In the ``List`` handler, we "
+"accumulate all successful results, and in the ``Maybe`` handler we try "
+"the first value in the list, and try later values only if that fails."
+msgstr ""
+
+#: ../effects/impleff.rst:290
+msgid ""
+"Result-dependent effects are no different from non-dependent effects in "
+"the way they are implemented. The listing below illustrates this for the "
+"``FILE_IO`` effect. The syntax for state transitions ``{ x ==> {res} x’ "
+"}``, where the result state ``x’`` is computed from the result of the "
+"operation ``res``, follows that for the equivalent ``Eff`` programs."
+msgstr ""
+
+#: ../effects/impleff.rst:329
+msgid ""
+"Note that in the handler for ``Open``, the types passed to the "
+"continuation ``k`` are different depending on whether the result is "
+"``True`` (opening succeeded) or ``False`` (opening failed). This uses "
+"``validFile``, defined in the ``Prelude``, to test whether a file handler"
+" refers to an open file or not."
+msgstr ""
+
+#: ../effects/index.rst:5
+msgid "The Effects Tutorial"
+msgstr ""
+
+#: ../effects/index.rst:7
+msgid "A tutorial on the `Effects` package in `Idris`."
+msgstr ""
+
+#: ../effects/index.rst:-1
+msgid "Effects and the ``Control.ST`` module"
+msgstr ""
+
+#: ../effects/index.rst:11
+msgid ""
+"There is a new module in the ``contrib`` package, ``Control.ST``, which "
+"provides the resource tracking facilities of `Effects` but with better "
+"support for creating and deleting resources, and implementing resources "
+"in terms of other resources."
+msgstr ""
+
+#: ../effects/index.rst:16
+msgid ""
+"Unless you have a particular reason to use `Effects` you are strongly "
+"recommended to use ``Control.ST`` instead. There is a tutorial available "
+"on this site for ``Control.ST`` with several examples (:ref:`st-tutorial-"
+"index`)."
+msgstr ""
+
+#: ../effects/index.rst:23
+msgid ""
+"The documentation for Idris has been published under the Creative Commons"
+" CC0 License. As such to the extent possible under law, *The Idris "
+"Community* has waived all copyright and related or neighbouring rights to"
+" Documentation for Idris."
+msgstr ""
+
+#: ../effects/index.rst:28
+msgid ""
+"More information concerning the CC0 can be found online at: "
+"https://creativecommons.org/publicdomain/zero/1.0/"
+msgstr ""
+
+#: ../effects/introduction.rst:3
+msgid "Introduction"
+msgstr ""
+
+#: ../effects/introduction.rst:5
+msgid ""
+"Pure functional languages with dependent types such as `Idris "
+"<https://www.idris-lang.org/>`_ support reasoning about programs directly"
+" in the type system, promising that we can *know* a program will run "
+"correctly (i.e. according to the specification in its type) simply "
+"because it compiles. Realistically, though, things are not so simple: "
+"programs have to interact with the outside world, with user input, input "
+"from a network, mutable state, and so on. In this tutorial I will "
+"introduce the library, which is included with the distribution and "
+"supports programming and reasoning with side-effecting programs, "
+"supporting mutable state, interaction with the outside world, exceptions,"
+" and verified resource management."
+msgstr ""
+
+#: ../effects/introduction.rst:17
+msgid ""
+"This tutorial assumes familiarity with pure programming in Idris, as "
+"described in Sections 1–6 of the main tutorial [1]_. The examples "
+"presented are tested with Idris and can be found in the examples "
+"directory of the Idris repository. The ``-p effects`` flag is needed when"
+" starting Idris."
+msgstr ""
+
+#: ../effects/introduction.rst:23
+msgid ""
+"Consider, for example, the following introductory function which "
+"illustrates the kind of properties which can be expressed in the type "
+"system:"
+msgstr ""
+
+#: ../effects/introduction.rst:33
+msgid ""
+"This function adds corresponding elements in a pair of vectors. The type "
+"guarantees that the vectors will contain only elements of type ``Int``, "
+"and that the input lengths and the output length all correspond. A "
+"natural question to ask here, which is typically neglected by "
+"introductory tutorials, is “How do I turn this into a program?” That is, "
+"given some lists entered by a user, how do we get into a position to be "
+"able to apply the ``vadd`` function? Before doing so, we will have to:"
+msgstr ""
+
+#: ../effects/introduction.rst:41
+msgid ""
+"Read user input, either from the keyboard, a file, or some other input "
+"device."
+msgstr ""
+
+#: ../effects/introduction.rst:43
+msgid ""
+"Check that the user inputs are valid, i.e. contain only ``Int`` and are "
+"the same length, and report an error if not."
+msgstr ""
+
+#: ../effects/introduction.rst:45
+msgid "Write output"
+msgstr ""
+
+#: ../effects/introduction.rst:47
+msgid ""
+"The complete program will include side-effects for I/O and error "
+"handling, before we can get to the pure core functionality. In this "
+"tutorial, we will see how Idris supports side-effects. Furthermore, we "
+"will see how we can use the dependent type system to *reason* about "
+"stateful and side-effecting programs. We will return to this specific "
+"example later."
+msgstr ""
+
+#: ../effects/introduction.rst:55
+msgid "Hello world"
+msgstr ""
+
+#: ../effects/introduction.rst:57
+msgid ""
+"To give an idea of how programs with effects look, here is the ubiquitous"
+" “Hello world” program, written using the ``Effects`` library:"
+msgstr ""
+
+#: ../effects/introduction.rst:74
+msgid ""
+"As usual, the entry point is ``main``. All ``main`` has to do is invoke "
+"the ``hello`` function which supports the ``STDIO`` effect for console "
+"I/O, and returns the unit value.  All programs using the ``Effects`` "
+"library must ``import Effects``.  The details of the ``Eff`` type will be"
+" presented in the remainder of this tutorial."
+msgstr ""
+
+#: ../effects/introduction.rst:80
+msgid ""
+"To compile and run this program, Idris needs to be told to include the "
+"``Effects`` package, using the ``-p effects`` flag (this flag is required"
+" for all examples in this tutorial):"
+msgstr ""
+
+#: ../effects/introduction.rst:90
+msgid "Outline"
+msgstr ""
+
+#: ../effects/introduction.rst:92
+msgid ""
+"The tutorial is structured as follows: first, in Section :ref:`sect-"
+"state`, we will discuss state management, describing why it is important "
+"and introducing the ``effects`` library to show how it can be used to "
+"manage state. This section also gives an overview of the syntax of "
+"effectful programs. Section :ref:`sect-simpleff` then introduces a number"
+" of other effects a program may have: I/O; Exceptions; Random Numbers; "
+"and Non-determinism, giving examples for each, and an extended example "
+"combining several effects in one complete program. Section :ref:`sect-"
+"depeff` introduces *dependent* effects, showing how states and resources "
+"can be managed in types. Section :ref:`sect-impleff` shows how new "
+"effects can be implemented.  Section :ref:`sect-hangman` gives an "
+"extended example showing how to implement a “mystery word” guessing game,"
+" using effects to describe the rules of the game and ensure they are "
+"implemented accurately. References to further reading are given in "
+"Section :ref:`sect-further`."
+msgstr ""
+
+#: ../effects/introduction.rst:110
+msgid "You do not, however, need to know what a monad is!"
+msgstr ""
+
+#: ../effects/simpleeff.rst:5
+msgid "Simple Effects"
+msgstr ""
+
+#: ../effects/simpleeff.rst:7
+msgid ""
+"So far we have seen how to write programs with locally mutable state "
+"using the ``STATE`` effect. To recap, we have the definitions below in a "
+"module ``Effect.State``"
+msgstr ""
+
+#: ../effects/simpleeff.rst:24
+msgid ""
+"The last line, ``Handler State m where { ... }``, means that the "
+"``STATE`` effect is usable in any computation context ``m``. That is, a "
+"program which uses this effect and returns something of type ``a`` can be"
+" evaluated to something of type ``m a`` using ``run``, for any ``m``. The"
+" lower case ``State`` is a data type describing the operations which make"
+" up the ``STATE`` effect itself—we will go into more detail about this in"
+" Section :ref:`sect-impleff`."
+msgstr ""
+
+#: ../effects/simpleeff.rst:32
+msgid ""
+"In this section, we will introduce some other supported effects, allowing"
+" console I/O, exceptions, random number generation and non-deterministic "
+"programming. For each effect we introduce, we will begin with a summary "
+"of the effect, its supported operations, and the contexts in which it may"
+" be used, like that above for ``STATE``, and go on to present some simple"
+" examples. At the end, we will see some examples of programs which "
+"combine multiple effects."
+msgstr ""
+
+#: ../effects/simpleeff.rst:40
+msgid ""
+"All of the effects in the library, including those described in this "
+"section, are summarised in Appendix :ref:`sect-appendix`."
+msgstr ""
+
+#: ../effects/simpleeff.rst:46
+msgid ""
+"Console I/O is supported with the ``STDIO`` effect, which allows reading "
+"and writing characters and strings to and from standard input and "
+"standard output. Notice that there is a constraint here on the "
+"computation context ``m``, because it only makes sense to support console"
+" I/O operations in a context where we can perform (or at the very least "
+"simulate) console I/O:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:70
+msgid "Examples"
+msgstr ""
+
+#: ../effects/simpleeff.rst:72
+msgid ""
+"A program which reads the user’s name, then says hello, can be written as"
+" follows:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:82
+msgid ""
+"We use ``trim`` here to remove the trailing newline from the input. The "
+"resource associated with ``STDIO`` is simply the empty tuple, which has a"
+" default value ``()``, so we can run this as follows:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:92
+msgid ""
+"In ``hello`` we could also use ``!``-notation instead of ``x <- getStr``,"
+" since we only use the string that is read once:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:101
+msgid ""
+"More interestingly, we can combine multiple effects in one program. For "
+"example, we can loop, counting the number of people we’ve said hello to:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:114
+msgid ""
+"The list of effects given in ``hello`` means that the function can call "
+"``get`` and ``put`` on an integer state, and any functions which read and"
+" write from the console. To run this, ``main`` does not need to be "
+"changed."
+msgstr ""
+
+#: ../effects/simpleeff.rst:120
+msgid "Aside: Resource Types"
+msgstr ""
+
+#: ../effects/simpleeff.rst:122
+msgid ""
+"To find out the resource type of an effect, if necessary (for example if "
+"we want to initialise a resource explicitly with ``runInit`` rather than "
+"using a default value with ``run``) we can run the ``resourceType`` "
+"function at the REPL:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:137
+msgid ""
+"The ``EXCEPTION`` effect is declared in module ``Effect.Exception``. This"
+" allows programs to exit immediately with an error, or errors to be "
+"handled more generally:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:158 ../effects/simpleeff.rst:267
+#: ../effects/simpleeff.rst:341
+msgid "Example"
+msgstr ""
+
+#: ../effects/simpleeff.rst:160
+msgid ""
+"Suppose we have a ``String`` which is expected to represent an integer in"
+" the range ``0`` to ``n``. We can write a function ``parseNumber`` which "
+"returns an ``Int`` if parsing the string returns a number in the "
+"appropriate range, or throws an exception otherwise. Exceptions are "
+"parameterised by an error type:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:179
+msgid ""
+"Programs which support the ``EXCEPTION`` effect can be run in any context"
+" which has some way of throwing errors, for example, we can run "
+"``parseNumber`` in the ``Either Error`` context. It returns a value of "
+"the form ``Right x`` if successful:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:189
+msgid "Or ``Left e`` on failure, carrying the appropriate exception:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:199
+msgid ""
+"In fact, we can do a little bit better with ``parseNumber``, and have it "
+"return a *proof* that the integer is in the required range along with the"
+" integer itself. One way to do this is define a type of bounded integers,"
+" ``Bounded``:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:209
+msgid ""
+"Recall that ``So`` is parameterised by a ``Bool``, and only ``So True`` "
+"is inhabited. We can use ``choose`` to construct such a value from the "
+"result of a dynamic check:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:220
+msgid ""
+"We then write ``parseNumber`` using ``choose`` rather than an "
+"``if/then/else`` construct, passing the proof it returns on success as "
+"the boundedness proof:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:236
+msgid "Random Numbers"
+msgstr ""
+
+#: ../effects/simpleeff.rst:238
+msgid ""
+"Random number generation is also implemented by the library, in module "
+"``Effect.Random``:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:253
+msgid ""
+"Random number generation is considered side-effecting because its "
+"implementation generally relies on some external source of randomness. "
+"The default implementation here relies on an integer *seed*, which can be"
+" set with ``srand``. A specific seed will lead to a predictable, "
+"repeatable sequence of random numbers. There are two functions which "
+"produce a random number:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:261
+msgid "``rndInt``, which returns a random integer between the given lower"
+msgstr ""
+
+#: ../effects/simpleeff.rst:261
+msgid "and upper bounds."
+msgstr ""
+
+#: ../effects/simpleeff.rst:264
+msgid "``rndFin``, which returns a random element of a finite set"
+msgstr ""
+
+#: ../effects/simpleeff.rst:264
+msgid "(essentially a number with an upper bound given in its type)."
+msgstr ""
+
+#: ../effects/simpleeff.rst:269
+msgid ""
+"We can use the ``RND`` effect to implement a simple guessing game. The "
+"``guess`` function, given a target number, will repeatedly ask the user "
+"for a guess, and state whether the guess is too high, too low, or "
+"correct:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:278
+msgid "For reference, the code for ``guess`` is given below:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:297
+msgid ""
+"Note that we use ``parseNumber`` as defined previously to read user "
+"input, but we don’t need to list the ``EXCEPTION`` effect because we use "
+"a nested ``run`` to invoke ``parseNumber``, independently of the calling "
+"effectful program."
+msgstr ""
+
+#: ../effects/simpleeff.rst:301
+msgid ""
+"To invoke this, we pick a random number within the range 0–100, having "
+"set up the random number generator with a seed, then run ``guess``:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:314
+msgid ""
+"If no seed is given, it is set to the ``default`` value. For a less "
+"predictable game, some better source of randomness would be required, for"
+" example taking an initial seed from the system time. To see how to do "
+"this, see the ``SYSTEM`` effect described in :ref:`sect-appendix`."
+msgstr ""
+
+#: ../effects/simpleeff.rst:323
+msgid ""
+"The listing below gives the definition of the non-determinism effect, "
+"which allows a program to choose a value non-deterministically from a "
+"list of possibilities in such a way that the entire computation succeeds:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:343
+msgid ""
+"The ``SELECT`` effect can be used to solve constraint problems, such as "
+"finding Pythagorean triples. The idea is to use ``select`` to give a set "
+"of candidate values, then throw an exception for any combination of "
+"values which does not satisfy the constraint:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:358
+msgid ""
+"This program chooses a value for ``z`` between ``1`` and ``max``, then "
+"values for ``y`` and ``x``. In operation, after a ``select``, the program"
+" executes the rest of the ``do``-block for every possible assignment, "
+"effectively searching depth-first. If the list is empty (or an exception "
+"is thrown) execution fails."
+msgstr ""
+
+#: ../effects/simpleeff.rst:364
+msgid ""
+"There are handlers defined for ``Maybe`` and ``List`` contexts, i.e. "
+"contexts which can capture failure. Depending on the context ``m``, "
+"``triple`` will either return the first triple it finds (if in ``Maybe`` "
+"context) or all triples in the range (if in ``List`` context). We can try"
+" this as follows:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:377
+msgid "``vadd`` revisited"
+msgstr ""
+
+#: ../effects/simpleeff.rst:379
+msgid ""
+"We now return to the ``vadd`` program from the introduction. Recall the "
+"definition:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:388
+msgid ""
+"Using , we can set up a program so that it reads input from a user, "
+"checks that the input is valid (i.e both vectors contain integers, and "
+"are the same length) and if so, pass it on to ``vadd``. First, we write a"
+" wrapper for ``vadd`` which checks the lengths and throw an exception if "
+"they are not equal. We can do this for input vectors of length ``n`` and "
+"``m`` by matching on the implicit arguments ``n`` and ``m`` and using "
+"``decEq`` to produce a proof of their equality, if they are equal:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:405
+msgid ""
+"To read a vector from the console, we implement a function of the "
+"following type:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:412
+msgid ""
+"This returns a dependent pair of a length, and a vector of that length, "
+"because we cannot know in advance how many integers the user is going to "
+"input. We can use ``-1`` to indicate the end of input:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:434
+msgid ""
+"This uses a variation on ``parseNumber`` which does not require a number "
+"to be within range."
+msgstr ""
+
+#: ../effects/simpleeff.rst:437
+msgid ""
+"Finally, we write a program which reads two vectors and prints the result"
+" of pairwise addition of them, throwing an exception if the inputs are of"
+" differing lengths:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:450
+msgid ""
+"By having explicit lengths in the type, we can be sure that ``vadd`` is "
+"only being used where the lengths of inputs are guaranteed to be equal.  "
+"This does not stop us reading vectors from user input, but it does "
+"require that the lengths are checked and any discrepancy is dealt with "
+"gracefully."
+msgstr ""
+
+#: ../effects/simpleeff.rst:458
+msgid "Example: An Expression Calculator"
+msgstr ""
+
+#: ../effects/simpleeff.rst:460
+msgid ""
+"To show how these effects can fit together, let us consider an evaluator "
+"for a simple expression language, with addition and integer values."
+msgstr ""
+
+#: ../effects/simpleeff.rst:469
+msgid ""
+"An evaluator for this language always returns an ``Integer``, and there "
+"are no situations in which it can fail!"
+msgstr ""
+
+#: ../effects/simpleeff.rst:478
+msgid ""
+"If we add variables, however, things get more interesting. The evaluator "
+"will need to be able to access the values stored in variables, and "
+"variables may be undefined."
+msgstr ""
+
+#: ../effects/simpleeff.rst:488
+msgid ""
+"To start, we will change the type of ``eval`` so that it is effectful, "
+"and supports an exception effect for throwing errors, and a state "
+"containing a mapping from variable names (as ``String``) to their values:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:502
+msgid ""
+"Note that we are using ``!``-notation to avoid having to bind "
+"subexpressions in a ``do`` block. Next, we add a case for evaluating "
+"``Var``:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:512
+msgid ""
+"This retrieves the state (with ``get``, supported by the ``STATE Env`` "
+"effect) and raises an exception if the variable is not in the environment"
+" (with ``raise``, supported by the ``EXCEPTION String`` effect)."
+msgstr ""
+
+#: ../effects/simpleeff.rst:517
+msgid ""
+"To run the evaluator on a particular expression in a particular "
+"environment of names and their values, we can write a function which sets"
+" the state then invokes ``eval``:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:529
+msgid ""
+"We have picked ``Maybe`` as a computation context here; it needs to be a "
+"context which is available for every effect supported by ``eval``. In "
+"particular, because we have exceptions, it needs to be a context which "
+"supports exceptions. Alternatively, ``Either String`` or ``IO`` would be "
+"fine, for example."
+msgstr ""
+
+#: ../effects/simpleeff.rst:535
+msgid ""
+"What if we want to extend the evaluator further, with random number "
+"generation? To achieve this, we add a new constructor to ``Expr``, which "
+"gives a random number up to a maximum value:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:546
+msgid ""
+"Then, we need to deal with the new case, making sure that we extend the "
+"list of events to include ``RND``. It doesn't matter where ``RND`` "
+"appears in the list, as long as it is present:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:556
+msgid ""
+"For test purposes, we might also want to print the random number which "
+"has been generated:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:565
+msgid ""
+"If we try this without extending the effects list, we would see an error "
+"something like the following:"
+msgstr ""
+
+#: ../effects/simpleeff.rst:575
+msgid ""
+"In other words, the ``STDIO`` effect is not available. We can correct "
+"this simply by updating the type of ``eval`` to include ``STDIO``."
+msgstr ""
+
+#: ../effects/simpleeff.rst:582
+msgid ""
+"Using ``STDIO`` will restrict the number of contexts in which ``eval`` "
+"can be ``run`` to those which support ``STDIO``, such as ``IO``. Once "
+"effect lists get longer, it can be a good idea instead to encapsulate "
+"sets of effects in a type synonym. This is achieved as follows, simply by"
+" defining a function which computes a type, since types are first class "
+"in Idris:"
+msgstr ""
+
+#: ../effects/state.rst:7
+msgid ""
+"Many programs, even pure programs, can benefit from locally mutable "
+"state. For example, consider a program which tags binary tree nodes with "
+"a counter, by an inorder traversal (i.e. counting depth first, left to "
+"right). This would perform something like the following:"
+msgstr ""
+
+#: ../effects/state.rst:12
+msgid "|image|"
+msgstr ""
+
+#: ../effects/state.rst:528
+msgid "image"
+msgstr ""
+
+#: ../effects/state.rst:14
+msgid ""
+"We can describe binary trees with the following data type ``BTree`` and "
+"``testTree`` to represent the example input above:"
+msgstr ""
+
+#: ../effects/state.rst:29
+msgid ""
+"Then our function to implement tagging, beginning to tag with a specific "
+"value ``i``, has the following type:"
+msgstr ""
+
+#: ../effects/state.rst:37
+msgid "First attempt"
+msgstr ""
+
+#: ../effects/state.rst:39
+msgid ""
+"Naïvely, we can implement ``treeTag`` by implementing a helper function "
+"which propagates a counter, returning the result of the count for each "
+"subtree:"
+msgstr ""
+
+#: ../effects/state.rst:56
+msgid "This gives the expected result when run at the REPL prompt:"
+msgstr ""
+
+#: ../effects/state.rst:67
+msgid ""
+"This works as required, but there are several problems when we try to "
+"scale this to larger programs. It is error prone, because we need to "
+"ensure that state is propagated correctly to the recursive calls (i.e. "
+"passing the appropriate ``i`` or ``i’``). It is hard to read, because the"
+" functional details are obscured by the state propagation. Perhaps most "
+"importantly, there is a common programming pattern here which should be "
+"abstracted but instead has been implemented by hand. There is local "
+"mutable state (the counter) which we have had to make explicit."
+msgstr ""
+
+#: ../effects/state.rst:78
+msgid "Introducing ``Effects``"
+msgstr ""
+
+#: ../effects/state.rst:80
+msgid ""
+"Idris provides a library, ``Effects`` [3]_, which captures this pattern "
+"and many others involving effectful computation [1]_. An effectful "
+"program ``f`` has a type of the following form:"
+msgstr ""
+
+#: ../effects/state.rst:88
+msgid ""
+"That is, the return type gives the effects that ``f`` supports (``effs``,"
+" of type ``List EFFECT``) and the type the computation returns ``t``. So,"
+" our ``treeTagAux`` helper could be written with the following type:"
+msgstr ""
+
+#: ../effects/state.rst:97
+msgid ""
+"That is, ``treeTagAux`` has access to an integer state, because the list "
+"of available effects includes ``STATE Int``. ``STATE`` is declared as "
+"follows in the module ``Effect.State`` (that is, we must ``import "
+"Effect.State`` to be able to use it):"
+msgstr ""
+
+#: ../effects/state.rst:106
+msgid ""
+"It is an effect parameterised by a type (by convention, we write effects "
+"in all capitals). The ``treeTagAux`` function is an effectful program "
+"which builds a new tree tagged with ``Ints``, and is implemented as "
+"follows:"
+msgstr ""
+
+#: ../effects/state.rst:121
+msgid ""
+"There are several remarks to be made about this implementation. "
+"Essentially, it hides the state, which can be accessed using ``get`` and "
+"updated using ``put``, but it introduces several new features. "
+"Specifically, it uses ``do``-notation, binding variables with ``<-``, and"
+" a ``pure`` function. There is much to be said about these features, but "
+"for our purposes, it suffices to know the following:"
+msgstr ""
+
+#: ../effects/state.rst:128
+msgid "``do`` blocks allow effectful operations to be sequenced."
+msgstr ""
+
+#: ../effects/state.rst:133
+msgid "``x <- e`` binds the result of an effectful operation ``e`` to a"
+msgstr ""
+
+#: ../effects/state.rst:131
+msgid ""
+"variable ``x``. For example, in the above code, ``treeTagAux l`` is an "
+"effectful operation returning ``BTree (Int, a)``, so ``l’`` has type "
+"``BTree (Int, a)``."
+msgstr ""
+
+#: ../effects/state.rst:136
+msgid "``pure e`` turns a pure value ``e`` into the result of an effectful"
+msgstr ""
+
+#: ../effects/state.rst:136
+msgid "operation."
+msgstr ""
+
+#: ../effects/state.rst:138
+msgid ""
+"The ``get`` and ``put`` functions read and write a state ``t``, assuming "
+"that the ``STATE t`` effect is available. They have the following types, "
+"polymorphic in the state ``t`` they manage:"
+msgstr ""
+
+#: ../effects/state.rst:147
+msgid ""
+"A program in ``Eff`` can call any other function in ``Eff`` provided that"
+" the calling function supports at least the effects required by the "
+"called function. In this case, it is valid for ``treeTagAux`` to call "
+"both ``get`` and ``put`` because all three functions support the ``STATE "
+"Int`` effect."
+msgstr ""
+
+#: ../effects/state.rst:153
+msgid ""
+"Programs in ``Eff`` are run in some underlying *computation context*, "
+"using the ``run`` or ``runPure`` function. Using ``runPure``, which runs "
+"an effectful program in the identity context, we can write the "
+"``treeTag`` function as follows, using ``put`` to initialise the state:"
+msgstr ""
+
+#: ../effects/state.rst:165
+msgid ""
+"We could also run the program in an impure context such as ``IO``, "
+"without changing the definition of ``treeTagAux``, by using ``run`` "
+"instead of ``runPure``:"
+msgstr ""
+
+#: ../effects/state.rst:178
+msgid ""
+"Note that the definition of ``treeTagAux`` is exactly as before. For "
+"reference, this complete program (including a ``main`` to run it) is "
+"shown in Listing [introprog]."
+msgstr ""
+
+#: ../effects/state.rst:220
+msgid "Effects and Resources"
+msgstr ""
+
+#: ../effects/state.rst:222
+msgid ""
+"Each effect is associated with a *resource*, which is initialised before "
+"an effectful program can be run. For example, in the case of ``STATE "
+"Int`` the corresponding resource is the integer state itself. The types "
+"of ``runPure`` and ``run`` show this (slightly simplified here for "
+"illustrative purposes):"
+msgstr ""
+
+#: ../effects/state.rst:233
+msgid ""
+"The ``env`` argument is implicit, and initialised automatically where "
+"possible using default values given by implementations of the following "
+"interface:"
+msgstr ""
+
+#: ../effects/state.rst:242
+msgid ""
+"Implementations of ``Default`` are defined for all primitive types, and "
+"many library types such as ``List``, ``Vect``, ``Maybe``, pairs, etc. "
+"However, where no default value exists for a resource type (for example, "
+"you may want a ``STATE`` type for which there is no ``Default`` "
+"implementation) the resource environment can be given explicitly using "
+"one of the following functions:"
+msgstr ""
+
+#: ../effects/state.rst:254
+msgid ""
+"To be well-typed, the environment must contain resources corresponding "
+"exactly to the effects in ``xs``. For example, we could also have "
+"implemented ``treeTag`` by initialising the state as follows:"
+msgstr ""
+
+#: ../effects/state.rst:264
+msgid "Labelled Effects"
+msgstr ""
+
+#: ../effects/state.rst:266
+msgid ""
+"What if we have more than one state, especially more than one state of "
+"the same type? How would ``get`` and ``put`` know which state they should"
+" be referring to? For example, how could we extend the tree tagging "
+"example such that it additionally counts the number of leaves in the "
+"tree? One possibility would be to change the state so that it captured "
+"both of these values, e.g.:"
+msgstr ""
+
+#: ../effects/state.rst:277
+msgid ""
+"Doing this, however, ties the two states together throughout (as well as "
+"not indicating which integer is which). It would be nice to be able to "
+"call effectful programs which guaranteed only to access one of the "
+"states, for example. In a larger application, this becomes particularly "
+"important."
+msgstr ""
+
+#: ../effects/state.rst:283
+msgid ""
+"The library therefore allows effects in general to be *labelled* so that "
+"they can be referred to explicitly by a particular name. This allows "
+"multiple effects of the same type to be included. We can count leaves and"
+" update the tag separately, by labelling them as follows:"
+msgstr ""
+
+#: ../effects/state.rst:294
+msgid ""
+"The ``:::`` operator allows an arbitrary label to be given to an effect."
+"  This label can be any type—it is simply used to identify an effect "
+"uniquely. Here, we have used a symbol type. In general ``’name`` "
+"introduces a new symbol, the only purpose of which is to disambiguate "
+"values [2]_."
+msgstr ""
+
+#: ../effects/state.rst:300
+msgid ""
+"When an effect is labelled, its operations are also labelled using the "
+"``:-`` operator. In this way, we can say explicitly which state we mean "
+"when using ``get`` and ``put``. The tree tagging program which also "
+"counts leaves can be written as follows:"
+msgstr ""
+
+#: ../effects/state.rst:317
+msgid ""
+"The ``update`` function here is a combination of ``get`` and ``put``, "
+"applying a function to the current state."
+msgstr ""
+
+#: ../effects/state.rst:324
+msgid ""
+"Finally, our top level ``treeTag`` function now returns a pair of the "
+"number of leaves, and the new tree. Resources for labelled effects are "
+"initialised using the ``:=`` operator (reminiscent of assignment in an "
+"imperative language):"
+msgstr ""
+
+#: ../effects/state.rst:337
+msgid "To summarise, we have:"
+msgstr ""
+
+#: ../effects/state.rst:339
+msgid "``:::`` to convert an effect to a labelled effect."
+msgstr ""
+
+#: ../effects/state.rst:341
+msgid ""
+"``:-`` to convert an effectful operation to a labelled effectful "
+"operation."
+msgstr ""
+
+#: ../effects/state.rst:343
+msgid "``:=`` to initialise a resource for a labelled effect."
+msgstr ""
+
+#: ../effects/state.rst:345
+msgid ""
+"Or, more formally with their types (slightly simplified to account only "
+"for the situation where available effects are not updated):"
+msgstr ""
+
+#: ../effects/state.rst:354
+msgid ""
+"Here, ``LRes`` is simply the resource type associated with a labelled "
+"effect. Note that labels are polymorphic in the label type ``lbl``. "
+"Hence, a label can be anything—a string, an integer, a type, etc."
+msgstr ""
+
+#: ../effects/state.rst:359
+msgid "``!``-notation"
+msgstr ""
+
+#: ../effects/state.rst:361
+msgid ""
+"In many cases, using ``do``-notation can make programs unnecessarily "
+"verbose, particularly in cases where the value bound is used once, "
+"immediately. The following program returns the length of the ``String`` "
+"stored in the state, for example:"
+msgstr ""
+
+#: ../effects/state.rst:372
+msgid ""
+"This seems unnecessarily verbose, and it would be nice to program in a "
+"more direct style in these cases. provides ``!``-notation to help with "
+"this. The above program can be written instead as:"
+msgstr ""
+
+#: ../effects/state.rst:381
+msgid ""
+"The notation ``!expr`` means that the expression ``expr`` should be "
+"evaluated and then implicitly bound. Conceptually, we can think of ``!`` "
+"as being a prefix function with the following type:"
+msgstr ""
+
+#: ../effects/state.rst:389
+msgid ""
+"Note, however, that it is not really a function, merely syntax! In "
+"practice, a subexpression ``!expr`` will lift ``expr`` as high as "
+"possible within its current scope, bind it to a fresh name ``x``, and "
+"replace ``!expr`` with ``x``. Expressions are lifted depth first, left to"
+" right. In practice, ``!``-notation allows us to program in a more direct"
+" style, while still giving a notational clue as to which expressions are "
+"effectful."
+msgstr ""
+
+#: ../effects/state.rst:397
+msgid "For example, the expression:"
+msgstr ""
+
+#: ../effects/state.rst:403
+msgid "is lifted to:"
+msgstr ""
+
+#: ../effects/state.rst:413
+msgid "The Type ``Eff``"
+msgstr ""
+
+#: ../effects/state.rst:415
+msgid ""
+"Underneath, ``Eff`` is an overloaded function which translates to an "
+"underlying type ``EffM``:"
+msgstr ""
+
+#: ../effects/state.rst:424
+msgid ""
+"This is more general than the types we have been writing so far. It is "
+"parameterised over an underlying computation context ``m``, a result type"
+" ``t`` as we have already seen, as well as a ``List EFFECT`` and a "
+"function type ``t -> List EFFECT``."
+msgstr ""
+
+#: ../effects/state.rst:429
+msgid ""
+"These additional parameters are the list of *input* effects, and a list "
+"of *output* effects, computed from the result of an effectful operation."
+"  That is: running an effectful program can change the set of effects "
+"available! This is a particularly powerful idea, and we will see its "
+"consequences in more detail later. Some examples of operations which can "
+"change the set of available effects are:"
+msgstr ""
+
+#: ../effects/state.rst:436
+msgid ""
+"Updating a state containing a dependent type (for example adding an "
+"element to a vector)."
+msgstr ""
+
+#: ../effects/state.rst:438
+msgid ""
+"Opening a file for reading is an effect, but whether the file really *is*"
+" open afterwards depends on whether the file was successfully opened."
+msgstr ""
+
+#: ../effects/state.rst:442
+msgid ""
+"Closing a file means that reading from the file should no longer be "
+"possible."
+msgstr ""
+
+#: ../effects/state.rst:445
+msgid ""
+"While powerful, this can make uses of the ``EffM`` type hard to read. "
+"Therefore the library provides an overloaded function ``Eff`` There are "
+"the following three versions:"
+msgstr ""
+
+#: ../effects/state.rst:457
+msgid ""
+"So far, we have used only the first version, ``SimpleEff.Eff``, which is "
+"defined as follows:"
+msgstr ""
+
+#: ../effects/state.rst:465
+msgid ""
+"i.e. the set of effects remains the same on output. This suffices for the"
+" ``STATE`` example we have seen so far, and for many useful side-"
+"effecting programs. We could also have written ``treeTagAux`` with the "
+"expanded type:"
+msgstr ""
+
+#: ../effects/state.rst:475
+msgid "Later, we will see programs which update effects:"
+msgstr ""
+
+#: ../effects/state.rst:481 ../effects/state.rst:501
+msgid "which is expanded to"
+msgstr ""
+
+#: ../effects/state.rst:487
+msgid ""
+"i.e. the set of effects is updated to ``xs’`` (think of a transition in a"
+" state machine). There is, for example, a version of ``put`` which "
+"updates the type of the state:"
+msgstr ""
+
+#: ../effects/state.rst:495
+msgid "Also, we have:"
+msgstr ""
+
+#: ../effects/state.rst:507
+msgid ""
+"i.e. the set of effects is updated according to the result of the "
+"operation ``res``, of type ``t``."
+msgstr ""
+
+#: ../effects/state.rst:510
+msgid ""
+"Parameterising ``EffM`` over an underlying computation context allows us "
+"to write effectful programs which are specific to one context, and in "
+"some cases to write programs which *extend* the list of effects available"
+" using the ``new`` function, though this is beyond the scope of this "
+"tutorial."
+msgstr ""
+
+#: ../effects/state.rst:515
+msgid ""
+"The earlier paper [3]_ describes the essential implementation details, "
+"although the library presented there is an earlier version which is less "
+"powerful than that presented in this tutorial."
+msgstr ""
+
+#: ../effects/state.rst:519
+msgid "In practice, ``’name`` simply introduces a new empty type"
+msgstr ""
+
+#: ../effects/state.rst:521
+msgid ""
+"Edwin Brady. 2013. Programming and reasoning with algebraic effects and "
+"dependent types. SIGPLAN Not. 48, 9 (September 2013), 133-144. "
+"DOI=10.1145/2544174.2500581 "
+"http://dl.acm.org/citation.cfm?doid=2544174.2500581"
+msgstr ""
+
+#: ../effects/summary.rst:5
+msgid "Effects Summary"
+msgstr ""
+
+#: ../effects/summary.rst:7
+msgid ""
+"This appendix gives interfaces for the core effects provided by the "
+"library."
+msgstr ""
+
+#: ../effects/summary.rst:11
+msgid "EXCEPTION"
+msgstr ""
+
+#: ../effects/summary.rst:32
+msgid "FILE\\_IO"
+msgstr ""
+
+#: ../effects/summary.rst:60
+msgid "RND"
+msgstr ""
+
+#: ../effects/summary.rst:79
+msgid "SELECT"
+msgstr ""
+
+#: ../effects/summary.rst:95
+msgid "STATE"
+msgstr ""
+
+#: ../effects/summary.rst:113
+msgid "STDIO"
+msgstr ""
+
+#: ../effects/summary.rst:135
+msgid "SYSTEM"
+msgstr ""
+
