@@ -14,6 +14,7 @@
 
 import sys
 import os
+import sphinx_rtd_theme
 
 # True if the readthedocs theme is locally installed
 on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
@@ -35,6 +36,7 @@ extensions = [
     'sphinx.ext.todo',
 #    'sphinx.ext.pngmath', # imgmath is not supported on readthedocs.
     'sphinx.ext.ifconfig',
+    "sphinx_rtd_theme",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -435,3 +437,7 @@ epub_exclude_files = ['search.html']
 
 # If false, no index is generated.
 #epub_use_index = True
+
+gettext_uuid = True
+gettext_compact = True
+locale_dirs = ["./locales"]

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Idris 1.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-29 09:06+0800\n"
+"POT-Creation-Date: 2022-07-29 14:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,735 +17,920 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: ../parserLibrary/index.rst:5
+#: 7636e69158d04d848a29cf27a5e35a02
 msgid "Lexer and Parser Library"
 msgstr ""
 
 #: ../parserLibrary/index.rst:7
+#: 4ec3b00337764d71bacbf5d6b1f54dc4
 msgid "A tutorial on the lexer and parser library in Idris."
 msgstr ""
 
 #: ../parserLibrary/index.rst:11
+#: d81311ccfb5241ba9a520547a75e1fc0
 msgid "The documentation for Idris has been published under the Creative Commons CC0 License. As such to the extent possible under law, *The Idris Community* has waived all copyright and related or neighboring rights to Documentation for Idris."
 msgstr ""
 
 #: ../parserLibrary/index.rst:16
+#: 7b236a32663d481d926e4c437d555216
 msgid "More information concerning the CC0 can be found online at: http://creativecommons.org/publicdomain/zero/1.0/"
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:5
+#: 73e37527c83342b5acd76f1208506122
 msgid "Parser Library Introduction"
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:7
+#: 4819189c51024982aa31a939111879b8
 msgid "The parser library can be used to build Idris structures from text. It involves a certain amount of complexity and so it would typically be used for big projects. An example might be a compiler for another language, written in Idris."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:11
+#: d519128dbcd6438cb90669f805cb03a4
 msgid "Of course the parser library can also be used to compile to Idris, this is what is done in Idris 2 and that is what the this library appears to have been written for."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:15
+#: bfe62db20ad7488c88824a76c2f4cd6b
 msgid "So a secondary use for this tutorial would be to help understanding the internal workings of Idris 2."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:18
+#: e427146ccd9c40e2ab91b53865e9a4a0
 msgid "The parser library is used in a similar way to Parsec which is a library for writing parsers in Haskell. It is based on higher-order parser combinators, so a complicated parser can be made out of many smaller ones."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:26
+#: 14ed60f8f4e2475eb3ddd81ddc85efdb
 msgid "This is a two stage process:"
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:25
+#: 035768a36654434f8f8eb5e92b8d9e24
 msgid "Lexer - This takes the input string and turns it into a list of Tokens."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:26
+#: c2d53cf840cb452f95189436f4e26b2d
 msgid "Parser - This takes the list of tokens and outputs the code."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:-1
 #: ../parserLibrary/introduction.rst:0
+#: 99accc9edcef4d73a04cbb7ba1121610
+#: dbd87f1f764a40a0927aa9ad883c1ab5
 msgid "diagram illustrating these stages of lexer and parser"
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:33
+#: af48018c1442489783cd5f33d6a693f4
 msgid "The advantage of using two stages, like this, is that things like whitespace and comments don't need to be considered in every parser rule."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:36
+#: efc27f2f9a2445f88f95e3df5918dbd3
 msgid "The  Idris parser library differs from Parsec in that you need to say, in the Recogniser, whether a rule is guaranteed to consume input. This means that the Idris type system prevents the construction of recognisers/rules that can't consume the input."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:41
+#: 021cc440eede47bd970b47c777fb2aa5
 msgid "The Lexer is similar but works at the level of characters rather than tokens, and you need to provide a TokenMap which defines how to build a token from a string when a rule is matched."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:45
+#: be2c46225c9d4bc6bdf506aacce770ec
 msgid "The following pages contain a tutorial for the :ref:`parserLibraryLexer` and a tutorial for the :ref:`parserLibraryParser`. These tutorials have a running example of a parser for integer expressions. This is a very simple example, there may be easier ways to do something so simple, but it illustrates some of the principles."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:52
+#: 8151572afc914b8da34715666c25e169
 msgid "Parser Library and Idris 2"
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:54
+#: 0d35cac395294d6d906202afed02d989
 msgid "The parser library, in Idris 1, is almost the same as the code that the Idris 2 parser is built on. Even if you only want to use the Idris 1 parser library it is useful to look at the code in the Idris 2 compilers to see how the library can be used."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:59
+#: 73285bfd84e64195a6c4cd92d38fab0e
 msgid "Idris 2 has at least 3 compilers:"
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:61
+#: 9fc89cd31d8f4aa8b10a50dd9f360430
 msgid "IDEMode - complies to SExp which is a Lisp-like structure used to communicate with external editors like Emacs and Vim."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:63
+#: 05ec6df5205b440f9cb8c22b39c39ff2
 msgid "Idris.Parser - This is the main compiler which compiles from a file to PTerm (and eventually TT structure)."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:65
+#: 6914a60f8e8d48be8a6721b84d8db81e
 msgid "REPL - compiles input from the command line."
 msgstr ""
 
 #: ../parserLibrary/introduction.rst:67
+#: 06874081b04d41079fedef0fb50c7250
 msgid "The following diagram is my first attempt to work out how some of the modules in Idris 2 fit together (with a few of the dependencies between them shown). The Idris 1 library is based on the modules at the bottom of the diagram (shown in red)."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:4
+#: 2f99bcbfaa3d4eff973be6e48b92e0ff
 msgid "Lexer"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:6
+#: a5d98b35487a4a51b4612fd5c1f4899c
 msgid "The lexer is run by calling the 'lex' function in the Text.Lexer.Core module:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:15
+#: bc5f09f7de5c4c38aa829fa158173a84
 msgid "This function takes a String and returns a list of tokens. With the tokens we have indexes back to the original string which can be used in error messages:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:0
+#: 760c5643e1d64053b5d60fd3030c904d
 msgid "diagram illustrating these stages of lexer"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:25
+#: 56837610347047628e967ff31bb6ba78
 msgid "TokenMap"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:27
+#: 45deca3c69c84d7c94fae9ac0f216f6e
 msgid "In order to construct this list of tokens we need:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:29
+#: b7b50f9cce2f466bac871a8faac151e4
 msgid "A way to recognise the tokens in the input string."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:30
+#: 7511d49c626f4a139993fc408ad72dea
 msgid "A way to construct these individual tokens."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:32
+#: 2e451e1af61e4fa8aa2fc7d19602f4d0
 msgid "This is given by the TokenMap which is a list of pairs containing this information:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:39
+#: b70daeba2c974af2b64341f2e2bb1cfe
 msgid "So for each Lexer in the list, if a substring in the input matches, run the associated function to produce a token of type ``tokenType``"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:44
+#: f2ff9d32d8d6459690dfdad3ba163245
 msgid "from Text.Lexer.Core : https://github.com/idris-lang/Idris-dev/blob/master/libs/contrib/Text/Lexer/Core.idr"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:52
+#: 9e2e6d212b764fd68244c4d11d2a76e1
 msgid "We can create a tokenMap by using a function like this:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:59
+#: a1155595dc59476abde7c288f97e9d35
 msgid "Once we have a TokenMap we can use it to lex many strings."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:62
+#: d38d682e7c174d44bedd1c858dd9bc3b
 msgid "Recognisers"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:64
+#: 0e31a57a6c254d34bf927a5e96459a0b
 msgid "The first part of each entry in the TokenMap is the recogniser."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:66
+#: 6baff6c4b28c41a3b4dfd237d2fcec25
 msgid "A simple recogniser is 'Pred' which uses a predicate (Char -> Bool) to test whether to accept the character. It can be constructed using the 'is' function:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:77
+#: b7a080a03fde498da54e76647bf0f64f
 msgid "More complicated structures can be recognised as tokens, this is done using the combinator structure of recognisers. This allows recognisers to be combined, for example,"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:83
+#: 1dc12e3375d14c928b8d1da67ac510a6
 msgid "``<+>`` means sequence two recognisers. If either consumes a character, the sequence is guaranteed to consume a character."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:92
+#: dc5a72a4cad74d80a3ca0d32932d5a06
 msgid "``<|>`` means if both consume, the combination is guaranteed to consumer a character:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:102
+#: b49d52533c0c47038f4df54846e0378f
 msgid "This diagram shows the recogniser combinator with some of its constructors:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:-1
+#: c46c271dc06a4887bddbc32ce1cada19
 msgid "recogniser data structure"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:109
+#: 373a5ce38b33407c9f6381d03ba3ec00
 msgid "A recogniser consumes its input, that is it advances the index to its input string, as it generates the token list. In some cases we don't want this to happen, for instance, we may need to lookahead before consuming the input string."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:114
+#: 6504f57c8bae4ba79190e7ea1b77db50
 msgid "If a recogniser does not consume input there is a danger of an infinite loop. To prevent this the recogniser is dependent on a boolean called 'consumes' which is true if the recogniser is guaranteed to consume at least one character."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:118
+#: 7df2aa7f11804c0a856c85624dd6cc72
 msgid "The constructors of Recognise allow us to ensure that, even though parts of the recogniser may not consume, overall the recogniser will consume."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:121
+#: 02100a3543854cab8687f7d3206c0316
 msgid "Since 'Recognise True' is more common than 'Recognise False' it is convenient to use 'Lexer' as a type synonym for 'Recognise True'."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:125
 #: ../parserLibrary/whitespace.rst:4
+#: dea2f6bd93a64795b6e5dd3a828f550a
+#: b9719a3c44a84698bb153a6a9d37d3bf
 msgid "Whitespace and Comments"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:127
+#: 40b30604f08647f7bb5857fcded42f95
 msgid "An important reason to have a lexer is to simplify the parser when whitespace or comments are required. Without this the parser would require a match for every combination, with and without, whitespace and comments."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:131
+#: 5ef825c5d2e047e49f8693d0b1e02d0b
 msgid "In some languages the lexer needs to remove whitespace and comments so that they don't appear in the token list. In some cases whitespace is significant but a single whitespace token can stand for any number of spaces, tabs, carriage returns and so on."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:136
+#: b72832a1fb4d448cbaaf75b74e5771d7
 msgid "In some cases, such as when parsing the Idris language itself, whitespace is important to indicate blocks. In this case we might want to output a start-of-block token when the indent increases and an end-of-block token when the indent decreases."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:141
+#: d9aa1fac39a041f891c3f418b436d8b1
 msgid "This topic will be discussed more fully on this page :ref:`parserLibraryWhitespace`."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:145
+#: 4b4cefb497ff4de1966ab1ac765a8119
 msgid "Simple Expression Example for Lexer"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:147
+#: 9face6e2845d4bd697ef54fcbf2c4191
 msgid "On this page we will implement a lexer to 'lex' a very simple expression as a running example, on the next page, we will go on to implement a parser for it."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:150
+#: e078d4910c10446bab59f7d6c118024f
 msgid "First import the lexer and parser code:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:160
+#: a621e18dfc58487e9ecb6d0a84b295e9
 msgid "Then decide on the tokens that are needed. For this example the idea is to be able to parse simple arithmetic expressions, like this:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:167
+#: b088323db0e84217bb8120cd1a54b874
 msgid "so we need:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:169
+#: 84e865d114334b6a927912f3c045abb7
 msgid "Numbers (for now integer literals are good enough)."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:170
+#: 04eaabb6f6134d4fbca928aed44cff9c
 msgid "Some operators (for now ``+``, ``-`` and ``*`` will do."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:171
+#: 984a79d7b238466cb8c10e024c904629
 msgid "Opening and closing Parentheses."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:173
+#: 1d69f1f096c24a32bb2dbe5b61a3d756
 msgid "We can define these, as tokens, like this:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:186
+#: 73f09244cecb48ef86fcce12c9a85e41
 msgid "It may help with debugging and to implement error messages to implement ``show`` for these tokens:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:203
+#: 1a58023f1d394ad2b371fb89ac55f685
 msgid "The following defines the 'TokenMap' for this example:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:225
+#: 0e9c4bb9de8f4e84a55436860dc8a94a
 msgid "This specifies the lexer. It gives, for each token, a function to recognise the token type and a function to construct the token."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:228
+#: 787c62b27d594ce281c5f83f22de5f17
 msgid "The library module 'Text.Lexer' contains useful functions to help with this. For example, the digits function used above, which reads one or more numeric characters."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:232
+#: 63e2d154b46c46a8a8868cf63d646790
 msgid "We can now run the code with various strings to see what output the lexer produces. This is done by calling the 'lex' function with the TokenMap and input string as parameters:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:277
+#: 4fa9571854d740ce9c80ea247cf1d5da
 msgid "The lexer uses potentially infinite data structures. It has recursive arguments (codata type) so code is lazy. In the output above the indexes have not been computed but we can pick out the tokens:"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:281
+#: a30cafb3ed5846738061aee3cac97999
 msgid "(Number 1)"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:282
+#: 3467655161d3432bbb3b161aafef281f
 msgid "(Operator \"+\")"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:283
+#: 7758ba9faa5f44a1a83dc36d343024d8
 msgid "(Number 2)"
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:285
+#: 3a6d07218f3643a9b6f617ac2d9670ff
 msgid "So the code is working."
 msgstr ""
 
 #: ../parserLibrary/lexer.rst:287
+#: 19d6182d54a344ebb285cb2f6e68a173
 msgid "We can now go ahead and parse this token list. A parser for this example will be constructed on the next page."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:4
+#: 951776090d2b4115a61f4c05074a21fc
 msgid "Parser"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:6
+#: 3eb37e6704d347599e47ff201013ce04
 msgid "To run the parser we call ``parse``. This requires a grammar and the output from the lexer (which is a list of tokens)."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:14
+#: da3f5e57d6874657818d56b6fe08d96b
 msgid "If successful this returns 'Right' with a pair of"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:16
+#: 666f435bbf5b46a4899430560bd75ec9
 msgid "the parse result."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:17
+#: 0f6dbc4ad2a7431e9f81ea08f86935eb
 msgid "the unparsed tokens (the remaining input)."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:19
+#: f084541e1d664928b375767f57ad6d06
 msgid "otherwise it returns 'Left' with the error message."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:21
+#: b10cfdc0b19540b6964b97c7a2365f04
 msgid "So we need to define the grammar for our parser, this is done using the following 'Grammar' data structure. This is a combinator structure, similar in principle to the recogniser combinator for the lexer, which was discussed on the previous page."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:26
+#: 54f0d44593864f99a020261d943b46ff
 msgid "As with the Recogniser the ``Grammar`` type is dependent on a boolean 'consumes' value which allows us to ensure that complicated ``Grammar`` structures will always consume input."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:56
+#: b6ee6fd6cac644669fbc29da867ba3a4
 msgid "So an example of a grammer type may look something like this: ``Grammar (TokenData ExpressionToken) True Integer``. This is a complicated type name and a given parser will need to use it a lot. So to reduce the amount of typing we can use the following type synonym (similar to what is done in Idris 2 : https://github.com/edwinb/Idris2/blob/master/src/Parser/Support.idr )"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:71
+#: 8baed3cfbddc4e81bee90df9bb781094
 msgid "Parser Example"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:73
+#: 1c96b3b413364f2db7ab2cd654c4260e
 msgid "On the previous page we implemented a lexer to 'lex' a very simple expression, on this page we will go on to add a parser for this running example."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:78
+#: 068c77846aaf4a139b65f022bd50e916
 msgid "The syntax we are aiming at is something like this (expressed in Backus–Naur form (BNF)):"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:92
+#: ffff036cf40e4f36a8d8b95a39a4f8c7
 msgid "To start, here is a grammar to parse an integer literal (that is, a sequence of numeric characters)."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:104
+#: 6f40efb241b64878b69e824c37406076
 msgid "In order to try this out, here is a temporary function, this calls parse which takes two parameters:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:107
+#: 08090949af734da78703b73e4425d7cc
 msgid "The grammar (in this case intLiteral)"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:108
+#: 52a9744028e346fab44de3a610ecf39a
 msgid "The token list from the lexer."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:116
+#: fdf711e4f875480b83f2b5f4f28bd918
 msgid "As required, if we pass it a string which is a number literal then it will return the number in the 'Right' option."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:125
+#: d58cca3b62884a22a282c202d1ed137d
 msgid "If we pass it a string which is not a number literal then it will return an error message."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:135
+#: 3fbd2c8fe37e45cbb1e1fd96b3172789
 msgid "If we pass it a number followed by something else, then it will still be successful, this is because we are not specifically checking for end-of-file."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:147
+#: 4618ec898e0b4a70a6bf926dc7f8ab54
 msgid "The ``intLiteral`` function above uses the ``terminal`` function to construct the grammar"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:158
+#: 03ff4fbb50e74e439eba451937961c32
 msgid "This is defined here : https://github.com/idris-lang/Idris-dev/blob/master/libs/contrib/Text/Parser/Core.idr Idris 2 uses a slightly different version which stores an error message like \"Expected integer literal\" which can be output if the rule fails : https://github.com/edwinb/Idris2/blob/master/src/Text/Parser/Core.idr"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:166
+#: e1b7b3175c1d44a2a0232271fec2dcfd
 msgid "The 'terminal' function is also used to construct the other elements of the grammar that we require, for instance, opening parenthesis:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:177
+#: f16ca450415549a99ef466cbcf33c73f
 msgid "Integer value is not really relevant for parenthesis so ``0`` (zero) is used as a default value."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:180
+#: 692f8df0ece64cb79f3579dc3dff4b83
 msgid "As before, this can be tested with a function like this:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:188
+#: 517f5ed160dc495c872005d26cc03b5f
 msgid "We can see below that it correctly parses an open parenthesis and gives an error for anything else:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:204
+#: 0605a5b387724f02a4f7ebcce7ce750d
 msgid "Now we have two Grammars we can try combining them. The following test looks for ``openParen`` followed by ``intLiteral``, the two Grammars are combined using ``<*>``. The ``map const`` part uses the integer value from the first."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:208
+#: 7766542b495a4574846e9577653b647a
 msgid "The following test is looking for ``(`` followed by a number:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:216
+#: 4764b87f457b40ca978ea11bea8e8c92
 msgid "We can see below that ``(`` followed by a number is successfully parsed but, as required, other token lists are not:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:254
+#: 8a3646961629496ea8fc55c96af6b25f
 msgid "The closing parenthesis is constructed in the same way."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:265
+#: e2fcdb285ae4442c9f68e0d64ab75475
 msgid "Now we can generate a Grammar for an expression inside parenthesis like this."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:273
+#: 88e8c3310a944d3494dcbbe6ed05a9bc
 msgid "The use of ``*>`` and ``<*`` instead of ``<*>`` is an easy way to use the integer value from the inner expression."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:276
+#: 468c50f7cc184c56bbc5180f213b7b48
 msgid "So lets try to use this to define a grammar which recognises either:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:278
+#: d78f89eb95e0480aa5828d3bf0054cea
 msgid "An integer literal"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:279
+#: 35653903e038478c866f42d72b36dfe8
 msgid "An integer literal inside parenthesis"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:280
+#: 29d334f913b64b2281584a5753c0157d
 msgid "An integer literal inside parenthesis inside parenthesis"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:281
+#: 2a3f07ec4b574bc689c897cbf1c4e8fa
 msgid "... and so on."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:285
+#: 4178b17cc09f4490a8657c5640f48f41
 msgid "This requires a recursively defined structure like this:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:293
+#: c787b187a84a415bbc18b71a76605319
 msgid "This is a valid grammar because every time it is called it is guaranteed to consume a token. However, as an Idris structure, it is problematic due to the recursion. Defining it as partial allows it to compile but at runtime we are likely to get a crash with an (unhelpful) error message like ``killed by signal 11``."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:299
+#: 37b3b179395c4a10a4c13cbf9c93f49b
 msgid "So a better method is to use ``do`` notation as described in the following section."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:303
+#: aa5797f80ab14dc19029c9787b2912a2
 msgid "Monadic Combinator"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:305
+#: 73b1097e23644725a26f4187a649e219
 msgid "In addition to ``<|>`` and ``<*>`` there is a ``>>=`` combinator, which is defined like this:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:324
+#: 77a088b8a07c45daad023fcab9c71cee
 msgid "This allows us to use ``do`` notation for the previous parenthesis example:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:334
+#: f39bc8b695114f259736f31f95f0b3e6
 msgid "This can be more flexible than using the ``<*>`` operator. Also it is defined using ``Inf`` so we can implement recursively defined grammars as above."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:338
+#: ed29231d5596496fbc2ea3f28fbb8e09
 msgid "Implementing the Arithmetic Operators"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:342
+#: 8acfa61cd12e437da313099f9b6ce2d9
 msgid "Now for the operations, in this case: ``+``, ``-`` and ``*``. The syntax we require for these infix operators would require recursive grammars like this:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:350
+#: 9d95a6c579404ab78bbae195dbec1a7a
 msgid "As already explained, ``do`` notation can allow us to use recursive definitions but not necessarily left-recursion like this."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:353
+#: d0d994068b8241d9956bbbaa6204e7ca
 msgid "In order to work up to this gradually lets start with prefix operators (sometimes known as Polish notation) then modify later for infix operators."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:358
+#: 061793762828451f962d5f23a963ac0d
 msgid "So prefix operators would have this sort of form:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:364
+#: 58f0df218e9349c0888f0f736570e938
 msgid "where ``op`` is defined like this:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:377
+#: 9837f23433154391b935a5d4ff5dbb1d
 msgid "and ``add`` is defined like this:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:379
+#: b7796ef2c9644b3385db31586f5fbf6a
 msgid "Where:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:381
+#: 1d14c68f32ac47b7b197b9edfa22538e
 msgid "x is the add operator."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:382
+#: c3d8dc0a0ecf4381b6ee37df655715b0
 msgid "y is the first operand."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:383
+#: 3efd0a4876b74b3da741ecf29ad372db
 msgid "z is the second operand."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:399
+#: cfd25d744e214cb3b70aca68f6c8844e
 msgid "The resulting integer will be the sum of the two operands."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:403
+#: 5dd75f740d634fb380995ab4058b5753
 msgid "The other operators are defined in a similar way:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:427
+#: 57490be4678945869dc08d8549df94ec
 msgid "So the top level ``Grammar`` can now be defined as follows. Note that this is partial as it is a potentially infinite structure and so not total."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:441
+#: 0f0df93f3ee04b7f81f86fef800f10b2
 msgid "To make the testing easier we can use this function:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:452
+#: a001edea43f544d3a8df42fe07945fad
 msgid "First test a valid (prefix) expression:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:461
+#: 30909f56587844d09789903971a72d78
 msgid "Then an invalid syntax:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:479
+#: e68e60d2487d43eaa48bd473e03b6655
 msgid "However if we try something that is invalid, but starts with a valid token, then it will return ``Right`` (to indicate success)"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:504
+#: 9519f6d7323044d8ac0778c1d4bfb05c
 msgid "Infix Notation"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:506
+#: c149fc4048954258b3943644fd3012e7
 msgid "So far we have implemented a prefix notation for operators (like this: ``+ expr expr``) but the aim is to implemented an infix notation (like this: ``expr + expr``). To do this we must be able to deal with potentially infinite data structures (see Codata Types here :ref:`sect-typefuns`)."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:511
+#: bccf8875fd68463cb33ce99ba3fc94d3
 msgid "First alter the grammar to have infix operations:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:553
+#: 1814ab882f0f4d178e5b5f495a963b25
 msgid "However, if this was run, the code would not terminate."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:556
+#: c5ef1b1ca72946c8b847b709223ad598
 msgid "Implement Left Recursion Elimination"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:558
+#: a7608ef7d36c400987e4fd887650a9cb
 msgid "Left factoring, like this, is a general problem."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:560
+#: 5df4ffcf122a467896a62332b2198f37
 msgid "If we have a rule like this:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:566
+#: f5d811bf5a4c4ae59334a044c9493a97
 msgid "If ``x<*>y`` fails but ``x<*>z`` would succeed a problem is that, ``x<*>y`` has already consumed ``x``, so now ``x<*>z`` will fail."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:569
+#: 6ee31523920a4c34bfaa528b43cd950c
 msgid "so we could write code to backtrack. That is ``try`` ``x<*>y`` without consuming so that, if the first token succeeds but the following tokens fail, then the first tokens would not be consumed."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:573
+#: b2fa69f301fa4b9498235fee3333cf46
 msgid "Another approach is left factoring:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:576
+#: 11e4396c04fa4ed581215d9dae5dc1d9
 msgid "Left Factoring"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:578
+#: ab02c929f12847da84679fc0e195c1fe
 msgid "Replace the rule with two rules (that is we add a non-terminal symbol) so for example, instead of:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:585
+#: 2e39460e0ede436c8c1565d2de330879
 msgid "we add an extra rule to give:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:592
+#: 3a9c2dfa0f1f49578e81acccfb636e13
 msgid "That is we convert a general context-free grammar to a LL(1) grammar. Although not every context-free grammar can be converted to a LL(1) grammar."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:595
+#: 40978928096044f5b997e58a820d28d1
 msgid "This still does not solve the infinite recursion issue and there is another problem: the precedence of the operators ``+``, ``-`` and ``*`` is not explicit."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:600
+#: a33d785c00a24186af830ff6da640d54
 msgid "To resolve this we can alter the example to have a BNF like this: Where braces ``{ ... }`` mean the contents can occur 1 or more times."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:655
+#: 182ec5067de8413a9d2c2e18f9df94a2
 msgid "As the following tests show, this now handles infix operators and precedence."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:659
+#: 2570c679a815491fab6d91d400358f1b
 msgid "For example '*' is an infix operator:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:667
+#: db58deeb05534f6c8a530abe27229a44
 msgid "Check that atomic number literals work:"
 msgstr ""
 
 #: ../parserLibrary/parser.rst:675
+#: f3d01bc72be6448a9061c7cb21fa3434
 msgid "Check that '*' has a higher precedence than '+'."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:683
+#: 1d04a89e8a5348c28495c9843c3d5af8
 msgid "Also '*' has a higher precedence than '+' when the order is reversed."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:691
+#: 1ea87aa31e034970a319051d1d8952e6
 msgid "Also precedence can be overridden by parenthesis."
 msgstr ""
 
 #: ../parserLibrary/parser.rst:699
+#: 51ea2e7f547644cda2e7d9c0d0c03072
 msgid "This is still not correct because it does not correctly parse multiple sums or terms like ``1+2+3`` or ``1*2*3``."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:6
+#: 589af0970da94f9cbb84c8a0e2982286
 msgid "The previous two pages introduced the lexer and parser but have not yet discussed how to handle whitespace and comments."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:9
+#: d645ccc5de5c4a6987b231b80686e0d5
 msgid "In some grammars whitespace and comments would not be considered significant and so we might be tempted not to generate any tokens for them. However, in the running example, we may want to make spaces significant in the future. For example, we might want to implement function application expressed by juxtaposition as in Haskell and Idris like this: ``f x``."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:15
+#: 4703f04764414ebd8f1b55e10b0336ff
 msgid "So, on this page, we will add a token for whitespace and comments. We will then consider two ways to process this:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:18
+#: 2df4dd7e9ee94fd3bc1bf5409d4e9467
 msgid "Filter all whitespace tokens from the lexer results before passing to the parser."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:20
+#: 48a57f0f984741ca8b612979721c4a28
 msgid "Process the whitespace tokens in the parser."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:23
+#: a99fb8d354ae4f9cbbbf6d95599ce054
 msgid "Whitespace and Comments in Lexer"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:25
+#: 8c0b2ab6a8604283961dbc7e5e661682
 msgid "To start with we can use the same token for both whitespace and comments. Here it is called ``Comment`` and added to the ``ExpressionToken`` data structure like this:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:39
+#: 72e798ef68b34fb9b9610972c9365b9a
 msgid "This is added to the ``TokenMap`` like this:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:56
+#: 2eed630f275c4f4da249206da7af77ba
 msgid "As you can see, the comment is defined like a single line Idris comment, it starts with ``--`` and continues for the remainder of the line."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:59
+#: a53be37d335b4158ab2ee1ef7075b319
 msgid "We don't need to define ``spaces`` because it is already defined in : https://github.com/idris-lang/Idris-dev/blob/master/libs/contrib/Text/Lexer.idr like this:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:75
+#: bd3f838cfb8947839357a60582e55d00
 msgid "If these whitespace tokens are not significant, that is, they can appear anywhere and they are optional then we can filter them out before the parser gets them like this:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:95
+#: 5dc8f83c93c44b608b4e0d1eb89301bf
 msgid "Whitespace and Comments in Parser"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:97
+#: 206d6fccc0a14d908b9e7da8f334dd43
 msgid "If we sometimes require whitespace to be significant then we can't filter them out as above. In this case the ``Comment`` tokens are sent to the parser which now needs to be able to handle them."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:108
+#: 550977b6da684824970b454a95c53587
 msgid "So far we don't have any syntax that requires spaces to be significant so we need to define the grammar so that it will parse with, or without, spaces. This needs to be done in a systematic way, here I have defined the grammar so that there is an optional space to the right of every atom or operator. First add versions of ``intLiteral`` , ``openParen`` , ``closeParen`` and ``op`` that allow optional spaces/comments to the right of them:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:130
+#: 2f22f3a9dce943a89ca64e63d4df39f6
 msgid "Then just use these functions instead of the original functions:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:175
+#: 8ed071d4811c4504aa2016452b4601fd
 msgid "Defining Block Structure using Indents"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:177
+#: 9ed232c995d14563ad34d221e0bcc4bc
 msgid "Many languages such as Python, Haskell and Idris use indents to delimit the block structure of the language."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:180
+#: 493ee0e8ced947729ffd9580d1bd8a63
 msgid "We can see how Idris2 does it here : https://github.com/edwinb/Idris2/blob/master/src/Parser/Support.idr"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:194
+#: d5466267c70d4770a1f2ed5b702230bb
 msgid "EndInput Token"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:196
+#: fc2421c9cba247e3aa897025870e8174
 msgid "So far, the parser will return a successful result even if the full input is not consumed. To ensure that the top level syntax is fully matched we add a ``EndInput`` token to indicate the last token."
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:200
+#: d0cafea1a4174cd792ccff63ffe71893
 msgid "``EndInput`` is added to the other tokens like this:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:211
+#: fa8e387e74004f36a3f6b03e639fe9ff
 msgid "A rule to consume this token is added:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:220
+#: 31755efed1b243ce90b46acd5f3cdce3
 msgid "Instead of using ``expr`` at the top level of the syntax we can now define ``exprFull`` as shown here. This will make sure that only when ``EndInput`` is consumed will the parse be successful:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:229
+#: 4fa74192e168439a852c28d9c3e24f82
 msgid "The following code makes sure ``EndInput`` is added to the end of the token list:"
 msgstr ""
 
 #: ../parserLibrary/whitespace.rst:243
+#: cb37cdbdfe66472986275b6a167797f1
 msgid "All we have to do now is use ``exprFull`` instead of ``expr``:"
 msgstr ""
